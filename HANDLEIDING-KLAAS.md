@@ -1,6 +1,7 @@
 # Handleiding: kasten beheren op kastvanklaas.nl
 
-Ga naar **www.kastvanklaas.nl/beheer/** en log in met GitHub (de login regelt Michael bij de livegang).
+Ga naar **www.kastvanklaas.nl/beheer/**, klik op **Inloggen met token** en plak de code die je van Michael hebt gekregen.
+Die code is je sleutel: deel hem met niemand. Kwijt of nieuwe computer? Vraag Michael om een nieuwe.
 Na elke opslag staat de wijziging na een paar minuten op de site.
 
 ## Een nieuwe kast toevoegen
