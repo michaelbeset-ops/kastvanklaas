@@ -1,0 +1,15 @@
+---
+// Kop voor inhoudspagina's: kruimelpad en een grote Fraunces-kop, links uitgelijnd, veel lucht.
+interface Props { titel: string; intro?: string; kruimel: string }
+const { titel, intro, kruimel } = Astro.props;
+---
+<div class="wrap pt-6">
+  <nav aria-label="Kruimelpad" class="text-xs text-stil">
+    <ol class="flex flex-wrap gap-x-2">
+      <li><a class="no-underline hover:text-teak" href="/">Home</a><span class="ml-2" aria-hidden="true">/</span></li>
+      <li aria-current="page" class="text-inkt">{kruimel}</li>
+    </ol>
+  </nav>
+  <h1 class="mt-10 max-w-4xl text-[2.25rem] min-[400px]:text-[2.6rem] sm:text-5xl lg:text-[5rem]">{titel}</h1>
+  {intro && <p class="mt-6 max-w-2xl text-lg sm:text-xl">{intro}</p>}
+</div>

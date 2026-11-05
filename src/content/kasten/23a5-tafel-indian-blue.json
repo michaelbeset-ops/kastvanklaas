@@ -1,0 +1,29 @@
+{
+  "id": 2441,
+  "code": "23A5",
+  "naam": "23A5 tafel Indian blue",
+  "slug": "23a5-tafel-indian-blue",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": "125cm L x 38cm B x 48cm H",
+  "omschrijving": "<p>Aparte, praktische, blauwe tafel. Ideaal als bijzettafel, salontafel. Of bijvoorbeeld aan het voeteind van je bed. Origineel oud teakhout.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_23A5-tafel-blauw-deze-scaled.jpg",
+      "alt": "23A5 tafel Indian blue, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_23A5-tafel-blauw-schuinvoor-scaled.jpg",
+      "alt": "23A5 tafel Indian blue, schuin van voren"
+    }
+  ],
+  "tags": [
+    "indiase-tafel"
+  ],
+  "inCollectie": true,
+  "volgorde": 2441
+}

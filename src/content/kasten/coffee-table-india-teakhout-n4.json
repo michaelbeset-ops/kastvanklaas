@@ -1,0 +1,27 @@
+{
+  "id": 1826,
+  "code": "N4",
+  "naam": "Coffee table India teakhout N4",
+  "slug": "coffee-table-india-teakhout-n4",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": 820,
+  "maten": null,
+  "omschrijving": "<p>Een niet te missen tafel! In India noem je dit een coffee table. Hoeveel koffie zal er aan deze tafel al gedronken zijn? Hoeveel verhalen zullen hieraan al verteld zijn? En hoeveel verhalen zullen er nog volgen?</p>\n<p>Deze tafel van teakhout is een echte blikvanger.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N4-scaled.jpg",
+      "alt": "N4 Coffee table India teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N4-scaled.jpg",
+      "alt": "N4 Coffee table India teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 1826
+}

@@ -1,0 +1,27 @@
+{
+  "id": 1324,
+  "code": null,
+  "naam": "Charmante vitrinekast, servieskast",
+  "slug": "vitrinekast-servieskast-2",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Afmeting : l 105 cm x d 42 x h 196 cm</p>\n<pre>આલમારી (Ālamārī)</pre>\n<ul>\n<li>Deze kast heeft iets weg van een artnouveau kast.</li>\n<li>leeftijd begin 1900 , mooie details</li>\n<li>Herkomst : Ahamdabad Gutjarath, India</li>\n<li>kleur : hemels blauw</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_32A0-2-2.jpg",
+      "alt": "Charmante vitrinekast, servieskast, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_32A0-1.jpg",
+      "alt": "Charmante vitrinekast, servieskast, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1324
+}

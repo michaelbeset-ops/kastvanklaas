@@ -1,0 +1,27 @@
+{
+  "id": 1817,
+  "code": "LH4",
+  "naam": "Charmant vitrinekastje India teakhout LH4",
+  "slug": "charmant-vitrinekastje-india-teakhout-lh4",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Lief, charmant kastje, teakhout.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_LH4-scaled.jpg",
+      "alt": "LH4 Charmant vitrinekastje India teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_LH4-zijkant-scaled.jpg",
+      "alt": "LH4 Charmant vitrinekastje India teakhout, zijkant"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1817
+}

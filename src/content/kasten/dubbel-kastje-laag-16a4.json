@@ -1,0 +1,35 @@
+{
+  "id": 2102,
+  "code": "16A4",
+  "naam": "Dubbel kastje laag 16A4",
+  "slug": "dubbel-kastje-laag-16a4",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": "116cmx22cmx70cm",
+  "omschrijving": "<p>Dit oude dubbele kastje uit India, vervaardigd van teakhout, is een prachtig voorbeeld van ambachtelijk vakmanschap en authentieke charme. Het kastje heeft een mooie patina die de tand des tijds weerspiegelt, waardoor het niet alleen uniek is maar ook karakter toevoegt aan je interieur. Met zijn vier deuren biedt dit kastje voldoende opbergruimte voor allerlei spullen. Of je het nu gebruikt om boeken, servies of andere persoonlijke items in op te bergen, het blijft altijd stijlvol en functioneel. De warme tinten van het teakhout en de subtiele houtstructuur zorgen voor een prachtige uitstraling. Dit kastje kan perfect worden geïntegreerd in verschillende ruimtes zoals de woonkamer, slaapkamer, keuken, gang of studeerkamer.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_09_16A4-scaled.jpg",
+      "alt": "16A4 Dubbel kastje laag, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2024_09_16A4-2-scaled.jpg",
+      "alt": "16A4 Dubbel kastje laag, foto 2"
+    }
+  ],
+  "tags": [
+    "badkamerkast",
+    "india-kast",
+    "indian-furniture",
+    "indiase-kast",
+    "kast-uit-india",
+    "keukenkast",
+    "originele-kast"
+  ],
+  "inCollectie": true,
+  "volgorde": 2102
+}

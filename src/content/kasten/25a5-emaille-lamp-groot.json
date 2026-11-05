@@ -1,0 +1,32 @@
+{
+  "id": 2443,
+  "code": "25A5",
+  "naam": "25A5 emaille lamp groot",
+  "slug": "25a5-emaille-lamp-groot",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": "36cm L x 36cm B x 18cm H",
+  "omschrijving": "<p>Onze nieuwe collectie is onderweg uit India. Binnenkort meer nieuws! Mocht je een vraag, of interesse hebben in een van onze kasten? Mail ons kast@kastvanklaas.nl of bel/app naar 06 26378480</p>\n<p>Groetjes Klaas</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_25A5-emaille-lamp-groter-scaled.jpg",
+      "alt": "25A5 emaille lamp groot, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_25A5-scaled.jpg",
+      "alt": "25A5 emaille lamp groot, foto 2"
+    }
+  ],
+  "tags": [
+    "emaille-lamp",
+    "indiase-lamp",
+    "kantoorlamp",
+    "vin-tage-lamp"
+  ],
+  "inCollectie": true,
+  "volgorde": 2443
+}

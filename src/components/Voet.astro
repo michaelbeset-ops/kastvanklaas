@@ -1,0 +1,40 @@
+---
+import Merk from './Merk.astro';
+import { zaak, tijden } from '../lib/site';
+---
+<!-- Donker, net als header en hero: de site begint en eindigt in dezelfde kleur. -->
+<footer class="donker bg-nacht text-mist">
+  <div class="wrap grid gap-10 py-16 md:grid-cols-12">
+    <div class="md:col-span-4">
+      <Merk />
+      <p class="mt-6 max-w-xs text-sm">De Kasten van Klaas zijn unieke exemplaren, eigenhandig geïmporteerd uit India.</p>
+    </div>
+    <div class="text-sm md:col-span-3">
+      <h2 class="font-tekst text-sm font-semibold tracking-normal text-wit">Winkel</h2>
+      <p class="mt-3">{zaak.straat}<br />{zaak.postcode} {zaak.plaats}</p>
+      <p class="mt-3"><a class="text-wit underline decoration-saffraan underline-offset-4 hover:text-saffraan" href={zaak.telefoonLink} data-goatcounter-click="bel-voet">{zaak.telefoon}</a><br /><a class="text-wit underline decoration-saffraan underline-offset-4 hover:text-saffraan" href={`mailto:${zaak.email}`}>{zaak.email}</a></p>
+    </div>
+    <div class="text-sm md:col-span-3">
+      <h2 class="font-tekst text-sm font-semibold tracking-normal text-wit">Open</h2>
+      <dl class="mt-3 grid grid-cols-[auto_1fr] gap-x-4 tabular-nums">
+        {tijden.map((t) => (<><dt>{t.dag}</dt><dd>{t.open.replace(':', '.')} tot {t.dicht.replace(':', '.')}</dd></>))}
+      </dl>
+      <p class="mt-2">Of op afspraak</p>
+    </div>
+    <div class="text-sm md:col-span-2">
+      <h2 class="font-tekst text-sm font-semibold tracking-normal text-wit">Collectie</h2>
+      <ul class="mt-3 space-y-1">
+        <li><a class="no-underline hover:text-saffraan" href="/webshop/cat/india-kasten/">India kasten</a></li>
+        <li><a class="no-underline hover:text-saffraan" href="/meer-bij-kastvanklaas/">Meer bij Kast van Klaas</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-wit/10">
+    <div class="wrap flex flex-wrap gap-x-6 gap-y-2 py-5 text-xs">
+      <span>KvK {zaak.kvk}</span>
+      <a class="no-underline hover:text-saffraan" href="/privacy/">Privacy</a>
+      <a class="no-underline hover:text-saffraan" href="/algemene-voorwaarden/">Algemene voorwaarden</a>
+      <span class="sm:ml-auto">Website door <a class="text-wit no-underline hover:text-saffraan" href="https://sitefront.nl" rel="noopener">Sitefront</a></span>
+    </div>
+  </div>
+</footer>

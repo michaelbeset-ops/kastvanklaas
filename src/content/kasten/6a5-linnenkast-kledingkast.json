@@ -1,0 +1,46 @@
+{
+  "id": 2324,
+  "code": "6A5",
+  "naam": "6A5 Linnenkast, Kledingkast",
+  "slug": "6a5-linnenkast-kledingkast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "te-koop",
+  "prijs": 875,
+  "maten": "130cm L x 44cm D x 182cm H",
+  "omschrijving": "<p>Linnenkast, kledingkast met 4 legplanken. Prachtig patent. Unieke kast uit India met vintage look.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_6A5-voorkant-dichte-kast-scaled.jpg",
+      "alt": "6A5 Linnenkast, Kledingkast, voorkant"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_6A5-echt-zijkant-scaled.jpg",
+      "alt": "6A5 Linnenkast, Kledingkast, zijkant"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_6A5-echt-echt-open-scaled.jpg",
+      "alt": "6A5 Linnenkast, Kledingkast, open"
+    }
+  ],
+  "tags": [
+    "boekenkast",
+    "duurzaam-wonen",
+    "exclusive-kast",
+    "goedkoopste-kast",
+    "ideale-kast",
+    "indian-furniture",
+    "kast-met-geschiedenis",
+    "kinderkamerkast",
+    "kledingkast",
+    "linnenkast",
+    "originele-kast",
+    "stoere-kast",
+    "vintage-kast",
+    "vintage-meubels"
+  ],
+  "inCollectie": true,
+  "volgorde": 2324
+}

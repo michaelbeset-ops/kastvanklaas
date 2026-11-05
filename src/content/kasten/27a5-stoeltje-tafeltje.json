@@ -1,0 +1,29 @@
+{
+  "id": 2445,
+  "code": "27A5",
+  "naam": "27A5 stoeltje, pidda/pidha chair",
+  "slug": "27a5-stoeltje-tafeltje",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": 175,
+  "maten": "62cm L x 47cm B x 54cm H",
+  "omschrijving": "<p>Originele pidda chair, pidha chair. Teak hout. Oud. Veelzijdig; stoeltje, tafeltje of als krukje.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_27A5-desk-van-voren-scaled.jpg",
+      "alt": "27A5 stoeltje, pidda/pidha chair, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_27A5-zijkant-scaled.jpg",
+      "alt": "27A5 stoeltje, pidda/pidha chair, zijkant"
+    }
+  ],
+  "tags": [
+    "accessoire"
+  ],
+  "inCollectie": false,
+  "volgorde": 2445
+}

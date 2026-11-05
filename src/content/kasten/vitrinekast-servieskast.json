@@ -1,0 +1,27 @@
+{
+  "id": 1302,
+  "code": null,
+  "naam": "Vitrinekast-servieskast",
+  "slug": "vitrinekast-servieskast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": "L138cm x D 39 cm xx  208cm",
+  "omschrijving": "<ul>\n<li>afmetingen : L138cm x D 39 cm xx  208cm</li>\n<li>2 grote deuren</li>\n<li>6 legplanken</li>\n<li>zeer functioneel</li>\n</ul>\n<ol>\n</ol>\n<p>આલમારી (Ālamārī)</p>\n<p>Leeftijd: begin 1900</p>\n<p>herkomst: Gutjarath, India</p>\n<p>kleur:oud creme</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_29A0-2-1.jpg",
+      "alt": "Vitrinekast-servieskast, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_29A0-1-1.jpg",
+      "alt": "Vitrinekast-servieskast, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1302
+}

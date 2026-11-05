@@ -1,0 +1,217 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import KastKaart from '../../../components/KastKaart.astro';
+import Reserveer from '../../../components/Reserveer.astro';
+import { alleKasten, padVan, label, prijsTekst, seoTitel, seoBeschrijving, productSchema, kruimelSchema, isTeak, type Kast } from '../../../lib/kasten';
+import { CATEGORIE, SITE, zaak, tijden, waLink, reviews } from '../../../lib/site';
+import Icoon from '../../../components/Icoon.astro';
+import klaasFoto from '../../../assets/site/klaas.jpg';
+
+export async function getStaticPaths() {
+  const kasten = await alleKasten();
+  return kasten.map((kast) => ({ params: { cat: kast.categorie, slug: kast.slug }, props: { kast, kasten } }));
+}
+const { kast, kasten } = Astro.props as { kast: Kast; kasten: Kast[] };
+const verkocht = kast.status === 'verkocht';
+// Sfeerfoto's en nieuws (ook de naamloze in 'Meer uit India') zijn geen product: geen prijs, knop of Product-schema.
+const inspiratie = !kast.naam || kast.categorie === 'inspiratie' || kast.categorie === 'nieuws-van-klaas';
+const cat = CATEGORIE[kast.categorie];
+const naamLabel = label(kast);
+const enkel = cat?.enkelvoud ?? 'kast';
+const dit = ['stuk', 'werk', 'bericht'].includes(enkel) ? 'dit' : 'deze'; // het-woorden
+
+// og:image en schema-beelden: echte bestanden met absolute URL (WhatsApp en Google lezen geen srcset).
+const og = await getImage({ src: kast.fotos[0].src, width: 1200, format: 'jpg', quality: 68 });
+const ogUrl = new URL(og.src, SITE).href;
+const schemaBeelden = [ogUrl]; // een groot beeld volstaat voor Google; scheelt honderden extra bestanden
+
+const kruimels = [
+  { naam: 'Home', pad: '/' },
+  { naam: 'Collectie', pad: '/webshop/' },
+  { naam: cat?.naam ?? 'Collectie', pad: `/webshop/cat/${kast.categorie}/` },
+  { naam: kast.code ?? naamLabel, pad: padVan(kast) },
+];
+const schema = [kruimelSchema(kruimels), ...(inspiratie ? [] : [productSchema(kast, schemaBeelden)])];
+
+// Bekijk ook: te-koop-stukken die het meest lijken (zelfde soort woord in de naam, dan zelfde categorie, dan nieuwste).
+// Ook op verkochte pagina's, zodat bezoekers uit Google doorlopen naar wat nog wel te koop is.
+const SOORTEN = ['vitrine', 'linnen', 'kleding', 'tv', 'side', 'commode', 'dressoir', 'dicht', 'laag', 'lage', 'hoog', 'hoge', 'rek', 'tafel', 'kruk', 'bank', 'lamp', 'kist', 'deur', 'nachtkast', 'badkamer'];
+const woorden = (k: Kast) => SOORTEN.filter((w) => k.naam.toLowerCase().includes(w));
+const mijn = woorden(kast);
+const lijkt = (k: Kast) => woorden(k).filter((w) => mijn.includes(w)).length * 2 + +(k.categorie === kast.categorie);
+const meer = kasten
+  .filter((k) => k.status === 'te-koop' && k.inCollectie && k.slug !== kast.slug && k.code !== kast.code)
+  .sort((a, b) => lijkt(b) - lijkt(a) || b.volgorde - a.volgorde)
+  .slice(0, 4);
+// 'Bekijk ook'-knop: naar de eigen categorie, Joosje Doodles en sfeerfoto's naar de India kasten.
+const verder = ['joosjedoodles', 'inspiratie', 'nieuws-van-klaas'].includes(kast.categorie) ? 'india-kasten' : kast.categorie;
+const verderNaam = CATEGORIE[verder]?.naam ?? 'India kasten';
+const verderTekst = verder === 'accessoires' ? verderNaam : `Alle ${/^Indi/.test(verderNaam) ? verderNaam : verderNaam.toLowerCase()}`;
+const wie = kast.code ? `kast ${kast.code}` : `"${kast.naam}"`;
+const vraag = verkocht
+  ? `Hoi Klaas, ik zag ${wie} op de site. Die is verkocht, heb je iets vergelijkbaars?`
+  : `Hoi Klaas, ik heb een vraag over ${wie}.`;
+const id = kast.code ?? kast.slug;
+const t = tijden;
+// Hoofdvak van de galerij: vaste verhouding (die van de eerste foto, begrensd), zodat wisselen nooit verspringt.
+// Breedte zo dat het vak nooit hoger wordt dan ~78% van het scherm: geen witte vlakken naast een staande foto.
+const r = Math.min(1.5, Math.max(0.6, kast.fotos[0].src.width / kast.fotos[0].src.height)).toFixed(3);
+const vakStijl = `aspect-ratio:${r};width:min(100%, calc(78vh * ${r}));width:min(100%, calc(78svh * ${r}))`;
+const review = reviews[0];
+// Specificaties alleen uit de gegevens: hout en herkomst alleen als de tekst het zegt of het een India kast is.
+const specs: [string, string][] = [
+  ...(kast.code ? [['Kastnummer', kast.code] as [string, string]] : []),
+  ...(kast.maten ? [['Maten', kast.maten] as [string, string]] : []),
+  ['Soort', cat?.naam ?? ''],
+  ...(isTeak(kast) ? [['Hout', 'Teakhout'] as [string, string]] : []),
+  ...(['india-kasten', 'indiase-tafels'].includes(kast.categorie) || /india/i.test(kast.naam + kast.omschrijving) ? [['Herkomst', 'India'] as [string, string]] : []),
+];
+---
+<Basis titel={seoTitel(kast)} beschrijving={seoBeschrijving(kast)} pad={padVan(kast)} ogBeeld={ogUrl} schema={schema}>
+  <div class="wrap pt-2">
+    <nav aria-label="Kruimelpad" class="pb-6 text-xs text-stil">
+      <ol class="flex flex-wrap gap-x-2">
+        {kruimels.slice(0, -1).map((k) => <li><a class="no-underline hover:text-inkt" href={k.pad}>{k.naam}</a><span class="ml-2" aria-hidden="true">/</span></li>)}
+        <li aria-current="page" class="text-inkt">{kruimels.at(-1)!.naam}</li>
+      </ol>
+    </nav>
+
+    <div class="grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-12 lg:items-start lg:gap-y-8">
+      <!-- Rechterkolom (koopkaart) lost op mobiel op, zodat volgorde wordt: foto's, nummer en naam, prijs en knoppen, tekst. -->
+      <div class="contents lg:sticky lg:top-28 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:block lg:self-start">
+        <div class="order-2 lg:order-none">
+          <h1>
+            {kast.code && <span class="kastnummer block text-[3rem] text-[#894606] sm:text-[3.75rem] lg:text-[4.25rem]">{kast.code}</span>}
+            <span class:list={['block', kast.code ? 'mt-2 font-tekst text-lg font-semibold leading-snug tracking-normal text-inkt sm:mt-3 sm:text-2xl' : 'text-[1.9rem] leading-tight sm:text-5xl sm:leading-[0.98]']}>{naamLabel}</span>
+          </h1>
+        </div>
+
+        {!inspiratie && (
+          <div id="koop" class="order-3 lg:order-none lg:mt-7 lg:rounded-[24px] lg:bg-wit lg:p-7 lg:shadow-zacht lg:ring-1 lg:ring-lijn">
+            {!verkocht && <p class="font-kop text-[2.25rem] font-extrabold leading-none tracking-[-0.02em] tabular-nums text-inkt [font-stretch:108%] sm:text-[2.5rem]">{prijsTekst(kast)}</p>}
+            {!verkocht && kast.categorie === 'india-kasten' && <p class="mt-2 text-sm text-stil">Uniek exemplaar: er is er maar één van.</p>}
+
+            <div class:list={[!verkocht && 'mt-6']}>
+              {verkocht ? (
+                <>
+                  <p>{dit[0].toUpperCase() + dit.slice(1)} {enkel} is verkocht. Klaas zoekt zijn kasten zelf uit in India. Vraag hem wat er binnenkomt.</p>
+                  <a class="knop knop-geel mt-5 w-full whitespace-normal text-center" href={waLink(vraag)} data-goatcounter-click={`vraag-verkocht-${id}`}>Zoek je zo'n kast? Vraag Klaas</a>
+                  {meer.length > 0 && <a class="knop knop-wit mt-3 w-full" href="#bekijk-ook">Bekijk wat nu te koop is</a>}
+                </>
+              ) : (
+                <>
+                  <Reserveer kast={kast} />
+                  <a class="knop knop-wit mt-3 w-full" href={waLink(vraag)} data-goatcounter-click={`whatsapp-${id}`}><Icoon naam="wa" />Vraag via WhatsApp</a>
+                  <ul class="mt-5 space-y-2 text-sm">
+                    <li class="flex gap-2.5"><Icoon naam="vink" class="mt-0.5 h-4 w-4 flex-none text-inkt" />Klaas neemt contact met je op over deze kast.</li>
+                    <li class="flex gap-2.5"><Icoon naam="vink" class="mt-0.5 h-4 w-4 flex-none text-inkt" />Kom hem bekijken op de Kaasmarkt, ook op afspraak.</li>
+                    <li class="flex gap-2.5"><Icoon naam="vink" class="mt-0.5 h-4 w-4 flex-none text-inkt" />Tegen een vergoeding worden de kasten thuis bezorgd.</li>
+                  </ul>
+                </>
+              )}
+            </div>
+
+            <dl class="mt-6 divide-y divide-lijn border-y border-lijn text-[.95rem]">
+              {specs.map(([k, v]) => <div class="flex justify-between gap-4 py-2.5"><dt class="text-stil">{k}</dt><dd class="text-right font-medium text-inkt tabular-nums">{v}</dd></div>)}
+            </dl>
+
+            <div class="mt-6 flex items-center gap-4 pt-1">
+              <Picture src={klaasFoto} alt="Klaas Hoekstra" formats={['avif']} fallbackFormat="webp" widths={[112]} sizes="56px" quality={70}
+                class="h-14 w-14 flex-none rounded-full object-cover object-[50%_35%]" />
+              <div class="text-sm">
+                <p class="font-semibold text-inkt">Vraag het Klaas</p>
+                <p><a class="link" href={zaak.telefoonLink} data-goatcounter-click={`bel-${id}`}>{zaak.telefoon}</a></p>
+              </div>
+              <a href={zaak.google.link} rel="noopener" class="ml-auto text-right text-xs text-stil no-underline hover:text-inkt">
+                <span class="flex justify-end text-saffraan" aria-hidden="true">{[1, 2, 3, 4, 5].map(() => <Icoon naam="ster" class="h-3.5 w-3.5" />)}</span>
+                <b class="text-inkt">{zaak.google.score}</b> op Google ({zaak.google.aantal})
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- Galerij: grote foto op eigen verhouding, daaronder duimnagels om te wisselen. -->
+      <div class="order-1 lg:order-none lg:col-span-7 lg:col-start-1 lg:row-start-1">
+        <div class="mx-auto" style={vakStijl.replace(/aspect-ratio:[^;]+;/, '')}>
+        <div class="relative overflow-hidden rounded-[24px] bg-wit ring-1 ring-lijn" style={`aspect-ratio:${r}`}>
+          {kast.fotos.map((f, i) => (
+            <div data-dia={i} class:list={['absolute inset-0', i > 0 && 'hidden']}>
+              <Picture src={f.src} alt={f.alt} formats={['avif']} fallbackFormat="webp" widths={[480, 720, 1000, 1400]}
+                sizes="(min-width: 1280px) 700px, (min-width: 1024px) 56vw, 100vw" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} quality={64}
+                class="h-full w-full object-contain" />
+            </div>
+          ))}
+          {verkocht && <span class="absolute left-3 top-3 rounded-full bg-[#a3341f] px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-wit">Verkocht</span>}
+        </div>
+        {kast.fotos.length > 1 && (
+          <div class="mt-3 flex flex-wrap gap-3" role="group" aria-label="Foto's" data-duimen>
+            {kast.fotos.map((f, i) => (
+              <button type="button" data-duim={i} aria-label={`Toon foto ${i + 1}: ${f.alt}`} aria-pressed={i === 0 ? 'true' : 'false'}
+                class="h-20 w-20 overflow-hidden rounded-xl ring-1 ring-lijn transition aria-pressed:ring-2 aria-pressed:ring-inkt sm:h-24 sm:w-24">
+                <Picture src={f.src} alt="" formats={['avif']} fallbackFormat="webp" widths={[200]} sizes="96px" quality={60} class="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+        </div>
+      </div>
+
+      <div class="order-4 lg:order-none lg:col-span-7 lg:col-start-1 lg:row-start-2">
+        {kast.omschrijving && (
+          <section class="mt-2 max-w-2xl" aria-labelledby="omschrijving">
+            <h2 id="omschrijving" class="text-2xl">Over {dit} {enkel}</h2>
+            <div class="verhaal mt-4" set:html={kast.omschrijving} />
+          </section>
+        )}
+        <div class="mt-10 max-w-2xl rounded-[18px] p-5 text-sm ring-1 ring-lijn sm:p-6">
+          <p class="font-semibold text-inkt">Kom kijken op de Kaasmarkt</p>
+          <p class="mt-1">{zaak.straat}, {zaak.postcode} {zaak.plaats}. {zaak.parkeren}</p>
+          <p class="mt-1 tabular-nums">Ma tot vr {t[0].open.replace(':', '.')} tot {t[0].dicht.replace(':', '.')}, za {t[5].open.replace(':', '.')} tot {t[5].dicht.replace(':', '.')}, zo {t[6].open.replace(':', '.')} tot {t[6].dicht.replace(':', '.')}. Of op afspraak.</p>
+        </div>
+        {!inspiratie && kast.categorie === 'india-kasten' && (
+          <p class="mt-6 text-sm text-stil">Liever een andere kleur? Dat kan in overleg, vraag Klaas naar de mogelijkheden.</p>
+        )}
+      </div>
+    </div>
+  </div>
+
+  {meer.length > 0 && (
+    <section id="bekijk-ook" class="wrap mt-14 scroll-mt-28 sm:mt-24">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-3xl">{verkocht ? 'Nu te koop, in dezelfde lijn' : 'Bekijk ook'}</h2>
+        <a class="knop knop-wit" href={`/webshop/cat/${verder}/`}>{verderTekst}</a>
+      </div>
+      <ul class="mt-8 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
+        {meer.map((k) => <KastKaart kast={k} />)}
+      </ul>
+    </section>
+  )}
+
+</Basis>
+
+<script>
+  const dias = [...document.querySelectorAll<HTMLElement>('[data-dia]')];
+  const duimen = [...document.querySelectorAll<HTMLButtonElement>('[data-duim]')];
+  // Het hoofdvak heeft een vaste maat: wisselen verandert alleen welke foto zichtbaar is, nooit de hoogte.
+  const toon = (b: HTMLButtonElement) => {
+    const i = b.dataset.duim;
+    dias.forEach((d) => d.classList.toggle('hidden', d.dataset.dia !== i));
+    duimen.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  };
+  duimen.forEach((b, n) => {
+    b.addEventListener('click', () => toon(b));
+    // Pijltjestoetsen tussen de duimnagels.
+    b.addEventListener('keydown', (e) => {
+      const stap = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!stap) return;
+      e.preventDefault();
+      const v = duimen[(n + stap + duimen.length) % duimen.length];
+      v.focus({ preventScroll: true });
+      toon(v);
+    });
+  });
+  // Na het laden de overige foto's alvast ophalen, zodat er bij wisselen geen leeg vak verschijnt.
+  addEventListener('load', () => dias.forEach((d) => d.querySelectorAll('img').forEach((img) => { img.loading = 'eager'; })), { once: true });
+</script>

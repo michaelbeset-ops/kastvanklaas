@@ -1,0 +1,31 @@
+{
+  "id": 2460,
+  "code": "29A5",
+  "naam": "29A5 teakhouten kistje India",
+  "slug": "29a5-teakhouten-kistje-india",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": "45cm l x 35cm B x 32cm H",
+  "omschrijving": "<p>Onze nieuwe collectie is onderweg uit India. Binnenkort meer nieuws! Mocht je een vraag, of interesse hebben in een van onze kasten? Mail ons kast@kastvanklaas.nl of bel/app naar 06 26378480</p>\n<p>Groetjes Klaas</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_29A5-kistje-zonder-maten-scaled.jpg",
+      "alt": "29A5 teakhouten kistje India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_29A5-kistje-open-scaled.jpg",
+      "alt": "29A5 teakhouten kistje India, open"
+    }
+  ],
+  "tags": [
+    "indian-colours",
+    "kistje",
+    "kistje-teakhout-india"
+  ],
+  "inCollectie": true,
+  "volgorde": 2460
+}

@@ -1,0 +1,23 @@
+{
+  "id": 2035,
+  "code": null,
+  "naam": "",
+  "slug": "2035",
+  "categorie": "inspiratie",
+  "categorieen": [
+    "inspiratie"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_11_tafel.jpg",
+      "alt": "Inspiratie uit de winkel van Kast van Klaas in Leiden, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 2035
+}

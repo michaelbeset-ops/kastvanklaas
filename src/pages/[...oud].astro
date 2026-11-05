@@ -1,0 +1,25 @@
+---
+// Doorverwijspagina's voor oude URL's zonder eigen pagina (tags, winkelmand, oude subcategorieen, paginering).
+// GitHub Pages kent geen echte 301, dus: meta refresh 0 + canonical naar de bestemming + gewone link als vangnet.
+import { redirectPaden } from '../lib/redirects.mjs';
+import { SITE } from '../lib/site';
+
+export function getStaticPaths() {
+  return redirectPaden().map((r) => ({ params: { oud: r.van.replace(/^\/|\/$/g, '') }, props: { naar: r.naar } }));
+}
+const { naar } = Astro.props as { naar: string };
+const doel = new URL(naar, SITE).href;
+---
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kast van Klaas</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={doel} />
+    <meta http-equiv="refresh" content={`0; url=${naar}`} />
+  </head>
+  <body>
+    <p>Deze pagina is verhuisd: <a href={naar}>ga verder naar Kast van Klaas</a>.</p>
+  </body>
+</html>

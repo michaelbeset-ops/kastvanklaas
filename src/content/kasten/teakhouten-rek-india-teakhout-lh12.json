@@ -1,0 +1,27 @@
+{
+  "id": 1820,
+  "code": "LH12",
+  "naam": "Teakhouten rek India teakhout LH12",
+  "slug": "teakhouten-rek-india-teakhout-lh12",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Origineel rek van teakhout uit India.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_LH12-zijkant-scaled.jpg",
+      "alt": "LH12 Teakhouten rek India teakhout, zijkant"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_LH12-scaled.jpg",
+      "alt": "LH12 Teakhouten rek India teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1820
+}

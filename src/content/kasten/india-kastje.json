@@ -1,0 +1,31 @@
+{
+  "id": 1443,
+  "code": null,
+  "naam": "India kastje",
+  "slug": "india-kastje",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<ul>\n<li>oud india kastje</li>\n<li>houtsoort onbekend ( jungle wood)</li>\n<li>afmeting: B 58cm x d 34 cm x  H125 cm</li>\n<li>niet geschilderd</li>\n<li>jungle wood</li>\n</ul>\n<ul>\n<li>Dit is een zeer atypisch oud kastje uit India.</li>\n<li>Qua uiterlijk heeft het kastje iets weg van een oud Spaans meubel.</li>\n<li>I.p.v. teakhout is dit kastje gemaakt van jungle wood. Hoewel de kwaliteit iets minder is dan teakwood, zorgt de simplicity van jungle wood voor een zeer fraai uniek stuk.</li>\n<li>Dit soort kastjes zijn bijzondere stukken die je tegenwoordig niet vaak tegen komt.</li>\n<li>Deze bijzondere Indiakast heeft een speciale vibe, die gelijk zal spreken wanneer je de kast ziet.</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_40A0-3.jpg",
+      "alt": "India kastje, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_40A0-2.jpg",
+      "alt": "India kastje, foto 2"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_40A0-1.jpg",
+      "alt": "India kastje, foto 3"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1443
+}

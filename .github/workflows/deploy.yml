@@ -1,0 +1,52 @@
+# Bouwt en publiceert de site op GitHub Pages bij elke push naar main,
+# dus ook als Klaas in /beheer/ een kast opslaat (Sveltia maakt dan een commit).
+# Controleer bij livegang de actuele versies in de Astro-gids "Deploy to GitHub Pages".
+name: Site bouwen en publiceren
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bouwen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # De geoptimaliseerde kastfoto's bewaren tussen builds: scheelt minuten per wijziging.
+      - uses: actions/cache@v4
+        with:
+          path: node_modules/.astro
+          key: astro-assets-${{ hashFiles('src/assets/**') }}
+          restore-keys: astro-assets-
+      - run: npm run build
+      # Geen enkele oude URL mag een 404 geven: faalt deze stap, dan wordt er niets gepubliceerd.
+      - run: npm run check-urls
+      - run: npm run check-seo
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publiceren:
+    needs: bouwen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,27 @@
+{
+  "id": 1831,
+  "code": "N3",
+  "naam": "Rek teakhout N3",
+  "slug": "rek-teakhout-n3",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Prachtig, origineel rek uit India. Te gebruiken om jouw spullen, die in het oog mogen springen, goed uit te laten komen! Denk aan je platencollectie. boeken die je dierbaar zijn, je servies. En wat te denken van de keurig opgevouwen handdoeken ;-). Indiakasten, je vindt ze bij www.kastvanklaas.nl</p>\n<p>De mooiste kasten uit India, persoonlijk voor jou geselecteerd en naar Nederland gehaald. Kom langs op de Kaasmarkt 3 in Leiden om je te laten inspireren en adviseren. We helpen je graag.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N3-zijkant-scaled.jpg",
+      "alt": "N3 Rek teakhout, zijkant"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N3-scaled.jpg",
+      "alt": "N3 Rek teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1831
+}

@@ -1,0 +1,27 @@
+{
+  "id": 1795,
+  "code": "N2",
+  "naam": "Lage kast India N2",
+  "slug": "lage-kast-india-n2",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Deze 244cm brede kast is een echte blikvanger. Vier paneeldeurtjes, legio opbergruimte. Ideaal als bijvoorbeeld televisiekast.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N2-scaled.jpg",
+      "alt": "N2 Lage kast India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N2-scaled.jpg",
+      "alt": "N2 Lage kast India, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1795
+}

@@ -1,0 +1,28 @@
+{
+  "id": 2100,
+  "code": "14A4",
+  "naam": "Bankje 14A4",
+  "slug": "bankje-14a4",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "te-koop",
+  "prijs": 140,
+  "maten": "122cmx30cmx32cm",
+  "omschrijving": "<p>Een multifunctioneel bankje uit India dat ook als tafeltje kan dienen, is een geweldige aanvulling voor je interieur!</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_09_14A4-scaled.jpg",
+      "alt": "14A4 Bankje, foto 1"
+    }
+  ],
+  "tags": [
+    "bankje",
+    "duurzame-meubels",
+    "indian-furniture",
+    "teakwood"
+  ],
+  "inCollectie": true,
+  "volgorde": 2100
+}

@@ -1,0 +1,13 @@
+---
+import Icoon from './Icoon.astro';
+import { zaak } from '../lib/site';
+---
+<section class="wrap">
+  <div class="flex flex-col gap-8 border-t border-lijn pt-10 sm:pt-12 lg:flex-row lg:items-center lg:justify-between">
+    <h2 class="max-w-2xl text-4xl">Op zoek naar een oude kast uit <span class="bg-[linear-gradient(transparent_62%,var(--color-saffraan)_62%)]">India</span>?</h2>
+    <div class="flex flex-wrap gap-3">
+      <a href="/webshop/cat/india-kasten/" class="knop">Bekijk de kasten</a>
+      <a href={zaak.telefoonLink} class="knop knop-wit" data-goatcounter-click="bel-cta"><Icoon naam="tel" />Bel {zaak.telefoon}</a>
+    </div>
+  </div>
+</section>

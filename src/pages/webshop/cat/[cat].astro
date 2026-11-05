@@ -1,0 +1,52 @@
+---
+import { getImage } from 'astro:assets';
+import Basis from '../../../layouts/Basis.astro';
+import Collectie from '../../../components/Collectie.astro';
+import { alleKasten, kruimelSchema } from '../../../lib/kasten';
+import { CATEGORIE, SITE } from '../../../lib/site';
+import { ECHTE_CATEGORIEEN } from '../../../lib/redirects.mjs';
+import { soortChips, soortenMetPagina } from '../../../lib/soorten.mjs';
+
+export function getStaticPaths() {
+  return ECHTE_CATEGORIEEN.map((cat) => ({ params: { cat } }));
+}
+const { cat } = Astro.params as { cat: string };
+const c = CATEGORIE[cat];
+const kasten = (await alleKasten()).filter((k) => k.categorieen.includes(cat));
+const n = kasten.filter((k) => k.status === 'te-koop').length;
+
+// Inleidingen alleen met feiten van de huidige site en uit de productgegevens.
+const intro: Record<string, string> = {
+  'india-kasten': 'Oude India kasten van primair teakhout, zestig tot honderd jaar oud en rechtstreeks uit India geïmporteerd. Vitrinekasten, servieskasten, linnenkasten en lage kasten: Klaas zoekt ze zelf uit, dus van elke kast is er maar één.',
+  'indiase-tafels': 'Tafels, klaptafels en krukjes uit India, door Klaas uitgezocht en zelf geïmporteerd. Te zien in de winkel op de Kaasmarkt in Leiden.',
+  accessoires: 'Naast kasten verkoopt Klaas ook tafels, stoelen en woonaccessoires uit India: emaille lampen, teakhouten kistjes, krukjes en meer.',
+  tuinmeubels: 'Smeedijzeren tuinmeubels uit India, gemoffeld zodat ze buiten kunnen blijven staan.',
+  inspiratie: 'Een kijkje in de winkel op de Kaasmarkt in Leiden: kasten, tafels en accessoires uit India bij elkaar.',
+  joosjedoodles: 'Ook in de winkel: illustratie en ontwerp van JoosjeDoodles, en een paar meubels uit India.',
+  'nieuws-van-klaas': 'Nieuws uit de winkel van Klaas op de Kaasmarkt in Leiden, met oude kasten en meubels uit India.',
+};
+const titelTag: Record<string, string> = {
+  'india-kasten': 'India kasten van teakhout te koop in Leiden | Kast van Klaas',
+  'indiase-tafels': 'Indiase tafels en klaptafels van teakhout | Kast van Klaas Leiden',
+  accessoires: 'Meer uit India: lampen, kistjes en krukjes | Kast van Klaas Leiden',
+  tuinmeubels: 'Smeedijzeren tuinmeubels uit India | Kast van Klaas Leiden',
+  inspiratie: 'Inspiratie uit de winkel | Kast van Klaas Leiden',
+  joosjedoodles: 'Joosje Doodles in de winkel | Kast van Klaas Leiden',
+  'nieuws-van-klaas': 'Nieuws van Klaas | Kast van Klaas Leiden',
+};
+const kruimels = [{ naam: 'Home', pad: '/' }, { naam: 'Collectie', pad: '/webshop/' }, { naam: c.naam, pad: `/webshop/cat/${cat}/` }];
+const volledig = `${n ? `${n} te koop. ` : ''}${intro[cat]}`;
+const beschrijving = volledig.length <= 158 ? volledig : volledig.slice(0, volledig.lastIndexOf(' ', 155)) + '…';
+const chips = cat === 'india-kasten' ? soortChips(kasten, new Set(soortenMetPagina().map((s) => s.tag))) : [];
+const eerste = kasten.find((k) => k.status === 'te-koop') ?? kasten[0];
+const og = eerste ? new URL((await getImage({ src: eerste.fotos[0].src, width: 1200, format: 'jpg', quality: 68 })).src, SITE).href : undefined;
+---
+<Basis
+  titel={titelTag[cat]}
+  beschrijving={beschrijving}
+  pad={`/webshop/cat/${cat}/`}
+  ogBeeld={og}
+  schema={[kruimelSchema(kruimels)]}
+>
+  <Collectie kasten={kasten} actief={cat} titel={c.naam} intro={intro[cat]} kruimels={kruimels} soorten={chips} />
+</Basis>

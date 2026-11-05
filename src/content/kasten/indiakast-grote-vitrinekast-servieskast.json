@@ -1,0 +1,23 @@
+{
+  "id": 958,
+  "code": null,
+  "naam": "Indiakast-grote vitrinekast- servieskast",
+  "slug": "indiakast-grote-vitrinekast-servieskast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2018_06_010-1-scaled.jpg",
+      "alt": "Indiakast-grote vitrinekast- servieskast, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 958
+}

@@ -1,0 +1,18 @@
+---
+// Alles wat geen kast is (tafels, accessoires, tuinmeubels), op verzoek van Klaas als eigen groep naast de kasten.
+import Basis from '../layouts/Basis.astro';
+import Collectie from '../components/Collectie.astro';
+import { alleKasten, kruimelSchema } from '../lib/kasten';
+
+const kasten = (await alleKasten()).filter((k) => k.inCollectie && k.categorie !== 'india-kasten');
+const kruimels = [{ naam: 'Home', pad: '/' }, { naam: 'Meer bij Kast van Klaas', pad: '/meer-bij-kastvanklaas/' }];
+---
+<Basis
+  titel="Tafels, accessoires en meer uit India | Kast van Klaas Leiden"
+  beschrijving="Naast kasten verkoopt Klaas ook tafels, krukjes, lampen, kistjes en tuinmeubels uit India. Te zien in de winkel op de Kaasmarkt 3 in Leiden."
+  pad="/meer-bij-kastvanklaas/"
+  schema={[kruimelSchema(kruimels)]}
+>
+  <Collectie kasten={kasten} actief="meer" titel="Meer bij Kast van Klaas" kruimels={kruimels}
+    intro="Naast kasten verkoopt Klaas ook tafels, stoelen en woonaccessoires uit India: emaille lampen, teakhouten kistjes, krukjes en meer." />
+</Basis>

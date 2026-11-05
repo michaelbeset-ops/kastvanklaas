@@ -1,0 +1,27 @@
+{
+  "id": 1350,
+  "code": null,
+  "naam": "Schattig oud ladenkastje",
+  "slug": "schattig-oud-ladenkastje",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<ul>\n<li>teakhout</li>\n<li>maten: l 67 cm x d 45 cm xh 42 cm</li>\n<li>kleur : naturel teakhout</li>\n<li>4 messing handvaten</li>\n</ul>\n<ul>\n<li>Dit teakhouten kastje stond op een toonbank waar de rekeningen in bewaard bleven.</li>\n<li> gevonden Surat, Gujarath</li>\n<li>Het kastje heeft 5 laadjes en  2 schuifen waarop geschreven werd.</li>\n<li>Wij van Kastvanklaas reizen door heel India op zoek naar nog  mooie oude kasten</li>\n<li>Wij zelf hebben zo&#8217;n kastje waar alle muziekstukken in bewaard blijven</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_11A0-2.jpg",
+      "alt": "Schattig oud ladenkastje, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_11A0-3.jpg",
+      "alt": "Schattig oud ladenkastje, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1350
+}

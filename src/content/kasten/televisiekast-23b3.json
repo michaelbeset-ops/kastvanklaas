@@ -1,0 +1,38 @@
+{
+  "id": 1937,
+  "code": "23B3",
+  "naam": "Televisiekast 23B3",
+  "slug": "televisiekast-23b3",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Deze prachtige 167cm brede lage kast, kan een hoop verhalen vertellen. Oud en uniek.</p>\n<p>Met haar 36cm breedte en 46cm hoogte dé kast om de televisie een plekje te geven. Daarnaast kan er veel in opgeruimd worden.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_10_23-B23-167x36x46-lage-tv-kast-voorkant.jpg",
+      "alt": "23B3 Televisiekast, voorkant"
+    }
+  ],
+  "tags": [
+    "duurzaam",
+    "exclusive-kast",
+    "huiskamerkast",
+    "kast-met-geschiedenis",
+    "kinderkamerkast",
+    "kleurrijke-kast",
+    "lage-kast",
+    "schoenenkast",
+    "spelletjeskast",
+    "stoere-kast",
+    "teakhout",
+    "tv-meubel",
+    "unieke-kast",
+    "woonkamerkast"
+  ],
+  "inCollectie": true,
+  "volgorde": 1937
+}

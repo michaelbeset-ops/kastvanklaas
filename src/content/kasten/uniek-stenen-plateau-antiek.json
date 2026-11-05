@@ -1,0 +1,23 @@
+{
+  "id": 940,
+  "code": null,
+  "naam": "Uniek stenen plateau, antiek",
+  "slug": "uniek-stenen-plateau-antiek",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2016_12_028.jpg",
+      "alt": "Uniek stenen plateau, antiek, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 940
+}

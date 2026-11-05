@@ -1,0 +1,27 @@
+{
+  "id": 1342,
+  "code": null,
+  "naam": "Oud india kastje",
+  "slug": "oud-india-kastje",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": "l 86 cm x d 36 cm x h 126cm",
+  "omschrijving": "<ul>\n<li>3 legplanken</li>\n<li>oud winkelkastje</li>\n<li>teakwood</li>\n<li>afmetingen: l 86 cm x d 36 cm x h 126cm</li>\n</ul>\n<ul>\n<li>oud Indiakastje.</li>\n<li>herkomst: Rajasthan,India</li>\n<li>leeftijd 100 jaar</li>\n<li>kleur blauw</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_09A0-2.jpg",
+      "alt": "Oud india kastje, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_09A0-1.jpg",
+      "alt": "Oud india kastje, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1342
+}

@@ -1,0 +1,27 @@
+{
+  "id": 1801,
+  "code": "R13",
+  "naam": "Rek R13",
+  "slug": "rek-r13",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": 175,
+  "maten": null,
+  "omschrijving": "<p>Charmant rek. Voor schoenen, handdoeken, voorraad, speelgoed.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_R13-scaled.jpg",
+      "alt": "R13 Rek, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_R13-scaled.jpg",
+      "alt": "R13 Rek, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 1801
+}

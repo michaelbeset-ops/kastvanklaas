@@ -1,0 +1,27 @@
+{
+  "id": 1773,
+  "code": "R4",
+  "naam": "Zachtgroene vitrinekast teakhout India R4",
+  "slug": "1773",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Vitrinekast, net als al onze andere kasten gemaakt van teakhout. Deze kast heeft vier schuifdeuren. Een blikvanger in huiskamer, keuken of studeerkamer.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_R4-1-scaled.jpg",
+      "alt": "R4 Zachtgroene vitrinekast teakhout India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_R4-1-scaled.jpg",
+      "alt": "R4 Zachtgroene vitrinekast teakhout India, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1773
+}

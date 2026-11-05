@@ -1,0 +1,36 @@
+{
+  "id": 1933,
+  "code": "19B3",
+  "naam": "Stoere kast uit India 19 B3",
+  "slug": "stoere-kast-uit-india-19-b3",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 775,
+  "maten": null,
+  "omschrijving": "<p>Stoere, unieke, oude kast uit het binnenland van India. Een kast met een verhaal.</p>\n<p>Glas rondom, wat zorgt voor een mooie doorkijk.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_10_19-B23-zijkant-.jpg",
+      "alt": "19B3 Stoere kast uit India 19 B3, zijkant"
+    }
+  ],
+  "tags": [
+    "duurzaam",
+    "exclusive-kast",
+    "india-kast",
+    "kast-met-geschiedenis",
+    "kasten",
+    "originele-kast",
+    "ronde-hoeken",
+    "stoere-kast",
+    "teakhout",
+    "unieke-kast",
+    "vintage",
+    "vitrinekast"
+  ],
+  "inCollectie": true,
+  "volgorde": 1933
+}

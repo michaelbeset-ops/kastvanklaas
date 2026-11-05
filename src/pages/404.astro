@@ -1,0 +1,16 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Icoon from '../components/Icoon.astro';
+import { zaak } from '../lib/site';
+---
+<Basis titel="Pagina niet gevonden | Kast van Klaas Leiden" beschrijving="Deze pagina bestaat niet (meer). Bekijk de collectie oude India kasten of vraag Klaas naar een kastnummer." pad="/404/" noindex>
+  <section class="wrap py-12 sm:py-20 lg:py-28">
+    <p class="kicker text-stil">Pagina niet gevonden</p>
+    <h1 class="mt-4 max-w-3xl text-5xl">Deze kast staat hier niet meer.</h1>
+    <p class="mt-6 max-w-xl text-lg">Misschien is de pagina verplaatst. Zoek in de collectie op kastnummer, of vraag het Klaas.</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/webshop/" class="knop knop-geel">Naar de collectie<Icoon naam="pijl" /></a>
+      <a href={zaak.telefoonLink} class="knop knop-wit"><Icoon naam="tel" />Bel {zaak.telefoon}</a>
+    </div>
+  </section>
+</Basis>

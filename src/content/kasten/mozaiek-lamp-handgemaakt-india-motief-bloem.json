@@ -1,0 +1,23 @@
+{
+  "id": 948,
+  "code": null,
+  "naam": "Mozaïek lamp handgemaakt India motief bloem",
+  "slug": "mozaiek-lamp-handgemaakt-india-motief-bloem",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": 90,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2018_01_SUN_5991-scaled.jpg",
+      "alt": "Mozaïek lamp handgemaakt India motief bloem, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 948
+}

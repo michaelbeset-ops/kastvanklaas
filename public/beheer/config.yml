@@ -1,0 +1,84 @@
+# Beheeromgeving Kast van Klaas (Sveltia CMS, Decap-compatibele config).
+# Na opslaan zet Sveltia een commit in de repo; GitHub Actions bouwt de site opnieuw (± 3 minuten).
+# Koppeling bij livegang invullen: repo-naam en inlogmethode (zie HANDLEIDING-KLAAS.md en het eindverslag).
+
+backend:
+  name: github
+  repo: michaelbeset-ops/kastvanklaas
+  branch: main
+  commit_messages:
+    create: "Nieuwe kast: {{slug}}"
+    update: "Kast bijgewerkt: {{slug}}"
+    delete: "Kast verwijderd: {{slug}}"
+
+locale: nl
+site_url: https://www.kastvanklaas.nl
+display_url: https://www.kastvanklaas.nl
+
+media_folder: /src/assets/kasten
+public_folder: ../../assets/kasten
+
+collections:
+  - name: kasten
+    label: Kasten
+    label_singular: Kast
+    description: "Elke kast is een eigen bestand. Verkocht? Zet de status op Verkocht, niet verwijderen: dan blijft de pagina in Google."
+    folder: src/content/kasten
+    extension: json
+    format: json
+    create: true
+    delete: true
+    identifier_field: slug
+    slug: "{{slug}}"
+    summary: "{{code}} {{naam}} ({{status}})"
+    sortable_fields: [code, naam, prijs, status]
+    view_filters:
+      - { label: Te koop, field: status, pattern: te-koop }
+      - { label: Verkocht, field: status, pattern: verkocht }
+    media_folder: /src/assets/kasten
+    public_folder: ../../assets/kasten
+    fields:
+      - { name: code, label: Kastnummer, widget: string, required: false, hint: "Zoals op het krijtbordje, bv. 20B5 (kast 20, levering B, jaar 5)." }
+      - { name: naam, label: Naam, widget: string, hint: "Met kastnummer erin, bv. 20B5 Zacht groene vitrinekast. Dit wordt ook de titel in Google." }
+      - { name: slug, label: Webadres, widget: string, pattern: ["^[a-z0-9-]+$", "Alleen kleine letters, cijfers en streepjes"], hint: "Deel van de link, bv. 20b5-zacht-groene-vitrinekast. Na publiceren niet meer veranderen." }
+      - name: status
+        label: Status
+        widget: select
+        default: te-koop
+        options:
+          - { label: Te koop, value: te-koop }
+          - { label: Verkocht, value: verkocht }
+      - { name: prijs, label: Prijs in euro, widget: number, value_type: float, required: false, min: 0, hint: "Leeg laten = 'Prijs op aanvraag'." }
+      - { name: maten, label: Maten, widget: string, required: false, hint: "Zoals je ze opschrijft, bv. 115cm L x 45cm B x 236cm H." }
+      - name: fotos
+        label: Foto's
+        widget: list
+        min: 1
+        summary: "{{fields.alt}}"
+        hint: "De eerste foto is de hoofdfoto (ook in de collectie en bij delen via WhatsApp)."
+        fields:
+          - { name: src, label: Foto, widget: image }
+          - { name: alt, label: Omschrijving foto, widget: string, hint: "Kort, met kastnummer, bv. 20B5 vitrinekast, zijkant." }
+      - { name: omschrijving, label: Tekst, widget: markdown, required: false, buttons: [bold, italic, bulleted-list, link], editor_components: [] }
+      - name: categorie
+        label: Soort (bepaalt het webadres)
+        widget: select
+        default: india-kasten
+        options:
+          - { label: India kasten, value: india-kasten }
+          - { label: Indiase tafels, value: indiase-tafels }
+          - { label: Meer uit India, value: accessoires }
+          - { label: Tuinmeubels, value: tuinmeubels }
+          - { label: Joosje Doodles, value: joosjedoodles }
+          - { label: Inspiratie, value: inspiratie }
+      - name: categorieen
+        label: Ook tonen in
+        widget: select
+        multiple: true
+        required: false
+        options: [india-kasten, indiase-tafels, accessoires, tuinmeubels, joosjedoodles, inspiratie]
+        hint: "Zet hier minstens dezelfde soort als hierboven."
+      - { name: inCollectie, label: Tonen in de collectie, widget: boolean, default: true }
+      - { name: toegevoegd, label: Toegevoegd op, widget: datetime, default: "{{now}}", required: false, hint: "Nieuwste kasten staan bovenaan." }
+      - { name: volgorde, label: Volgorde, widget: hidden, default: 0 }
+      - { name: tags, label: Tags, widget: hidden, default: [] }

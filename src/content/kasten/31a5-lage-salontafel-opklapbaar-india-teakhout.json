@@ -1,0 +1,35 @@
+{
+  "id": 2463,
+  "code": "31A5",
+  "naam": "31A5 lage salontafel (opklapbaar) India teakhout",
+  "slug": "31a5-lage-salontafel-opklapbaar-india-teakhout",
+  "categorie": "indiase-tafels",
+  "categorieen": [
+    "indiase-tafels"
+  ],
+  "status": "te-koop",
+  "prijs": 195,
+  "maten": "120cm L x 75cm B x 46cm H",
+  "omschrijving": "<p>Lage teakhouten opklapbare salontafel.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_31A5-klaptafel-scaled.jpg",
+      "alt": "31A5 lage salontafel (opklapbaar) India teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_31A5-lage-klaptafel-scaled.jpg",
+      "alt": "31A5 lage salontafel (opklapbaar) India teakhout, foto 2"
+    }
+  ],
+  "tags": [
+    "bijzettafel",
+    "handig",
+    "india-salontafel",
+    "praktisch",
+    "tafel-opklapbaar",
+    "teak-wood",
+    "teakhout"
+  ],
+  "inCollectie": true,
+  "volgorde": 2463
+}

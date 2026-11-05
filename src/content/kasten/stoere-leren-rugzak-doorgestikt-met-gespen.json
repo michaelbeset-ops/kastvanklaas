@@ -1,0 +1,23 @@
+{
+  "id": 952,
+  "code": null,
+  "naam": "Stoere leren rugzak doorgestikt met gespen",
+  "slug": "stoere-leren-rugzak-doorgestikt-met-gespen",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": 60,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2018_01_Rugzak.jpg",
+      "alt": "Stoere leren rugzak doorgestikt met gespen, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 952
+}

@@ -1,0 +1,23 @@
+{
+  "id": 1715,
+  "code": null,
+  "naam": "Charmante witte vitrinekast",
+  "slug": "charmante-witte-vitrinekast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "te-koop",
+  "prijs": 1750,
+  "maten": null,
+  "omschrijving": "<p>Nr. 19A1<br />\nMaten: Lengte 132cm x Diepte 43cm x Hoogte 207cm<br />\nWit</p>\n<p>Glas rondom<br />\nBoven en onder zijn de deuren van glas<br />\n3 legplanken boven<br />\n1 legplank onder<br />\nTeakhout<br />\nSchuifdeuren boven en onder</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2021_10_Nr.-19A1-scaled.jpg",
+      "alt": "Charmante witte vitrinekast, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1715
+}

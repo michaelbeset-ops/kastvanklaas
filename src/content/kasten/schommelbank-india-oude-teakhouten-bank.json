@@ -1,0 +1,27 @@
+{
+  "id": 1432,
+  "code": null,
+  "naam": "Schommelbank- india -oude teakhouten bank",
+  "slug": "schommelbank-india-oude-teakhouten-bank",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_13A0-2-1-scaled.jpg",
+      "alt": "Schommelbank- india -oude teakhouten bank, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_13A0-1-1.jpg",
+      "alt": "Schommelbank- india -oude teakhouten bank, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1432
+}

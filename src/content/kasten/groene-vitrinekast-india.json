@@ -1,0 +1,27 @@
+{
+  "id": 1764,
+  "code": null,
+  "naam": "Groene vitrinekast India",
+  "slug": "groene-vitrinekast-india",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "te-koop",
+  "prijs": 1215,
+  "maten": null,
+  "omschrijving": "<p>Groene vitrinekast met 6 planken en openslaande deuren.</p>\n<p>Deze prachtige kleur groen tref je nagenoeg alleen in India. Mocht je toch liever jouw kast in een andere kleur zien? Dan kan dat. Graag overleggen we met jou wat de mogelijkheden zijn.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N06.jpg",
+      "alt": "Groene vitrinekast India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N06.jpg",
+      "alt": "Groene vitrinekast India, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1764
+}

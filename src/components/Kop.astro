@@ -1,0 +1,68 @@
+---
+// Kop naar het voorbeeld van zbnridderkerk.nl: donkere topbalk met de drie vinkjes, daaronder een witte
+// zwevende menubalk die bij scrollen mee blijft. Op de home ligt die balk over de hero-foto.
+import Icoon from './Icoon.astro';
+import Merk from './Merk.astro';
+import { zaak, waLink } from '../lib/site';
+
+interface Props { thuis?: boolean }
+const { thuis = false } = Astro.props;
+const pad = Astro.url.pathname;
+const nav = [
+  { href: '/webshop/cat/india-kasten/', t: 'Kasten', actief: pad.startsWith('/webshop/cat/india-kasten') || pad.startsWith('/webshop/india-kasten') || pad.startsWith('/vitrinekast') },
+  { href: '/meer-bij-kastvanklaas/', t: 'Meer bij Klaas', actief: pad.startsWith('/meer-bij') || (pad.startsWith('/webshop/') && !pad.includes('india-kasten')) },
+  { href: '/over-kast-van-klaas/', t: 'Over Klaas', actief: pad.startsWith('/over') },
+  { href: '/contact/', t: 'Contact', actief: pad.startsWith('/contact') },
+];
+// Twee letterlijk van kastvanklaas.nl (home en over-pagina), "Wij bezorgen" op verzoek van Klaas (04-11-2026).
+const usp = ['Rechtstreeks uit India', 'Oude kasten van primair teakhout', 'Wij bezorgen'];
+const hoi = waLink('Hallo Klaas, ik heb een vraag over een kast.');
+---
+<div class="donker hidden bg-nacht lg:block">
+  <div class="wrap flex h-10 items-center justify-between gap-6 text-[.875rem] text-wit/85">
+    <ul class="flex gap-7">
+      {usp.map((e) => <li class="flex items-center gap-2"><Icoon naam="vink" class="h-4 w-4 text-saffraan" />{e}</li>)}
+    </ul>
+    <div class="flex items-center gap-6">
+      <a href={`mailto:${zaak.email}`} class="no-underline hover:text-wit">{zaak.email}</a>
+      <a href={zaak.telefoonLink} class="flex items-center gap-2 tabular-nums no-underline hover:text-wit" data-goatcounter-click="bel-topbalk"><Icoon naam="tel" class="h-4 w-4 text-saffraan" />06 26 37 84 80</a>
+    </div>
+  </div>
+</div>
+
+<header class:list={['sticky top-3 z-50 px-3 sm:px-5', thuis ? 'h-0' : 'my-3']}>
+  <div class:list={[thuis && 'translate-y-3']}>
+  <div class="mx-auto flex max-w-[78rem] items-center justify-between gap-4 rounded-[20px] bg-wit/95 py-2.5 pl-4 pr-2.5 shadow-hoog backdrop-blur-md sm:pl-5 lg:rounded-full">
+    <Merk licht compact />
+    <nav aria-label="Hoofdmenu" class="hidden lg:block">
+      <ul class="flex gap-1 text-[.95rem] font-medium text-inkt">
+        {nav.map((n) => <li><a href={n.href} aria-current={n.actief ? 'page' : undefined} class:list={['rounded-full px-3.5 py-2 no-underline transition-colors hover:bg-ijs', n.actief && 'bg-ijs font-semibold']}>{n.t}</a></li>)}
+      </ul>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href={zaak.telefoonLink} class="knop knop-wit hidden min-h-10 px-4 py-2 text-[.95rem] xl:inline-flex" data-goatcounter-click="bel-kop"><Icoon naam="tel" />{zaak.telefoon}</a>
+      <a href={hoi} class="knop knop-geel hidden min-h-10 px-4 py-2 text-[.95rem] md:inline-flex" data-goatcounter-click="whatsapp-kop"><Icoon naam="wa" />App Klaas</a>
+      <button type="button" class="grid h-10 w-10 place-items-center rounded-full text-inkt hover:bg-ijs lg:hidden" aria-expanded="false" aria-controls="menu-nav" data-menu-knop>
+        <span class="sr-only">Menu</span>
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
+      </button>
+    </div>
+  </div>
+  <nav id="menu-nav" aria-label="Menu" class="mx-auto mt-2 hidden max-w-[78rem] rounded-[20px] bg-wit p-3 shadow-hoog lg:hidden" data-menu>
+    <ul>
+      {nav.map((n) => <li><a href={n.href} class="block rounded-xl px-4 py-3 font-kop text-xl font-bold text-inkt no-underline [font-stretch:110%] hover:bg-ijs">{n.t}</a></li>)}
+      <li class="px-4 pb-2 pt-3"><a href={zaak.telefoonLink} class="font-medium tabular-nums text-stil no-underline">{zaak.telefoon}</a></li>
+    </ul>
+  </nav>
+  </div>
+</header>
+
+
+<script>
+  const k = document.querySelector<HTMLButtonElement>('[data-menu-knop]');
+  const m = document.querySelector<HTMLElement>('[data-menu]');
+  if (k && m) {
+    k.addEventListener('click', () => { const o = k.getAttribute('aria-expanded') !== 'true'; k.setAttribute('aria-expanded', String(o)); m.classList.toggle('hidden', !o); });
+    m.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { k.setAttribute('aria-expanded', 'false'); m.classList.add('hidden'); }));
+  }
+</script>

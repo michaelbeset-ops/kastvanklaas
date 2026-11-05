@@ -1,0 +1,23 @@
+{
+  "id": 936,
+  "code": null,
+  "naam": "Keukenblok en/of kookeiland India",
+  "slug": "keukenblok-en-of-kookeiland-india",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2016_03_11a16-1.jpg",
+      "alt": "Keukenblok en/of kookeiland India, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 936
+}

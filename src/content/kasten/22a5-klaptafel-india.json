@@ -1,0 +1,33 @@
+{
+  "id": 2438,
+  "code": "22A5",
+  "naam": "22A5 Klaptafel India",
+  "slug": "22a5-klaptafel-india",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": "115cm L x 77cm B x 70cm H",
+  "omschrijving": "<p>Onze nieuwe collectie is onderweg uit India. Binnenkort meer nieuws! Mocht je een vraag, of interesse hebben in een van onze kasten? Mail ons kast@kastvanklaas.nl of bel/app naar 06 26378480</p>\n<p>Groetjes Klaas</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_22A5-klaptafel-voorkant-scaled.jpg",
+      "alt": "22A5 Klaptafel India, voorkant"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_22A5-klaptafel-schuin-voor-scaled.jpg",
+      "alt": "22A5 Klaptafel India, schuin van voren"
+    }
+  ],
+  "tags": [
+    "duurzaam",
+    "duurzaam-wonen",
+    "handig",
+    "indiase-klaptafel",
+    "praktisch"
+  ],
+  "inCollectie": false,
+  "volgorde": 2438
+}

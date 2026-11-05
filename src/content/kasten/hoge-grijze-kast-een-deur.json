@@ -1,0 +1,30 @@
+{
+  "code": null,
+  "naam": "Hoge grijze kast met een deur",
+  "slug": "hoge-grijze-kast-een-deur",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "Hoge grijze kast met één paneeldeur. Van binnen onbewerkt hout met vijf planken.",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_11_grijs-een-deur-1.jpg",
+      "alt": "Hoge grijze kast met een deur, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_11_grijs-een-deur-2.jpg",
+      "alt": "Hoge grijze kast met een deur, foto 2"
+    }
+  ],
+  "tags": [
+    "india-kast",
+    "unieke-kast"
+  ],
+  "inCollectie": true,
+  "volgorde": 2470,
+  "toegevoegd": "2026-11-05"
+}

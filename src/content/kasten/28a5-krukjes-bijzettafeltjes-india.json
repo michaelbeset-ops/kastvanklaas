@@ -1,0 +1,31 @@
+{
+  "id": 2448,
+  "code": "28A5",
+  "naam": "28A5 krukjes, bijzettafeltjes India",
+  "slug": "28a5-krukjes-bijzettafeltjes-india",
+  "categorie": "indiase-tafels",
+  "categorieen": [
+    "indiase-tafels"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": "26cm L x 26cm B x 20cm H",
+  "omschrijving": "<p>Onze nieuwe collectie is onderweg uit India. Binnenkort meer nieuws! Mocht je een vraag, of interesse hebben in een van onze kasten? Mail ons kast@kastvanklaas.nl of bel/app naar 06 26378480</p>\n<p>Groetjes Klaas</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_28A5-krukjes-scaled.jpg",
+      "alt": "28A5 krukjes, bijzettafeltjes India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_28A5-2-krukjes-scaled.jpg",
+      "alt": "28A5 krukjes, bijzettafeltjes India, foto 2"
+    }
+  ],
+  "tags": [
+    "bijzettafeltje",
+    "krukjes-india",
+    "tafeltjes"
+  ],
+  "inCollectie": false,
+  "volgorde": 2448
+}

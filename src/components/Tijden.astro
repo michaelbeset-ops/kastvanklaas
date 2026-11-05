@@ -1,0 +1,23 @@
+---
+// Openingstijden als kaart; vandaag krijgt een label (in de browser, Nederlandse tijd).
+import { tijden } from '../lib/site';
+---
+<div class="kaart p-6 sm:p-7">
+  <h3 class="text-xl">Openingstijden</h3>
+  <table class="mt-4 w-full text-[.95rem] tabular-nums">
+    <tbody>
+      {tijden.map((t, i) => (
+        <tr class="border-b border-lijn last:border-0" data-dag={(i + 1) % 7}>
+          <th scope="row" class="py-2.5 text-left font-normal text-inkt">{t.dag} <span class="vandaag ml-1.5 hidden rounded-full bg-nacht px-2 py-0.5 align-[1px] text-[.7rem] font-semibold text-wit">vandaag</span></th>
+          <td class="py-2.5 text-right">{t.open.replace(':', '.')} tot {t.dicht.replace(':', '.')} uur</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="mt-3 text-sm text-stil">Of op afspraak.</p>
+</div>
+<script>
+  const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Amsterdam' })).getDay();
+  document.querySelectorAll(`[data-dag="${d}"] .vandaag`).forEach((e) => e.classList.remove('hidden'));
+  document.querySelectorAll<HTMLElement>(`[data-dag="${d}"]`).forEach((e) => e.classList.add('font-semibold'));
+</script>

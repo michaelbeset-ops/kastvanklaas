@@ -1,0 +1,31 @@
+{
+  "id": 1782,
+  "code": "R8",
+  "naam": "Blauwe dubbele vitrinekast met lades R8",
+  "slug": "blauwe-dubbele-vitrinekast-met-lades-r8",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Deze prachtige hoge vitrine kast wordt door 3 lades verdeeld in 2 aparte delen.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_R8-scaled.jpg",
+      "alt": "R8 Blauwe dubbele vitrinekast met lades, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_R8-scaled.jpg",
+      "alt": "R8 Blauwe dubbele vitrinekast met lades, foto 2"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_Blauwe-kast-met-lades-zijkant-scaled.jpg",
+      "alt": "R8 Blauwe dubbele vitrinekast met lades, zijkant"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1782
+}

@@ -1,0 +1,27 @@
+{
+  "id": 1784,
+  "code": "R5",
+  "naam": "Blauwe vitrinekast met dichte deurtjes India teakhout R5",
+  "slug": "blauwe-vitrinekast-met-dichte-deurtjes-india-teakhout-r5",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 1925,
+  "maten": null,
+  "omschrijving": "<p>Prachtige hoge vitrinekast van teakhout.</p>\n<p>Mocht je de kast liever een andere kleur hebben? Schilderen we hem graag, in overleg met jou, in de door jou gewenste kleur.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_R5-1-scaled.jpg",
+      "alt": "R5 Blauwe vitrinekast met dichte deurtjes India teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_R5-1-scaled.jpg",
+      "alt": "R5 Blauwe vitrinekast met dichte deurtjes India teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1784
+}

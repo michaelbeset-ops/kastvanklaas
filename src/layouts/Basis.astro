@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import Kop from '../components/Kop.astro';
+import Voet from '../components/Voet.astro';
+import { SITE, GOATCOUNTER_CODE, heeftWaarde } from '../lib/site';
+
+interface Props {
+  titel: string;
+  beschrijving: string;
+  pad: string; // canonical pad, altijd met slash aan het eind
+  ogBeeld?: string; // absolute URL
+  schema?: object[];
+  noindex?: boolean;
+  thuis?: boolean; // home: header ligt over de donkere hero
+}
+const { titel, beschrijving, pad, ogBeeld, schema = [], noindex = false, thuis = false } = Astro.props;
+const canonical = new URL(pad, SITE).href;
+const og = ogBeeld ?? new URL('/og.jpg', SITE).href;
+---
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Beveiliging: GitHub Pages kan geen headers zetten, dus hier. Alleen eigen bestanden, Web3Forms (formulieren) en GoatCounter (statistiek). -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; font-src 'self'; connect-src 'self' https://api.web3forms.com https://*.goatcounter.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>{titel}</title>
+    <meta name="description" content={beschrijving} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:site_name" content="Kast van Klaas" />
+    <meta property="og:title" content={titel} />
+    <meta property="og:description" content={beschrijving} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#1f1812" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen bg-nacht">
+    <a href="#inhoud" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-wit focus:px-4 focus:py-2">Naar de inhoud</a>
+    <Kop thuis={thuis} />
+    <main id="inhoud" class="bg-wit pb-14 sm:pb-20 lg:pb-24">
+      <slot />
+    </main>
+    <Voet />
+    {heeftWaarde(GOATCOUNTER_CODE) && (
+      <script is:inline async data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`} src="//gc.zgo.at/count.js"></script>
+    )}
+  </body>
+</html>

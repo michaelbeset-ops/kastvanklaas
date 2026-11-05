@@ -1,0 +1,27 @@
+{
+  "code": null,
+  "naam": "Lichtgroene vitrinekast",
+  "slug": "lichtgroene-vitrinekast-teakhout",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "te-koop",
+  "prijs": 1075,
+  "maten": null,
+  "omschrijving": "Zeer charmante lichtgroene vitrinekast van teakhout, naar schatting zo'n 70 jaar oud. Glazen deuren, glas in de zijkanten en wit van binnen.",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_11_lichtgroen.jpg",
+      "alt": "Lichtgroene vitrinekast van teakhout, foto 1"
+    }
+  ],
+  "tags": [
+    "india-kast",
+    "unieke-kast",
+    "vitrinekast"
+  ],
+  "inCollectie": true,
+  "volgorde": 2468,
+  "toegevoegd": "2026-11-05"
+}

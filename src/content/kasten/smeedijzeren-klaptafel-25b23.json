@@ -1,0 +1,33 @@
+{
+  "id": 1940,
+  "code": "25B23",
+  "naam": "Smeedijzeren klaptafel 25B23",
+  "slug": "smeedijzeren-klaptafel-25b23",
+  "categorie": "tuinmeubels",
+  "categorieen": [
+    "tuinmeubels"
+  ],
+  "status": "verkocht",
+  "prijs": 295,
+  "maten": null,
+  "omschrijving": "<p>Ronde smeedijzeren klaptafel. Gemoffeld, powder coating, wat inhoudt dat deze tafel alle weersomstandigheden zal trotseren.</p>\n<p>Bij deze leuke, charmante, handige (klap)tafel hebben wij ook fantastisch leuke smeedijzeren stoelen, te koop.</p>\n<p>Tuinmeubelen die lang meegaan. Duurzaam!</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_10_25-B23-tafel-van-boven.jpg",
+      "alt": "25B23 Smeedijzeren klaptafel, van boven"
+    }
+  ],
+  "tags": [
+    "india",
+    "klaptafel",
+    "makkelijk-op-te-bergen",
+    "origineel",
+    "praktisch",
+    "ronde-tafel",
+    "smeedijzeren-tafel",
+    "tuinmeubel",
+    "uniek"
+  ],
+  "inCollectie": true,
+  "volgorde": 1940
+}

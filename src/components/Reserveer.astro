@@ -1,0 +1,79 @@
+---
+// "Reserveer deze kast": geen online afrekenen, maar een korte aanvraag die bij Klaas in de mail komt.
+// Opent als venster (dialog) met het kastnummer al ingevuld. Zonder Web3Forms-key wordt het een ingevulde mail.
+import Icoon from './Icoon.astro';
+import { type Kast, padVan } from '../lib/kasten';
+import { WEB3FORMS_KEY, heeftWaarde, zaak, SITE, euro } from '../lib/site';
+
+interface Props { kast: Kast }
+const { kast } = Astro.props;
+const wie = kast.code ? `${kast.code} ${kast.naam.replace(kast.code, '').trim()}` : kast.naam;
+const onderwerp = `Reservering ${wie}`.replace(/\s{2,}/g, ' ');
+const id = kast.code ?? kast.slug;
+---
+<button type="button" class="knop knop-geel w-full text-[1.05rem]" data-reserveer-open data-goatcounter-click={`reserveer-klik-${id}`}>
+  Reserveer deze kast<Icoon naam="pijl" />
+</button>
+
+<dialog class="reserveer m-auto w-[min(34rem,calc(100%-2rem))] rounded-[24px] p-0 shadow-hoog backdrop:bg-nacht/60" data-code={id} aria-labelledby="reserveer-kop">
+  <form class="grid gap-5 p-6 sm:p-8" method="post" action="https://api.web3forms.com/submit"
+    data-mail={zaak.email} data-onderwerp={onderwerp} data-key={heeftWaarde(WEB3FORMS_KEY) ? 'ja' : 'nee'}>
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <p class="kicker text-stil">Reserveren</p>
+        <h2 id="reserveer-kop" class="mt-2 text-2xl">{kast.code ? <>Kast <span class="kastnummer">{kast.code}</span></> : kast.naam}</h2>
+        {kast.code && <p class="mt-1 text-sm text-stil">{kast.naam.replace(kast.code, '').trim()}{kast.prijs ? `, ${euro(kast.prijs)}` : ''}</p>}
+      </div>
+      <button type="button" class="grid h-10 w-10 flex-none place-items-center rounded-full hover:bg-ijs" data-reserveer-dicht aria-label="Sluiten">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <p class="text-sm">Laat je naam en nummer of e-mail achter. Klaas neemt contact met je op over deze kast.</p>
+    {heeftWaarde(WEB3FORMS_KEY) && <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />}
+    <input type="hidden" name="subject" value={onderwerp} />
+    <input type="hidden" name="from_name" value="kastvanklaas.nl" />
+    <input type="hidden" name="kast" value={`${wie}${kast.prijs ? `, ${euro(kast.prijs)}` : ''}, ${new URL(padVan(kast), SITE).href}`} />
+    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+    <div><label for="r-naam" class="mb-1.5 block text-sm font-semibold text-inkt">Naam</label>
+      <input id="r-naam" required name="naam" autocomplete="name" class="veld" /></div>
+    <div><label for="r-contact" class="mb-1.5 block text-sm font-semibold text-inkt">Telefoon of e-mail</label>
+      <input id="r-contact" required name="contact" autocomplete="tel" class="veld" /></div>
+    <div><label for="r-bericht" class="mb-1.5 block text-sm font-semibold text-inkt">Bericht <span class="font-normal text-stil">(mag leeg)</span></label>
+      <textarea id="r-bericht" name="bericht" rows="3" class="veld resize-y"></textarea></div>
+    <button type="submit" class="knop knop-geel w-full">Verstuur reservering</button>
+    <p class="text-xs text-stil">We gebruiken je gegevens alleen voor deze kast. Zie de <a class="underline" href="/privacy/">privacyverklaring</a>.</p>
+  </form>
+</dialog>
+
+<script>
+  const dlg = document.querySelector<HTMLDialogElement>('dialog.reserveer');
+  if (dlg) {
+    const open = () => { dlg.showModal(); setTimeout(() => dlg.querySelector<HTMLInputElement>('input[name=naam]')?.focus(), 50); };
+    document.querySelectorAll('[data-reserveer-open]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); open(); }));
+    dlg.querySelector('[data-reserveer-dicht]')?.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    const form = dlg.querySelector('form')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      if (d.get('botcheck')) return;
+      // Per verzonden aanvraag een teller-event, zodat Michael per verkoop ziet dat het via de site kwam.
+      (window as any).goatcounter?.count?.({ path: `aanvraag-${dlg.dataset.code}`, title: 'Reserveer-aanvraag', event: true });
+      if (form.dataset.key !== 'ja') {
+        const body = `Kast: ${d.get('kast')}\nNaam: ${d.get('naam')}\nContact: ${d.get('contact')}\n\n${d.get('bericht') ?? ''}`;
+        location.href = `mailto:${form.dataset.mail}?subject=${encodeURIComponent(form.dataset.onderwerp ?? '')}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+      const knop = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      knop.disabled = true;
+      try {
+        const r = await fetch(form.action, { method: 'POST', body: d, headers: { Accept: 'application/json' } });
+        if (!r.ok) throw new Error();
+        form.innerHTML = '<p class="text-lg font-semibold text-inkt" role="status">Dank je. Klaas heeft je reservering en neemt contact op.</p>';
+      } catch {
+        knop.disabled = false;
+        knop.insertAdjacentHTML('afterend', '<p class="text-sm" role="alert">Versturen lukte niet. Bel of WhatsApp Klaas even.</p>');
+      }
+    });
+  }
+</script>

@@ -1,0 +1,23 @@
+{
+  "id": 932,
+  "code": null,
+  "naam": "Indiaas kamerscherm 4 delig",
+  "slug": "indiaas-kamerscherm-4-delig",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2016_03_33b5-1.jpg",
+      "alt": "Indiaas kamerscherm 4 delig, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 932
+}

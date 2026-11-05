@@ -1,0 +1,33 @@
+{
+  "id": 1762,
+  "code": "N03",
+  "naam": "Hoge dubbele kast teakhout India N03",
+  "slug": "hoge-dubbele-kast-teakhout-india-n03",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 1350,
+  "maten": null,
+  "omschrijving": "<p>De ideale servies- of boekenkast. Dubbele kast met meerdere legplanken, openslaande deuren. Hoog en rank.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N03.jpg",
+      "alt": "N03 Hoge dubbele kast teakhout India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N03.jpg",
+      "alt": "N03 Hoge dubbele kast teakhout India, foto 2"
+    }
+  ],
+  "tags": [
+    "india-kast",
+    "indiase-kast",
+    "kasten",
+    "teakhout-kast",
+    "vitrinekast"
+  ],
+  "inCollectie": true,
+  "volgorde": 1762
+}

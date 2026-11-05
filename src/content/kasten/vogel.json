@@ -1,0 +1,23 @@
+{
+  "id": 2246,
+  "code": null,
+  "naam": "Vogel",
+  "slug": "vogel",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_11_91803B83-5DE5-4CF6-BCA5-62C145402D9D.jpg",
+      "alt": "Vogel, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 2246
+}

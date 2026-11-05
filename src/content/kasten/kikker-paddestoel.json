@@ -1,0 +1,23 @@
+{
+  "id": 2245,
+  "code": null,
+  "naam": "Kikker paddestoel",
+  "slug": "kikker-paddestoel",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_11_41DFE181-6C15-4066-8934-4164EB877E1B.jpg",
+      "alt": "Kikker paddestoel, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 2245
+}

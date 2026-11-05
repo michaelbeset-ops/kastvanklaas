@@ -1,0 +1,27 @@
+{
+  "id": 1814,
+  "code": "LH09",
+  "naam": "Ladekast India teakhout gekleurd LH09",
+  "slug": "ladekast-india-teakhout-gekleurd-lh09",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 675,
+  "maten": null,
+  "omschrijving": "<ol>\n<li>Stoere ladekast uit India. Fraai kleurenpatroon zoals je het alleen in India treffen kan.</li>\n</ol>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_LH09-scaled.jpg",
+      "alt": "LH09 Ladekast India teakhout gekleurd, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_LH09-scaled.jpg",
+      "alt": "LH09 Ladekast India teakhout gekleurd, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1814
+}

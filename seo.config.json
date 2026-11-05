@@ -1,0 +1,131 @@
+{
+  "slug": "kastvanklaas",
+  "site": "https://www.kastvanklaas.nl",
+  "base": "",
+  "githubPagesUrl": "",
+  "mode": "klant",
+  "language": "nl-NL",
+  "branche": "meubelwinkel",
+  "strategy": [
+    "lokaal",
+    "landelijk",
+    "ai"
+  ],
+  "brandTerms": [
+    "kast van klaas",
+    "kastvanklaas"
+  ],
+  "business": {
+    "schemaType": "FurnitureStore",
+    "name": "Kast van Klaas",
+    "legalName": "",
+    "description": "Kast van Klaas is een winkel op de Kaasmarkt in Leiden met oude kasten en meubels van primair teakhout, door eigenaar Klaas Hoekstra zelf uitgezocht in India.",
+    "kvk": "28093664",
+    "vatID": "",
+    "foundingYear": "",
+    "founder": "Klaas Hoekstra",
+    "showAddress": true,
+    "street": "Kaasmarkt 3",
+    "postalCode": "2312 HZ",
+    "city": "Leiden",
+    "region": "Zuid-Holland",
+    "country": "NL",
+    "geo": {
+      "lat": 52.1596612,
+      "lng": 4.4961235
+    },
+    "phone": "+31626378480",
+    "phoneDisplay": "06-26378480",
+    "whatsapp": "31626378480",
+    "email": "klaas@kastvanklaas.nl",
+    "priceRange": "",
+    "openingHours": [
+      {
+        "days": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "12:00",
+        "closes": "18:00"
+      },
+      {
+        "days": [
+          "Saturday"
+        ],
+        "opens": "11:00",
+        "closes": "17:30"
+      },
+      {
+        "days": [
+          "Sunday"
+        ],
+        "opens": "14:00",
+        "closes": "16:00"
+      }
+    ],
+    "specialHours": [],
+    "areaServed": [
+      "Leiden",
+      "Nederland"
+    ],
+    "gbpUrl": "https://www.google.com/maps/place/Kastvanklaas/@52.1596612,4.4961235,17z",
+    "reviewLink": "",
+    "gbpPrimaryCategory": "Meubelwinkel",
+    "sameAs": [],
+    "logo": "/logo-kastvanklaas.png",
+    "image": "",
+    "extra": {}
+  },
+  "services": [
+    {
+      "name": "India kasten",
+      "path": "/webshop/cat/india-kasten/",
+      "summary": "Oude kasten uit India van primair teakhout.",
+      "keywords": [
+        "india kasten",
+        "oude india kast",
+        "indiase kast kopen"
+      ]
+    },
+    {
+      "name": "Vitrinekast uit India",
+      "path": "/vitrinekast-uit-india/",
+      "summary": "Oude vitrinekasten uit India.",
+      "keywords": [
+        "vitrinekast india",
+        "oude vitrinekast teakhout"
+      ]
+    },
+    {
+      "name": "Indiase tafels",
+      "path": "/webshop/cat/indiase-tafels/",
+      "summary": "Oude tafels uit India.",
+      "keywords": [
+        "indiase tafel",
+        "oude teakhouten tafel"
+      ]
+    }
+  ],
+  "llmsPages": [],
+  "ignorePaths": [
+    "/privacy/",
+    "/algemene-voorwaarden/",
+    "/winkelmand/",
+    "/afrekenen/",
+    "/mijn-account/",
+    "/beheer/",
+    "/404/"
+  ],
+  "gscProperty": "sc-domain:kastvanklaas.nl",
+  "psiUrls": [
+    "/",
+    "/webshop/",
+    "/vitrinekast-uit-india/"
+  ],
+  "aiCrawlers": {
+    "training": "allow"
+  }
+}

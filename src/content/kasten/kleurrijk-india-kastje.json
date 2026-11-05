@@ -1,0 +1,27 @@
+{
+  "id": 1182,
+  "code": null,
+  "naam": "Kleurrijk india kastje",
+  "slug": "kleurrijk-india-kastje",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>kleurrijk, stoer kastje</p>\n<p>gemaakt van recycled  teakhout</p>\n<p>Kleurrijk Indiakastje</p>\n<ul>\n<li>kleur gemeleerd met oud blauw</li>\n<li>servieskastje alle maten borden passen erin</li>\n<li>karakteristieke uitstraling</li>\n<li>Het hout is van sloophout</li>\n<li>herkomst Rajasthan, India</li>\n<li>maten b 80 x  d 39 x h 113</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_02A0-2-scaled.jpg",
+      "alt": "Kleurrijk india kastje, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_02A0-1-scaled.jpg",
+      "alt": "Kleurrijk india kastje, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1182
+}

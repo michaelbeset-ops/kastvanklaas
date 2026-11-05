@@ -1,0 +1,23 @@
+{
+  "id": 1974,
+  "code": null,
+  "naam": "",
+  "slug": "1974",
+  "categorie": "inspiratie",
+  "categorieen": [
+    "inspiratie"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Deze klaptafel staat perfect in de fantastische woning van blije en tevreden klant in Arnhem.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_11_inspiratie-tafel.jpg",
+      "alt": "Inspiratie uit de winkel van Kast van Klaas in Leiden, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 1974
+}

@@ -1,0 +1,27 @@
+{
+  "id": 1312,
+  "code": null,
+  "naam": "Klein India kastje",
+  "slug": "klein-india-kastje",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 235,
+  "maten": null,
+  "omschrijving": "<p>afmeting: l 78cm x d 43 cm x61cm</p>\n<p>kleur oudwit</p>\n<p>teakhout</p>\n<p>oud Indiaas theemeubel</p>\n<p>leeftijd : ca. 1930</p>\n<p>herkomst : Calcutta</p>\n<p>2 deurskastje met extra legplank</p>\n<p>kleur oudwit</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_05A0-2.jpg",
+      "alt": "Klein India kastje, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_05A0-1.jpg",
+      "alt": "Klein India kastje, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1312
+}

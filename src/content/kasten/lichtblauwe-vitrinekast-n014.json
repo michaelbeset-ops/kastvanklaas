@@ -1,0 +1,27 @@
+{
+  "id": 1770,
+  "code": "N014",
+  "naam": "Lichtblauwe vitrinekast N014",
+  "slug": "lichtblauwe-vitrinekast-n014",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 1275,
+  "maten": null,
+  "omschrijving": "<p>Stoere, eenvoudig ogende kast, een blikvanger voor elke ruimte. Perfect als boekenkast, keukenkast, servieskast of studeerkamerkast.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N014.jpg",
+      "alt": "N014 Lichtblauwe vitrinekast, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N014.jpg",
+      "alt": "N014 Lichtblauwe vitrinekast, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1770
+}

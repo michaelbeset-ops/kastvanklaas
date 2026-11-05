@@ -1,0 +1,23 @@
+{
+  "id": 1978,
+  "code": null,
+  "naam": "",
+  "slug": "1978",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Originele blikjes uit India. Ook te koop bij KASTVANKLAAS</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_11_blikjes.jpg",
+      "alt": "Meer uit India, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1978
+}

@@ -1,0 +1,28 @@
+---
+// Oude landingspagina die in Google staat; nu met de echte vitrinekasten eronder. Ook de oude tag-URL's
+// voor vitrinekasten verwijzen hierheen (redirects.mjs).
+import { getImage } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import Collectie from '../components/Collectie.astro';
+import { alleKasten, kruimelSchema } from '../lib/kasten';
+import { SITE } from '../lib/site';
+import { soortChips, soortenMetPagina } from '../lib/soorten.mjs';
+
+const alle = (await alleKasten()).filter((k) => k.inCollectie);
+const kasten = alle.filter((k) => /vitrine/i.test(k.naam) || k.tags.includes('vitrinekast'));
+const n = kasten.filter((k) => k.status === 'te-koop').length;
+const kruimels = [{ naam: 'Home', pad: '/' }, { naam: 'Vitrinekast uit India', pad: '/vitrinekast-uit-india/' }];
+const chips = soortChips(alle, new Set(soortenMetPagina().map((s) => s.tag)));
+const eerste = kasten.find((k) => k.status === 'te-koop') ?? kasten[0];
+const og = new URL((await getImage({ src: eerste.fotos[0].src, width: 1200, format: 'jpg', quality: 68 })).src, SITE).href;
+---
+<Basis
+  titel="Vitrinekast uit India van oud teakhout | Kast van Klaas Leiden"
+  beschrijving={`${n} oude vitrinekasten uit India te koop, van primair teakhout en elk met een eigen kastnummer. Te zien in de winkel op de Kaasmarkt in Leiden.`}
+  pad="/vitrinekast-uit-india/"
+  ogBeeld={og}
+  schema={[kruimelSchema(kruimels)]}
+>
+  <Collectie kasten={kasten} actief="india-kasten" huidigPad="/vitrinekast-uit-india/" titel="Vitrinekast uit India" kruimels={kruimels} soorten={chips}
+    intro="Oude vitrinekasten van primair teakhout, rechtstreeks uit India en zestig tot honderd jaar oud. Hoog of laag, met schuifdeuren of openslaande deurtjes. Elke kast heeft een eigen nummer." />
+</Basis>

@@ -1,0 +1,27 @@
+{
+  "id": 1766,
+  "code": "N07",
+  "naam": "Gele kast India N07",
+  "slug": "gele-kast-india",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Gele vrolijke teakhoutenkast. Voor de keuken, woonkamer, gang, of studeerkamer.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N07.jpg",
+      "alt": "N07 Gele kast India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N07.jpg",
+      "alt": "N07 Gele kast India, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1766
+}

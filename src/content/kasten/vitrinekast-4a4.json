@@ -1,0 +1,31 @@
+{
+  "id": 2080,
+  "code": "4A4",
+  "naam": "Vitrinekast 4A4",
+  "slug": "vitrinekast-4a4",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 1500,
+  "maten": "117cmx40cmx196cm",
+  "omschrijving": "<p>Deze groene vitrinekast uit India is niet zomaar een meubelstuk; het is een verhaal op zich, doordrenkt met cultuur, vakmanschap en karakter. De kast vormt een prachtig middelpunt in elke ruimte en voegt een vleugje exotische flair toe aan je interieur. De rijke, levendige groene kleur van de kast roept beelden op van weelderige Indiase landschappen en biedt een frisse uitstraling die perfect past in zowel moderne als traditionele interieurs.</p>\n\n<p>Vanaf 22 oktober in de winkel!</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_09_4A4-scaled.jpg",
+      "alt": "4A4 Vitrinekast, foto 1"
+    }
+  ],
+  "tags": [
+    "india-kast",
+    "indian-furniture",
+    "indiase-kast",
+    "legkast",
+    "openslaande-deuren",
+    "tweedelige-kast",
+    "vitrinekast"
+  ],
+  "inCollectie": true,
+  "volgorde": 2080
+}

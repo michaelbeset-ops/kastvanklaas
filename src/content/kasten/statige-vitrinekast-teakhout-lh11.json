@@ -1,0 +1,27 @@
+{
+  "id": 1823,
+  "code": "LH11",
+  "naam": "Stoere vitrinekast teakhout LH11",
+  "slug": "statige-vitrinekast-teakhout-lh11",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 1125,
+  "maten": null,
+  "omschrijving": "<p>Een juweeltje van een kast. Mooi doorleefde kleuren. Glas rondom.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_LH11-scaled.jpg",
+      "alt": "LH11 Stoere vitrinekast teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_LH11-scaled.jpg",
+      "alt": "LH11 Stoere vitrinekast teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1823
+}

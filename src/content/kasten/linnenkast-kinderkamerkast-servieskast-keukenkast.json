@@ -1,0 +1,23 @@
+{
+  "id": 1709,
+  "code": null,
+  "naam": "Linnenkast, Kinderkamerkast, Servieskast, Keukenkast",
+  "slug": "linnenkast-kinderkamerkast-servieskast-keukenkast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Nr. 16A1<br />\nMaten: Lengte 123cm x Diepte 46cm x Hoogte 181cm<br />\nHeel licht blauw</p>\n<p>Glazen deuren onder 2 dichte paneeltjes<br />\n4 legplanken achter glas<br />\n1 legplank achter paneeltjes<br />\nTeakhout</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2021_10_Nr.-16A1-scaled.jpg",
+      "alt": "Linnenkast, Kinderkamerkast, Servieskast, Keukenkast, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1709
+}

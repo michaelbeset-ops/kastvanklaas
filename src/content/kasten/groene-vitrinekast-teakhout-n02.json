@@ -1,0 +1,27 @@
+{
+  "id": 1760,
+  "code": "N02",
+  "naam": "Groene vitrinekast teakhout N02",
+  "slug": "groene-vitrinekast-teakhout-n02",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "te-koop",
+  "prijs": 1625,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N02.jpg",
+      "alt": "N02 Groene vitrinekast teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N02.jpg",
+      "alt": "N02 Groene vitrinekast teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1760
+}

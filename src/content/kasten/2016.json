@@ -1,0 +1,24 @@
+{
+  "id": 2016,
+  "code": null,
+  "naam": "",
+  "slug": "2016",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires",
+    "inspiratie"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_11_inspiratie-en-accessoires.jpg",
+      "alt": "Meer uit India, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 2016
+}

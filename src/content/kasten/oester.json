@@ -1,0 +1,23 @@
+{
+  "id": 2247,
+  "code": null,
+  "naam": "Oester",
+  "slug": "oester",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_11_087A44AF-DE14-4A1B-A7DC-CC487AE0C1AB.jpg",
+      "alt": "Oester, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 2247
+}

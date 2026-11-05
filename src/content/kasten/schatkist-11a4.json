@@ -1,0 +1,33 @@
+{
+  "id": 2092,
+  "code": "11A4",
+  "naam": "Schatkist 11A4",
+  "slug": "schatkist-11a4",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 175,
+  "maten": "53cmx35cmx25cm",
+  "omschrijving": "<p>Een oude geldkist van teakhout is niet alleen een prachtig meubelstuk, maar ook een stukje geschiedenis dat verhalen vertelt. Deze schatkisten zijn vaak handgemaakt en vertonen het vakmanschap van vroegere tijden. Een prachtige oude kist, met veel geheime vakjes.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_09_11A4-scaled.jpg",
+      "alt": "11A4 Schatkist, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2024_09_11A4-2-scaled.jpg",
+      "alt": "11A4 Schatkist, foto 2"
+    }
+  ],
+  "tags": [
+    "duurzaam-wonen",
+    "indian-furniture",
+    "oude-geldkist",
+    "schatkist",
+    "winkelkist"
+  ],
+  "inCollectie": true,
+  "volgorde": 2092
+}

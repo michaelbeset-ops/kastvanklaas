@@ -1,0 +1,23 @@
+{
+  "id": 1992,
+  "code": "3B3",
+  "naam": "Blauwe vitrinekast met schuifdeuren glas en hout 3B3",
+  "slug": "blauwe-vitrinekast-met-schuifdeuren-glas-en-hout-3b3",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_10_3-B23-120x42x230-blauw-zijkant.jpg",
+      "alt": "3B3 Blauwe vitrinekast met schuifdeuren glas en hout, zijkant"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1992
+}

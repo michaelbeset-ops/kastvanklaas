@@ -1,0 +1,27 @@
+{
+  "id": 1371,
+  "code": null,
+  "naam": "Leuk badkamer kastje, klein kastje",
+  "slug": "leuk-badkamer-kastje",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": "63 cm x d 19cm x h 96 cm",
+  "omschrijving": "<ul>\n<li>afmetingen : 63 cm x d 19cm x h 96 cm</li>\n<li>kleur : licht blauw</li>\n<li>2 deurtjes</li>\n<li>leeftijd: ca 1920</li>\n</ul>\n<ul>\n<li>Een leuk oud India kastje</li>\n<li>3 legplankjes</li>\n<li>kan eventueel opgehangen worden</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_04A0-2-1.jpg",
+      "alt": "Leuk badkamer kastje, klein kastje, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_04A0-1-1.jpg",
+      "alt": "Leuk badkamer kastje, klein kastje, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1371
+}

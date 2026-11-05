@@ -1,0 +1,27 @@
+{
+  "id": 1789,
+  "code": "LH10",
+  "naam": "Teakhouten 4 dubbele oude vitrinekast teakhout LH10",
+  "slug": "teakhouten-4-dubbele-oude-vitrinekast-teakhout-lh10",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 2175,
+  "maten": null,
+  "omschrijving": "<ul>\n<li>Teakhouten  4 dubbele oude vitrinekast. &#8220;Vier kastjes in een kast&#8221;.</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_LH10-scaled.jpg",
+      "alt": "LH10 Teakhouten 4 dubbele oude vitrinekast teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_LH10-scaled.jpg",
+      "alt": "LH10 Teakhouten 4 dubbele oude vitrinekast teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1789
+}

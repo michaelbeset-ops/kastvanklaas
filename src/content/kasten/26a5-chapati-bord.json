@@ -1,0 +1,27 @@
+{
+  "id": 2444,
+  "code": "26A5",
+  "naam": "26A5 chapati bord",
+  "slug": "26a5-chapati-bord",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": "27cm L x 27cm B x 8cm H",
+  "omschrijving": "<p>Onze nieuwe collectie is onderweg uit India. Binnenkort meer nieuws! Mocht je een vraag, of interesse hebben in een van onze kasten? Mail ons kast@kastvanklaas.nl of bel/app naar 06 26378480</p>\n<p>Groetjes Klaas</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_26A5-chapati-bord-scaled.jpg",
+      "alt": "26A5 chapati bord, foto 1"
+    }
+  ],
+  "tags": [
+    "chapati-bord",
+    "indiase-keuken",
+    "kopen-india"
+  ],
+  "inCollectie": true,
+  "volgorde": 2444
+}

@@ -1,0 +1,8 @@
+---
+// Het eigen logo van Klaas (bron/img/2016_03_logo-1.png, 412x55).
+interface Props { licht?: boolean; compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<a href="/" class="inline-flex items-center no-underline">
+  <img src="/logo-kastvanklaas.png" width="412" height="55" alt="Kast van Klaas" class:list={['block w-auto', compact ? 'h-7 sm:h-8' : 'h-8 sm:h-9']} />
+</a>

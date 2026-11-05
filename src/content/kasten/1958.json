@@ -1,0 +1,33 @@
+{
+  "id": 1958,
+  "code": "22B3",
+  "naam": "Stoere vitrinekast 22B3",
+  "slug": "1958",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p><!--more-->Stoere kast, teakhout, oude kast uit het hartje van het altijd verrassende en inspirerende India. Uniek exemplaar.</p>\n<p>Een fantastische blikvanger.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_10_22-B23-94x33x162-schuin-scaled.jpg",
+      "alt": "22B3 Stoere vitrinekast, schuin van voren"
+    }
+  ],
+  "tags": [
+    "duurzaam",
+    "india-kast",
+    "kast-uit-india",
+    "keukenkast",
+    "koloniale-kast",
+    "stoere-kast",
+    "teakhout",
+    "vintage-meubels",
+    "vitrinekast"
+  ],
+  "inCollectie": true,
+  "volgorde": 1958
+}

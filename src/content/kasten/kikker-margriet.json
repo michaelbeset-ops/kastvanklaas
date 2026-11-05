@@ -1,0 +1,23 @@
+{
+  "id": 2244,
+  "code": null,
+  "naam": "Kikker margriet",
+  "slug": "kikker-margriet",
+  "categorie": "joosjedoodles",
+  "categorieen": [
+    "joosjedoodles"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2024_09_kikker.jpg",
+      "alt": "Kikker margriet, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 2244
+}

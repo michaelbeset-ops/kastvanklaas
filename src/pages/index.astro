@@ -1,0 +1,248 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import KastKaart from '../components/KastKaart.astro';
+import Icoon from '../components/Icoon.astro';
+import Tijden from '../components/Tijden.astro';
+import Reviews from '../components/Reviews.astro';
+import Aanvraag from '../components/Aanvraag.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { alleKasten, winkelSchema } from '../lib/kasten';
+import { zaak, tijden, SITE, waLink } from '../lib/site';
+import hero from '../assets/site/hero.jpg';
+import klaasIndia from '../assets/site/klaas-india.jpg';
+import pui from '../assets/site/pui.jpg';
+import winkelKasten from '../assets/site/winkel-kasten.jpg';
+import tafel from '../assets/site/tafel.jpg';
+import indiaWerkplaats from '../assets/site/india-werkplaats.jpg';
+import indiaDeuren from '../assets/site/india-deuren.jpg';
+import indiaBlikjes from '../assets/site/india-blikjes.jpg';
+import dahlias from '../assets/site/dahlias.jpg';
+
+const kasten = (await alleKasten()).filter((k) => k.inCollectie);
+const teKoop = kasten.filter((k) => k.status === 'te-koop');
+const uitgelicht = teKoop.filter((k) => k.categorie === 'india-kasten').slice(0, 8);
+// Hero-foto vooraf laden (zelfde avif-varianten als de Picture), zodat de grootste afbeelding eerder in beeld is.
+const heroBreedtes = [480, 720, 960, 1170];
+const heroSet = (await Promise.all(heroBreedtes.map(async (w) => `${(await getImage({ src: hero, width: w, format: 'avif', quality: 42 })).src} ${w}w`))).join(', ');
+const winkelBeeld = new URL((await getImage({ src: hero, width: 1170, format: 'jpg' })).src, SITE).href;
+const uur = (t: string) => +t.slice(0, 2) + +t.slice(3) / 60;
+const tijdenJson = JSON.stringify(tijden.map((t, i) => ({ nr: (i + 1) % 7, van: uur(t.open), tot: uur(t.dicht) })));
+const stappen = [
+  { icoon: 'oog', t: 'Bekijken', z: 'De collectie online of in het echt in de winkel bekijken? Dat kan, op de Kaasmarkt 3 in Leiden.' },
+  { icoon: 'bladwijzer', t: 'Reserveren', z: 'Interesse in een kast? Klik op "Reserveer deze kast". Of bel, app of mail Klaas.' },
+  { icoon: 'tel', t: 'Klaas neemt contact op', z: '' },
+  { icoon: 'huis', t: 'Bezorgen', z: 'Tegen een vergoeding worden de kasten thuis bezorgd.' },
+];
+---
+<Basis
+  titel="Kast van Klaas | Oude India kasten van teakhout in Leiden"
+  beschrijving="Oude India kasten van teakhout, persoonlijk uitgezocht door Klaas Hoekstra en rechtstreeks geïmporteerd. Elke kast is uniek. Winkel op de Kaasmarkt 3 in Leiden."
+  pad="/"
+  thuis
+  schema={[winkelSchema(winkelBeeld, kasten), { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${SITE}/#website`, name: 'Kast van Klaas', alternateName: 'Kastvanklaas', url: `${SITE}/`, inLanguage: 'nl-NL', publisher: { '@id': `${SITE}/#winkel` } }]}
+>
+  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={heroSet} imagesizes="(min-width: 1024px) 58vw, 100vw" fetchpriority="high" />
+  <!-- Hero: links donker vlak met de kop, rechts de winkel die naar links in het donker overloopt. -->
+  <section class="donker relative isolate overflow-hidden bg-nacht text-wit lg:min-h-[calc(100svh-2.5rem)]">
+    <div class="absolute inset-x-0 top-0 -z-10 h-[58svh] [mask-image:linear-gradient(180deg,#000_45%,transparent)] lg:inset-y-0 lg:left-auto lg:right-0 lg:h-full lg:w-[58%] lg:[mask-image:linear-gradient(90deg,transparent_4%,#000_48%)]">
+      <Picture src={hero} alt="Blauwe en groene vitrinekast achter een teakhouten tafel, in de winkel van Kast van Klaas" formats={['avif']} fallbackFormat="webp"
+        widths={heroBreedtes} sizes="(min-width: 1024px) 58vw, 100vw" quality={42} loading="eager" fetchpriority="high"
+        class="h-full w-full object-cover object-[60%_45%]" />
+    </div>
+    <div class="wrap pb-14 pt-[50svh] lg:flex lg:min-h-[calc(100svh-2.5rem)] lg:items-center lg:pb-20 lg:pt-36">
+      <div class="lg:max-w-[48rem]">
+        <p class="kicker text-saffraan">Kaasmarkt 3 Leiden</p>
+        <h1 class="mt-5 text-hero text-wit [text-shadow:0_2px_28px_#1f1812]">Oude, unieke kasten uit <span class="sier text-saffraan">India.</span></h1>
+        <p class="mt-6 max-w-[34rem] text-lg text-wit/90 md:text-xl">De mooiste exemplaren van primair teakhout, zestig tot meer dan honderd jaar oud. Te zien, voelen en ruiken in de winkel bij Kast van Klaas, Kaasmarkt 3 in Leiden.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/webshop/cat/india-kasten/" class="knop knop-geel">Bekijk de kasten<Icoon naam="pijl" /></a>
+          <a href={zaak.telefoonLink} class="knop knop-glas" data-goatcounter-click="bel-hero"><Icoon naam="tel" />Bel Klaas</a>
+        </div>
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-wit/85">
+          <p class="flex items-center gap-2"><span class="flex text-saffraan" aria-hidden="true">{[1, 2, 3, 4, 5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span><b class="text-wit">{zaak.google.score}</b> op Google, {zaak.google.aantal} reviews</p>
+          <p>Winkel <b class="text-wit" data-open>elke dag open</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collectie in twee grote fotokaarten, met snelle links per soort. -->
+  <section class="wrap py-12 sm:py-20 lg:py-28" aria-labelledby="collectie-kop">
+    <h2 id="collectie-kop" class="text-4xl">Verschillende soorten kasten</h2>
+    <div class="mt-12 grid gap-6 lg:grid-cols-2">
+      {[
+        { titel: 'India kasten', tekst: 'Klaas zoekt, selecteert, transporteert en bezorgt.', href: '/webshop/cat/india-kasten/', beeld: winkelKasten, alt: 'Oude Indiase kasten in de winkel van Kast van Klaas' },
+        { titel: 'Meer bij Kast van Klaas', tekst: 'Tafels, accessoires en meer uit India.', href: '/meer-bij-kastvanklaas/', beeld: tafel, alt: 'Blauwe Indiase tafel met servies en bloemen' },
+      ].map((c) => (
+        <div>
+          <a href={c.href} class="group relative block overflow-hidden rounded-[24px] no-underline shadow-zacht">
+            <Picture src={c.beeld} alt={c.alt} formats={['avif']} fallbackFormat="webp" widths={[480, 720, 900]} sizes="(min-width: 1024px) 600px, 100vw" quality={50}
+              class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+            <div class="absolute inset-0 bg-[linear-gradient(180deg,#1f181200_25%,#1f1812b3_60%,#1f1812f2_100%)]"></div>
+            <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 sm:p-8">
+              <div>
+                <h3 class="text-3xl font-extrabold text-wit [font-stretch:112%]">{c.titel}</h3>
+                <p class="mt-2 max-w-sm text-wit/85">{c.tekst}</p>
+              </div>
+              <span class="grid h-11 w-11 flex-none place-items-center rounded-full bg-wit text-inkt transition-transform group-hover:translate-x-1" aria-hidden="true"><Icoon naam="pijl" class="h-5 w-5" /></span>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Nu te koop: de kasten zelf, met nummer en prijs. -->
+  <section class="wrap pb-12 sm:pb-20 lg:pb-28" aria-labelledby="nu-te-koop">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 id="nu-te-koop" class="text-4xl">De kasten van Klaas</h2>
+    </div>
+    <ul class="mt-10 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
+      {uitgelicht.map((k) => <KastKaart kast={k} />)}
+    </ul>
+  </section>
+
+  <!-- Zo werkt het: van bekijken tot bij je thuis. Alleen wat de site echt biedt. -->
+  <section class="bg-ijs py-12 sm:py-20 lg:py-28" aria-labelledby="werkwijze-kop">
+    <div class="wrap">
+      <h2 id="werkwijze-kop" class="text-4xl">Van kastnummer tot kast in huis.</h2>
+      <p class="mt-5 max-w-3xl text-lg">Heb je interesse in een kast? Dan kan je deze reserveren. Vervolgens neemt Klaas contact met je op om samen de rest te bespreken.</p>
+      <!-- Stappen van links naar rechts, op mobiel als veegrij. -->
+      <ol data-stappen class="relative -mx-5 mt-10 flex snap-x snap-mandatory scroll-pl-5 gap-6 overflow-x-auto px-5 pb-4 pt-2 md:scroll-pl-8 [scrollbar-width:none] md:-mx-8 md:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-8 lg:overflow-visible lg:px-0 lg:pb-0 lg:pt-0 after:w-[calc(22%-1.5rem)] after:flex-none after:content-[''] sm:after:w-[calc(58%-1.5rem)] lg:after:hidden">
+        <span class="absolute left-7 right-[12%] top-7 hidden h-px bg-lijn lg:block" aria-hidden="true"></span>
+        {stappen.map((s, i) => (
+          <li class="relative w-[78%] flex-none snap-start rounded-[18px] bg-wit p-5 shadow-zacht ring-1 ring-lijn sm:w-[42%] lg:w-auto lg:rounded-none lg:bg-transparent lg:p-0 lg:shadow-none lg:ring-0">
+            <span class="relative grid h-14 w-14 place-items-center rounded-full bg-wit text-inkt shadow-zacht ring-1 ring-lijn">
+              <Icoon naam={s.icoon} class="h-6 w-6" />
+              <span class="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-nacht text-xs font-bold text-wit">{i + 1}</span>
+            </span>
+            <h3 class="mt-5 text-lg">{s.t}</h3>
+            {s.z && <p class="mt-2 text-[.95rem]">{s.z}</p>}
+          </li>
+        ))}
+      </ol>
+      <!-- Alleen op mobiel/tablet: laten zien dat de rij doorloopt. -->
+      <div class="mt-3 flex items-center justify-between gap-4 lg:hidden">
+        <span class="flex gap-2" aria-hidden="true">
+          {stappen.map((_, i) => <span data-stip class:list={['h-2 w-2 rounded-full transition-colors', i === 0 ? 'bg-inkt' : 'bg-lijn']}></span>)}
+        </span>
+        <span class="whitespace-nowrap text-sm text-stil max-[359px]:text-xs" aria-hidden="true">Veeg voor de volgende stap &rarr;</span>
+      </div>
+      <div class="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-5">
+          <h3 class="text-[1.45rem] font-extrabold leading-tight [font-stretch:108%] sm:text-[1.75rem]">Onze mooie collectie Indiase kasten is te bewonderen op de Kaasmarkt 3 in Leiden.</h3>
+          <p class="mt-4 text-lg">Parkeren kan voor de deur van de winkel.</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="#vraag" class="knop">Stel een vraag</a>
+            <a href={zaak.telefoonLink} class="knop knop-wit" data-goatcounter-click="bel-werkwijze"><Icoon naam="tel" />Bel {zaak.telefoon}</a>
+          </div>
+        </div>
+        <div class="lg:col-span-6 lg:col-start-7">
+          <Picture src={dahlias} alt="Kasten, een lange tafel en bloemen in de winkel van Kast van Klaas" formats={['avif']} fallbackFormat="webp" widths={[560, 900, 1170]}
+            sizes="(min-width: 1024px) 560px, 100vw" quality={68} class="aspect-[16/10] w-full rounded-[24px] object-cover shadow-zacht" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Klaas: donker, zijn eigen verhaal van de huidige site. -->
+  <section class="donker bg-nacht py-14 text-mist sm:py-20 lg:py-28" aria-labelledby="klaas">
+    <div class="wrap grid gap-12 md:grid-cols-12 md:items-center">
+      <figure class="md:col-span-6">
+        <Picture src={klaasIndia} alt="Klaas Hoekstra voor een verweerde roze muur" formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]}
+          sizes="(min-width: 768px) 50vw, 100vw" quality={70} class="aspect-[4/3] w-full rounded-[24px] object-cover object-[60%_30%]" />
+      </figure>
+      <div class="md:col-span-6 lg:col-span-5 lg:col-start-8">
+        <p class="kicker text-saffraan">Over Klaas</p>
+        <h2 id="klaas" class="mt-3 text-4xl text-wit">Klaas zoekt elke kast <span class="sier text-saffraan">zelf</span> uit.</h2>
+        <div class="mt-6 space-y-4 text-[1.05rem] leading-relaxed">
+          <p>Klaas kent Noord-India als geen ander. Het is al meer dan twintig jaar zijn geliefde bestemming, waar hij enkele keren per jaar naartoe reist om persoonlijk op zoek te gaan naar de mooiste Indiase kasten.</p>
+          <p>De kasten zijn veelal minimaal zestig tot meer dan honderd jaar oud en zijn nog gemaakt van zogenoemd primair teakhout, dat tegenwoordig steeds zeldzamer is.</p>
+          <p>Waar nodig worden ze onder toezicht van Klaas bij lokale Indiase meubelmakers gerestaureerd, voordat ze naar Nederland worden verscheept.</p>
+        </div>
+        <a href="/over-kast-van-klaas/" class="knop knop-glas mt-8">Meer over Klaas<Icoon naam="pijl" /></a>
+      </div>
+    </div>
+    <!-- Strook uit India: eigen foto's van de huidige site. -->
+    <div class="wrap mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:grid-cols-12 sm:gap-4">
+      <div class="col-span-2 sm:col-span-6">
+        <Picture src={indiaWerkplaats} alt="Indiase meubelmakers in een werkplaats, voor gerestaureerde vitrinekasten" formats={['avif']} fallbackFormat="webp" widths={[480, 960]}
+          sizes="(min-width: 640px) 50vw, 100vw" quality={64} loading="lazy" class="aspect-[4/3] h-full w-full rounded-[18px] object-cover" />
+      </div>
+      <div class="sm:col-span-3">
+        <Picture src={indiaDeuren} alt="Oude Indiase deuren en kasten, opgesteld in de winkel" formats={['avif']} fallbackFormat="webp" widths={[400, 800]}
+          sizes="(min-width: 640px) 25vw, 50vw" quality={64} loading="lazy" class="aspect-[3/4] h-full w-full rounded-[18px] object-cover" />
+      </div>
+      <div class="sm:col-span-3">
+        <Picture src={indiaBlikjes} alt="Oude Indiase blikjes met handgeschilderde opdruk" formats={['avif']} fallbackFormat="webp" widths={[400, 800]}
+          sizes="(min-width: 640px) 25vw, 50vw" quality={64} loading="lazy" class="aspect-[3/4] h-full w-full rounded-[18px] object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Winkel: foto, openingstijden met vandaag, adres en route. -->
+  <section id="winkel" class="wrap py-12 sm:py-20 lg:py-28" aria-labelledby="winkel-kop">
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7">
+        <p class="kicker text-stil">Winkel en openingstijden</p>
+        <h2 id="winkel-kop" class="mt-3 text-4xl">Kom kijken op de Kaasmarkt.</h2>
+      </div>
+      <p class="text-lg lg:col-span-4 lg:col-start-9">Achter de Hooigracht, hoogte Oude Rijn. {zaak.parkeren}</p>
+    </div>
+    <div class="mt-12 grid gap-8 lg:grid-cols-12">
+      <div class="relative overflow-hidden rounded-[24px] shadow-zacht lg:col-span-7">
+        <Picture src={pui} alt="De ingang van de winkel van Kast van Klaas, met groene tuinstoelen voor de deur" formats={['avif']} fallbackFormat="webp" widths={[560, 900, 1200]}
+          sizes="(min-width: 1024px) 700px, 100vw" quality={68} class="aspect-[4/3] h-full w-full object-cover lg:aspect-auto" />
+        <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-[linear-gradient(180deg,transparent,#1f1812cc)] p-5 sm:p-6">
+          <p class="font-kop text-lg font-bold text-wit [font-stretch:105%]">De winkel aan de Kaasmarkt</p>
+        </div>
+      </div>
+      <div class="lg:col-span-5">
+        <Tijden />
+        <div class="mt-6 px-1">
+          <p class="font-semibold text-inkt">Kast van Klaas</p>
+          <p class="text-stil">{zaak.straat}, {zaak.postcode} {zaak.plaats}</p>
+          <p class="mt-2"><a class="link" href={zaak.telefoonLink} data-goatcounter-click="bel-winkel">{zaak.telefoon}</a> of <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a></p>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Kaasmarkt+3%2C+2312+HZ+Leiden" rel="noopener" class="knop mt-5" data-goatcounter-click="route-home">Plan route</a>
+          <p class="mt-6 text-sm text-stil">Ook in de winkel: werk van <a class="link font-medium" href="/joosjedoodles/">Joosje Doodles</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+  <Aanvraag bron="home" />
+  <CtaBand />
+
+  <script define:vars={{ tijdenJson }}>
+    const T = JSON.parse(tijdenJson);
+    const nu = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Amsterdam' }));
+    const d = nu.getDay(); const u = nu.getHours() + nu.getMinutes() / 60;
+    const v = T.find((t) => t.nr === d);
+    const fmt = (x) => `${String(Math.floor(x)).padStart(2, '0')}.${x % 1 ? '30' : '00'}`;
+    let tekst;
+    if (u < v.van) tekst = `vandaag open, ${fmt(v.van)} tot ${fmt(v.tot)}`;
+    else if (u < v.tot) tekst = `nu open, tot ${fmt(v.tot)}`;
+    else { const m = T.find((t) => t.nr === (d + 1) % 7); tekst = `morgen open vanaf ${fmt(m.van)}`; }
+    document.querySelectorAll('[data-open]').forEach((e) => (e.textContent = tekst));
+  </script>
+  <script>
+    // Stipjes onder de veegrij volgen de stap die links in beeld staat.
+    const rij = document.querySelector<HTMLElement>('[data-stappen]');
+    const stippen = [...document.querySelectorAll<HTMLElement>('[data-stip]')];
+    if (rij && stippen.length) {
+      const items = [...rij.querySelectorAll<HTMLElement>('li')];
+      let wacht = false;
+      const zet = () => {
+        wacht = false;
+        const links = rij.getBoundingClientRect().left;
+        let best = 0, afstand = Infinity;
+        items.forEach((li, i) => { const d = Math.abs(li.getBoundingClientRect().left - links - parseFloat(getComputedStyle(rij).paddingLeft)); if (d < afstand) { afstand = d; best = i; } });
+        if (rij.scrollLeft + rij.clientWidth >= rij.scrollWidth - 4) best = items.length - 1;
+        stippen.forEach((s, i) => { s.classList.toggle('bg-inkt', i === best); s.classList.toggle('bg-lijn', i !== best); });
+      };
+      rij.addEventListener('scroll', () => { if (!wacht) { wacht = true; requestAnimationFrame(zet); } }, { passive: true });
+    }
+  </script>
+</Basis>

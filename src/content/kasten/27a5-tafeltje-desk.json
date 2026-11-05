@@ -1,0 +1,29 @@
+{
+  "id": 2447,
+  "code": "27A5",
+  "naam": "27A5 tafeltje, desk",
+  "slug": "27a5-tafeltje-desk",
+  "categorie": "indiase-tafels",
+  "categorieen": [
+    "indiase-tafels"
+  ],
+  "status": "te-koop",
+  "prijs": 175,
+  "maten": "62cm L x 47cm B x 54cm H",
+  "omschrijving": "<p>Originele pidda chair, pidha chair. Teak hout. Oud. Veelzijdig; stoeltje, tafeltje of als krukje.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_27A5-desk-van-voren-scaled.jpg",
+      "alt": "27A5 tafeltje, desk, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_27A5-zijkant-scaled.jpg",
+      "alt": "27A5 tafeltje, desk, zijkant"
+    }
+  ],
+  "tags": [
+    "tafeltje-india"
+  ],
+  "inCollectie": true,
+  "volgorde": 2447
+}

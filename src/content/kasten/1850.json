@@ -1,0 +1,29 @@
+{
+  "id": 1850,
+  "code": null,
+  "naam": "Nieuws uit de kast",
+  "slug": "1850",
+  "categorie": "nieuws-van-klaas",
+  "categorieen": [
+    "nieuws-van-klaas"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Wil je advies m.b.t. keur, styling?</p>\n<p>Neem eens een kijkje op de website van Monique</p>\n<p>www.GETINSPIREDBYMO.com</p>\n<p>of volg haar op instagram @getinspiredbymo</p>\n<p>Voor inspiratie!</p>\n<p>Vriendelijke groet,</p>\n<p>Klaas</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_11_tafel.jpg",
+      "alt": "Nieuws uit de kast, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_olifantje.jpg",
+      "alt": "Nieuws uit de kast, foto 2"
+    }
+  ],
+  "tags": [
+    "india-kast"
+  ],
+  "inCollectie": false,
+  "volgorde": 1850
+}

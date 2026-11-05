@@ -1,0 +1,27 @@
+{
+  "id": 1834,
+  "code": "N6",
+  "naam": "Boekenrekje/badkamerkastje teakhout India N6",
+  "slug": "boekenrekje-badkamerkastje-teakhout-india-n6",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 145,
+  "maten": null,
+  "omschrijving": "<p>Charmant rekje voor badkamer, woonkamer of misschien wel in de keuken.</p>\n<p>Je kan met dit rekje alle kanten op. Een sieraad aan je muur. Of om neer te zetten.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N6-Zijkant-scaled.jpg",
+      "alt": "N6 Boekenrekje/badkamerkastje teakhout India, zijkant"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N6-scaled.jpg",
+      "alt": "N6 Boekenrekje/badkamerkastje teakhout India, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1834
+}

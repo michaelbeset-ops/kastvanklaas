@@ -1,0 +1,23 @@
+{
+  "id": 1973,
+  "code": null,
+  "naam": "",
+  "slug": "1973",
+  "categorie": "inspiratie",
+  "categorieen": [
+    "inspiratie"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Onze meubels komen in de mooiste kleuren. Kleuren die je alleen in India vinden zal. Alhoewel.. Klaas is gespecialiseerd in kleuradvies. Hij kan jou ook helpen de juiste kleur te vinden. Want bevalt je de huidige kleur niet helemaal? Schildert hij het graag voor jou over in de door jou gewenste kleur.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_11_inspiratie-tafel-blauw.jpg",
+      "alt": "Inspiratie uit de winkel van Kast van Klaas in Leiden, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": false,
+  "volgorde": 1973
+}

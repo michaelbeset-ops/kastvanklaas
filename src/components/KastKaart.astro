@@ -1,0 +1,35 @@
+---
+import { Picture } from 'astro:assets';
+import { type Kast, padVan, label, prijsTekst } from '../lib/kasten';
+
+interface Props { kast: Kast; eager?: boolean; li?: boolean }
+const { kast, eager = false, li = true } = Astro.props;
+const foto = kast.fotos[0];
+const verkocht = kast.status === 'verkocht';
+const Tag = li ? 'li' : 'div';
+// Zonder kastnummer: de naam splitsen bij de eerste komma, punt of streep. Eerste deel als korte titel op de plek
+// van het nummer, de rest eronder. Alleen opsplitsen, geen woorden toevoegen; de volle naam staat op de productpagina.
+const naam = label(kast);
+const deel = kast.code ? null : naam.match(/^(.{3,}?)(?:\s*[,.]\s+|\s*-\s*)(.+)$/);
+const kort = kast.code ? null : (deel ? deel[1] : naam);
+const rest = kast.code ? naam : deel ? deel[2] : '';
+---
+<Tag class="kast-kaart" data-code={(kast.code ?? '').toLowerCase()} data-status={kast.status} data-naam={kast.naam.toLowerCase()}>
+  <a href={padVan(kast)} class="group flex h-full flex-col overflow-hidden rounded-[18px] bg-wit no-underline shadow-zacht ring-1 ring-lijn transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-hoog">
+    <div class="relative aspect-[4/5] overflow-hidden">
+      <Picture src={foto.src} alt={foto.alt} formats={['avif']} fallbackFormat="webp" widths={[380, 640]}
+        sizes="(min-width: 1280px) 290px, (min-width: 768px) 30vw, 50vw" loading={eager ? 'eager' : 'lazy'} quality={66}
+        class:list={['h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]', verkocht && 'grayscale-[30%]']} />
+      {verkocht && <span class="absolute left-3 top-3 rounded-full bg-[#a3341f] px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-wit">Verkocht</span>}
+    </div>
+    <div class="flex flex-1 flex-col p-3.5 sm:p-5">
+      {kast.code
+        ? <span class="kastnummer text-[clamp(1rem,4.3vw,1.2rem)] !text-[#894606] sm:text-[1.35rem]">{kast.code}</span>
+        : <span class="line-clamp-2 font-kop text-[clamp(1rem,4.3vw,1.2rem)] font-bold leading-tight tracking-[-0.02em] text-inkt [font-stretch:108%] [overflow-wrap:break-word] sm:text-[1.35rem]">{kort}</span>}
+      {rest && <span class="mt-1.5 line-clamp-2 text-sm leading-snug text-tekst [overflow-wrap:break-word]">{rest}</span>}
+      <span class="mt-auto flex items-baseline justify-end gap-2 pt-3 text-sm">
+        <span class:list={['font-semibold tabular-nums', verkocht ? 'text-stil' : 'text-inkt']}>{verkocht ? (kast.prijs ? prijsTekst({ ...kast, status: 'te-koop' }) : '') : prijsTekst(kast)}</span>
+      </span>
+    </div>
+  </a>
+</Tag>

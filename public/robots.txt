@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /beheer/
+
+Sitemap: https://www.kastvanklaas.nl/sitemap-index.xml
+Sitemap: https://www.kastvanklaas.nl/sitemap-afbeeldingen.xml

@@ -1,0 +1,55 @@
+---
+// Algemeen vraagformulier. Zelfde werking als "Reserveer deze kast": via Web3Forms naar Klaas,
+// of zolang de key ontbreekt een ingevulde mail.
+import { WEB3FORMS_KEY, heeftWaarde, zaak } from '../lib/site';
+interface Props { bron: string }
+const { bron } = Astro.props;
+const id = (n: string) => `${bron}-${n}`;
+---
+<form class="vraag grid gap-5" method="post" action="https://api.web3forms.com/submit"
+  data-mail={zaak.email} data-onderwerp="Vraag via kastvanklaas.nl" data-key={heeftWaarde(WEB3FORMS_KEY) ? 'ja' : 'nee'} data-bron={bron}>
+  {heeftWaarde(WEB3FORMS_KEY) && <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />}
+  <input type="hidden" name="subject" value="Vraag via kastvanklaas.nl" />
+  <input type="hidden" name="from_name" value="kastvanklaas.nl" />
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div><label for={id('naam')} class="mb-1.5 block text-sm font-semibold text-inkt">Naam <span class="text-[#a33]" aria-hidden="true">*</span></label>
+      <input id={id('naam')} required name="naam" autocomplete="name" class="veld" /></div>
+    <div><label for={id('contact')} class="mb-1.5 block text-sm font-semibold text-inkt">Telefoon of e-mail <span class="text-[#a33]" aria-hidden="true">*</span></label>
+      <input id={id('contact')} required name="contact" autocomplete="email" class="veld" /></div>
+  </div>
+  <div><label for={id('kast')} class="mb-1.5 block text-sm font-semibold text-inkt">Kastnummer <span class="font-normal text-stil">(als je er een op het oog hebt)</span></label>
+    <input id={id('kast')} name="kastnummer" placeholder="bijvoorbeeld 21A5" class="veld uppercase placeholder:normal-case" /></div>
+  <div><label for={id('bericht')} class="mb-1.5 block text-sm font-semibold text-inkt">Wat zoek je? <span class="text-[#a33]" aria-hidden="true">*</span></label>
+    <textarea id={id('bericht')} required name="bericht" rows="4" placeholder="Bijvoorbeeld een vitrinekast van ongeveer 120 cm breed voor in de keuken." class="veld resize-y"></textarea></div>
+  <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+    <button type="submit" class="knop">Verstuur je vraag</button>
+    <p class="text-xs text-stil">We gebruiken je gegevens alleen voor deze vraag. Zie de <a class="underline" href="/privacy/">privacyverklaring</a>.</p>
+  </div>
+</form>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('form.vraag')) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      if (d.get('botcheck')) return;
+      (window as any).goatcounter?.count?.({ path: `vraag-${form.dataset.bron}`, title: 'Vraag verstuurd', event: true });
+      if (form.dataset.key !== 'ja') {
+        const body = `Naam: ${d.get('naam')}\nContact: ${d.get('contact')}\nKastnummer: ${d.get('kastnummer') || '-'}\n\n${d.get('bericht') ?? ''}`;
+        location.href = `mailto:${form.dataset.mail}?subject=${encodeURIComponent(form.dataset.onderwerp ?? '')}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+      const knop = form.querySelector('button')!;
+      knop.disabled = true;
+      try {
+        const r = await fetch(form.action, { method: 'POST', body: d, headers: { Accept: 'application/json' } });
+        if (!r.ok) throw new Error();
+        form.innerHTML = '<p class="text-lg font-semibold text-inkt" role="status">Dank je. Klaas heeft je vraag en neemt contact op.</p>';
+      } catch {
+        knop.disabled = false;
+        knop.insertAdjacentHTML('afterend', '<p class="text-sm" role="alert">Versturen lukte niet. Bel of WhatsApp Klaas even.</p>');
+      }
+    });
+  }
+</script>

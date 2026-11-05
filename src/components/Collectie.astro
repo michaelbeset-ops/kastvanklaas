@@ -1,0 +1,122 @@
+---
+// Collectie-overzicht (webshop, categorie, soort, vitrinekast). Alle kasten staan in de HTML (goed voor Google);
+// zoeken op kastnummer en te koop/verkocht filteren gebeurt in de browser.
+import KastKaart from './KastKaart.astro';
+import { type Kast } from '../lib/kasten';
+import { waLink } from '../lib/site';
+
+interface Props {
+  kasten: Kast[];
+  actief: string | null;
+  titel: string;
+  intro: string;
+  kruimels: { naam: string; pad: string }[];
+  soorten?: { naam: string; pad: string; n: number }[];
+  huidigPad?: string;
+}
+// soorten/huidigPad: de soortpagina's blijven bestaan (oude URL's), maar de chiprij is op verzoek van Klaas weg.
+const { kasten, actief, titel, intro, kruimels } = Astro.props;
+const teKoop = kasten.filter((k) => k.status === 'te-koop');
+const verkocht = kasten.filter((k) => k.status === 'verkocht');
+// Twee hoofdgroepen op verzoek van Klaas: de kasten, en alles wat geen kast is.
+const tabs = [{ href: '/webshop/cat/india-kasten/', naam: 'India kasten', slug: 'india-kasten' }, { href: '/meer-bij-kastvanklaas/', naam: 'Meer bij Klaas', slug: 'meer' }];
+const actiefTab = actief && actief !== 'india-kasten' ? 'meer' : actief;
+---
+<section class="wrap pt-4 sm:pt-6">
+  <nav aria-label="Kruimelpad" class="text-xs text-stil">
+    <ol class="flex flex-wrap gap-x-2">
+      {kruimels.slice(0, -1).map((k) => <li><a class="no-underline hover:text-inkt" href={k.pad}>{k.naam}</a><span class="ml-2" aria-hidden="true">/</span></li>)}
+      <li aria-current="page" class="text-inkt">{kruimels.at(-1)!.naam}</li>
+    </ol>
+  </nav>
+
+  <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:items-end">
+    <div class="lg:col-span-7">
+      <h1 class="text-[2.1rem] min-[400px]:text-[2.5rem] sm:text-5xl lg:text-[4.25rem]">{titel}</h1>
+      <p class="mt-5 max-w-2xl text-lg text-tekst">{intro}</p>
+    </div>
+    <form class="kaart p-5 lg:col-span-4 lg:col-start-9" role="search" onsubmit="return false">
+      <label for="kastnummer" class="block text-sm font-semibold text-inkt">Zoek op kastnummer</label>
+      <div class="relative mt-2">
+        <input id="kastnummer" name="kast" type="search" autocomplete="off" autocapitalize="characters" spellcheck="false"
+          placeholder="bijvoorbeeld 21A5" class="veld kastnummer py-3 pr-11 text-2xl placeholder:font-tekst placeholder:text-base placeholder:font-normal placeholder:tracking-normal placeholder:text-stil" />
+        <svg viewBox="0 0 24 24" class="pointer-events-none absolute right-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-stil" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5" stroke-linecap="round"/></svg>
+      </div>
+      <p class="mt-2 text-xs text-stil">Het nummer van de kast vind je onder de foto.</p>
+    </form>
+  </div>
+
+  <div class="mt-10 flex flex-col gap-4 border-b border-lijn pb-5 lg:flex-row lg:items-center lg:justify-between">
+    <nav aria-label="Soort" class="flex gap-2">
+      {tabs.map((t) => <a href={t.href} class="chip" aria-current={t.slug === actiefTab ? 'page' : undefined}>{t.naam}</a>)}
+    </nav>
+    <fieldset class="flex w-fit items-center gap-0.5 rounded-full p-1 text-sm shadow-[inset_0_0_0_1px_var(--color-lijn)] sm:gap-1">
+      <legend class="sr-only">Toon</legend>
+      {[['alles', 'Alles'], ['te-koop', `Te koop (${teKoop.length})`], ['verkocht', `Verkocht (${verkocht.length})`]].map(([v, t]) => (
+        <label class="cursor-pointer whitespace-nowrap rounded-full px-3 py-1.5 font-medium max-[359px]:px-2 max-[359px]:text-[.8125rem] sm:px-4 sm:py-2 text-stil transition-colors hover:text-inkt has-[:checked]:bg-wit has-[:checked]:text-inkt has-[:checked]:shadow-zacht has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-inkt">
+          <input type="radio" name="status" value={v} class="sr-only" checked={v === 'alles'} />{t}
+        </label>
+      ))}
+    </fieldset>
+  </div>
+
+  <p id="leeg" class="mt-10 hidden max-w-xl text-lg" role="status">
+    Geen kast gevonden met nummer <strong class="kastnummer" id="leeg-code"></strong>.
+    {actief !== null && <> <a class="link" id="leeg-alles" href="/webshop/">Zoek in de hele collectie</a> of</>} <a class="link" href={waLink('Hoi Klaas, ik zoek kast ')} id="leeg-wa" data-goatcounter-click="vraag-zoeken">vraag het Klaas</a>.
+  </p>
+
+  <div data-groep="te-koop" class:list={['mt-8', !teKoop.length && 'hidden']}>
+    <h2 class="sr-only">Te koop</h2>
+    <ul class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
+      {teKoop.map((k, i) => <KastKaart kast={k} eager={i < 2} />)}
+    </ul>
+  </div>
+
+  {verkocht.length > 0 && (
+    <div data-groep="verkocht" class="mt-14 sm:mt-20">
+      <h2 class="text-xl">Een greep uit de collectie.</h2>
+      <ul class="mt-8 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 xl:grid-cols-4">
+        {verkocht.map((k) => <KastKaart kast={k} />)}
+      </ul>
+    </div>
+  )}
+</section>
+
+<script>
+  const invoer = document.getElementById('kastnummer') as HTMLInputElement;
+  const kaarten = [...document.querySelectorAll<HTMLElement>('.kast-kaart')];
+  const groepen = [...document.querySelectorAll<HTMLElement>('[data-groep]')];
+  const leeg = document.getElementById('leeg')!;
+  const norm = (s: string) => s.toLowerCase().replace(/[\s.\-]/g, '').replace(/^nr/, '');
+
+  function filter() {
+    const q = norm(invoer.value);
+    const status = (document.querySelector('input[name=status]:checked') as HTMLInputElement)?.value ?? 'alles';
+    for (const k of kaarten) {
+      const code = k.dataset.code ?? '';
+      k.hidden = !(!q || code.startsWith(q) || (q.length > 2 && !/\d/.test(q) && (k.dataset.naam ?? '').includes(q)));
+    }
+    let zichtbaar = 0;
+    for (const g of groepen) {
+      const n = [...g.querySelectorAll<HTMLElement>('.kast-kaart')].filter((k) => !k.hidden).length;
+      g.hidden = n === 0 || (status !== 'alles' && g.dataset.groep !== status);
+      if (!g.hidden) zichtbaar += n;
+    }
+    leeg.classList.toggle('hidden', zichtbaar > 0 || !q);
+    if (q) {
+      document.getElementById('leeg-code')!.textContent = invoer.value.toUpperCase().trim();
+      const alles = document.getElementById('leeg-alles') as HTMLAnchorElement | null;
+      if (alles) alles.href = `/webshop/?kast=${encodeURIComponent(invoer.value.trim())}`;
+      const wa = document.getElementById('leeg-wa') as HTMLAnchorElement;
+      wa.href = wa.href.replace(/text=.*/, 'text=' + encodeURIComponent(`Hoi Klaas, ik zoek kast ${invoer.value.toUpperCase().trim()}`));
+    }
+    const url = new URL(location.href);
+    q ? url.searchParams.set('kast', invoer.value.trim()) : url.searchParams.delete('kast');
+    history.replaceState(null, '', url);
+  }
+  const start = new URLSearchParams(location.search).get('kast');
+  if (start) invoer.value = start;
+  invoer.addEventListener('input', filter);
+  document.querySelectorAll('input[name=status]').forEach((r) => r.addEventListener('change', filter));
+  if (start) filter();
+</script>

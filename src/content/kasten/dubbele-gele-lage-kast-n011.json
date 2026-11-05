@@ -1,0 +1,27 @@
+{
+  "id": 1768,
+  "code": "N011",
+  "naam": "Dubbele gele lage kast N011",
+  "slug": "dubbele-gele-lage-kast-n011",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": 1350,
+  "maten": null,
+  "omschrijving": "<p>Dubbele unieke kast met glas rondom. Door het glas aan de zijkant gaat de kast mooi op in de ruimte waarin hij staat.</p>\n<p>Ideale kast van teakhout voor servies of boeken. In een woonkamer, keuken of studeerkamer een kast die er mag zijn!</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N011.jpg",
+      "alt": "N011 Dubbele gele lage kast, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N011.jpg",
+      "alt": "N011 Dubbele gele lage kast, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1768
+}

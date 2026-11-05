@@ -1,0 +1,27 @@
+{
+  "id": 1780,
+  "code": "R7",
+  "naam": "Witte vitrinekast India teakhout R7",
+  "slug": "1780",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<p>Dubbele verfijnde vitrinekast met ronde hoeken.</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_R7-scaled.jpg",
+      "alt": "R7 Witte vitrinekast India teakhout, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_R7-scaled.jpg",
+      "alt": "R7 Witte vitrinekast India teakhout, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1780
+}

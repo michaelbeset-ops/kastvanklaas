@@ -1,0 +1,27 @@
+{
+  "id": 1411,
+  "code": null,
+  "naam": "Laag tv meubel, india kast",
+  "slug": "laag-tv-meubel-india-kast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<ul>\n<li>Oud teakhouten lage kast.</li>\n<li>uitermate geschikt voor tv kast</li>\n</ul>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2020_07_41A0-2.jpg",
+      "alt": "Laag tv meubel, india kast, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2020_07_41A0-3.jpg",
+      "alt": "Laag tv meubel, india kast, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1411
+}

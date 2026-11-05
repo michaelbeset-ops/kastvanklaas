@@ -1,0 +1,23 @@
+{
+  "id": 973,
+  "code": null,
+  "naam": "Praktische vitrinekast -indiakast, servieskast, teakhouten kast",
+  "slug": "praktische-vitrinekast-indiakast-servieskast-teakhouten-kast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2019_01_029A9-2-scaled.jpg",
+      "alt": "Praktische vitrinekast -indiakast, servieskast, teakhouten kast, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 973
+}

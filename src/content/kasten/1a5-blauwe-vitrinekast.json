@@ -1,0 +1,45 @@
+{
+  "id": 2293,
+  "code": "1A5",
+  "naam": "1A5 Blauwe vitrinekast",
+  "slug": "1a5-blauwe-vitrinekast",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "<article>\n<p>Deze kast staat daar alsof hij al generaties verhalen bewaart. Deze unieke oude vitrinekast uit India valt meteen op door haar blauwe kleur. Het hout, original old teak, staat voor kwaliteit en duurzaamheid. Achter de glazen deuren kun je je mooiste spullen tentoonstellen: servies, boeken of bijzondere vondsten.</p>\n<p>Wat deze kast zo bijzonder maakt, zijn de kleine details. De openslaande deuren, de handgemaakte panelen. De blauwe kleur doet denken aan de blauwe deuren en huizen uit oude Indiase steden, waar traditie en vakmanschap samenkomen.</p>\n<p>Deze vitrinekast is niet alleen praktisch, maar ook een echte blikvanger in huis. Ze brengt warmte, geschiedenis en een vleugje exotische charme in elke ruimte. Alsof er een stukje India in je interieur staat.</p>\n</article>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_1A5-zijkant-scaled.jpg",
+      "alt": "1A5 Blauwe vitrinekast, zijkant"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_1A5-voorkant-scaled.jpg",
+      "alt": "1A5 Blauwe vitrinekast, voorkant"
+    },
+    {
+      "src": "../../assets/kasten/2026_01_1A5-open-1-scaled.jpg",
+      "alt": "1A5 Blauwe vitrinekast, open"
+    }
+  ],
+  "tags": [
+    "boekenkast",
+    "duurzaam",
+    "duurzaam-wonen",
+    "duurzame-meubels",
+    "exclusive-kast",
+    "gangkast",
+    "india-kast",
+    "indian-furniture",
+    "keukenkast",
+    "praktisch",
+    "studeerkamerkast",
+    "teakhout",
+    "teakwood"
+  ],
+  "inCollectie": true,
+  "volgorde": 2293
+}

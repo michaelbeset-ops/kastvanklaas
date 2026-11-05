@@ -1,0 +1,23 @@
+{
+  "id": 960,
+  "code": null,
+  "naam": "Oude dichte kast van teakhout",
+  "slug": "oude-dichte-kast-van-teakhout",
+  "categorie": "india-kasten",
+  "categorieen": [
+    "india-kasten"
+  ],
+  "status": "verkocht",
+  "prijs": null,
+  "maten": null,
+  "omschrijving": "",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2018_06_016-2-scaled.jpg",
+      "alt": "Oude dichte kast van teakhout, foto 1"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 960
+}

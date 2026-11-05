@@ -1,0 +1,26 @@
+{
+  "id": 2442,
+  "code": "24A5",
+  "naam": "24A5 emaille lamp groen klein",
+  "slug": "24a5-emaille-lamp-groen-klein",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "te-koop",
+  "prijs": null,
+  "maten": "27cm L x 27cm B x 17cm H",
+  "omschrijving": "<p>Onze nieuwe collectie is onderweg uit India. Binnenkort meer nieuws! Mocht je een vraag, of interesse hebben in een van onze kasten? Mail ons kast@kastvanklaas.nl of bel/app naar 06 26378480</p>\n<p>Groetjes Klaas</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2026_01_24A5-emaille-lamp-scaled.jpg",
+      "alt": "24A5 emaille lamp groen klein, foto 1"
+    }
+  ],
+  "tags": [
+    "indiase-lamp-emaille-lamp",
+    "kantoorlamp"
+  ],
+  "inCollectie": true,
+  "volgorde": 2442
+}

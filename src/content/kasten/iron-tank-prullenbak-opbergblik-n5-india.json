@@ -1,0 +1,27 @@
+{
+  "id": 1794,
+  "code": "N5",
+  "naam": "Blikken trommel/vat India N5",
+  "slug": "iron-tank-prullenbak-opbergblik-n5-india",
+  "categorie": "accessoires",
+  "categorieen": [
+    "accessoires"
+  ],
+  "status": "verkocht",
+  "prijs": 125,
+  "maten": null,
+  "omschrijving": "<p>Deze blikken trommel is voor veel te gebruiken. Voor speelgoed, de sjaals en handschoenen, als wasmand? Bedenk het en het kan!</p>",
+  "fotos": [
+    {
+      "src": "../../assets/kasten/2023_01_N5-scaled.jpg",
+      "alt": "N5 Blikken trommel/vat India, foto 1"
+    },
+    {
+      "src": "../../assets/kasten/2023_01_N5-scaled.jpg",
+      "alt": "N5 Blikken trommel/vat India, foto 2"
+    }
+  ],
+  "tags": [],
+  "inCollectie": true,
+  "volgorde": 1794
+}
