@@ -1,27 +1,26 @@
 {
-  "code": null,
-  "naam": "Hoge grijze kast met een deur",
-  "slug": "hoge-grijze-kast-een-deur",
+  "code": "6A6",
+  "naam": "Oude Franse hoge kast 6A6",
+  "slug": "oude-franse-hoge-kast-6a6",
   "categorie": "india-kasten",
   "categorieen": [
     "india-kasten"
   ],
   "status": "te-koop",
   "prijs": null,
-  "maten": null,
-  "omschrijving": "Hoge grijze kast met één paneeldeur. Van binnen onbewerkt hout met vijf planken.",
+  "maten": "100cm L x 45cm D x 271cm H",
+  "omschrijving": "Oude Franse hoge kast van begin 1900, grijs met één paneeldeur. Van binnen onbewerkt hout met vijf planken.",
   "fotos": [
     {
       "src": "../../assets/kasten/2026_11_grijs-een-deur-1.jpg",
-      "alt": "Hoge grijze kast met een deur, foto 1"
+      "alt": "6A6 Oude Franse hoge kast, foto 1"
     },
     {
       "src": "../../assets/kasten/2026_11_grijs-een-deur-2.jpg",
-      "alt": "Hoge grijze kast met een deur, foto 2"
+      "alt": "6A6 Oude Franse hoge kast, foto 2"
     }
   ],
   "tags": [
-    "india-kast",
     "unieke-kast"
   ],
   "inCollectie": true,

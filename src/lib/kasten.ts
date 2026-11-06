@@ -45,10 +45,13 @@ export function seoTitel(k: Kast) {
   if (!k.naam) return `Uit de winkel, foto ${k.id ?? k.slug} | Kast van Klaas Leiden`;
   // Kortste variant die binnen 62 tekens (Google kapt rond 600 px af) past wint; kastnummer en "Leiden" blijven er altijd in.
   const naam = k.naam.replace(/\s{2,}/g, ' ');
-  const hout = isTeak(k) && !/teak/i.test(naam) ? ', teakhout uit India' : /india/i.test(naam) ? '' : ' uit India';
+  // Niet elke kast komt uit India (bv. 6A6 is Frans): dan geen herkomst toevoegen.
+  const elders = /frans|engels|hollands/i.test(naam);
+  const india = /india/i.test(naam) || elders ? '' : ' uit India';
+  const hout = isTeak(k) && !/teak/i.test(naam) && !elders ? ', teakhout uit India' : india;
   const opties = [
     `${naam}${hout} | Kast van Klaas Leiden`,
-    `${naam}${/india/i.test(naam) ? '' : ' uit India'} | Kast van Klaas Leiden`,
+    `${naam}${india} | Kast van Klaas Leiden`,
     `${naam} | Kast van Klaas Leiden`,
   ];
   const past = opties.find((t) => t.length <= 62);
@@ -67,12 +70,12 @@ export function seoBeschrijving(k: Kast) {
     return kort(`${k.naam || 'Inspiratie'} uit de winkel van Kast van Klaas op de Kaasmarkt in Leiden${zin ? `: ${zin}` : `, foto ${k.id ?? k.slug}`}.`, 158);
   }
   const wat = [k.code, label(k)].filter(Boolean).join(' ');
-  const hout = isTeak(k) ? 'van teakhout uit India' : 'uit India';
+  const hout = /frans|engels|hollands/i.test(k.naam) ? '' : isTeak(k) ? 'van teakhout uit India' : 'uit India';
   const status = k.status === 'verkocht'
     ? 'Verkocht. Zoek je zo\'n kast? Vraag Klaas wat er binnenkomt.'
     : k.prijs ? `Te koop voor ${euro(k.prijs)}.` : 'Te koop, prijs op aanvraag.';
   const zin = platteTekst(k.omschrijving).split(/(?<=[.!?])\s/)[0] ?? '';
-  const basis = `${wat}, ${hout}. ${status} Te zien bij Kast van Klaas, Kaasmarkt Leiden.`;
+  const basis = `${wat}${hout ? ', ' + hout : ''}. ${status} Te zien bij Kast van Klaas, Kaasmarkt Leiden.`;
   return kort(basis.length < 120 && zin ? `${basis} ${zin}` : basis, 158);
 }
 
