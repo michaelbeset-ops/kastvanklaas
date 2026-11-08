@@ -1,30 +1,46 @@
 ---
 // Algemeen vraagformulier. Zelfde werking als "Reserveer deze kast": via Web3Forms naar Klaas,
-// of zolang de key ontbreekt een ingevulde mail.
+// of zolang de key ontbreekt een ingevulde mail. De mail aan Klaas blijft Nederlands, met de taal van de bezoeker erbij.
 import { WEB3FORMS_KEY, heeftWaarde, zaak } from '../lib/site';
-interface Props { bron: string }
-const { bron } = Astro.props;
+import { type Taal, TAAL_INFO, lp } from '../lib/i18n';
+interface Props { bron: string; taal?: Taal }
+const { bron, taal = 'nl' } = Astro.props;
 const id = (n: string) => `${bron}-${n}`;
+const taalMail = TAAL_INFO[taal].mailNaam;
+const onderwerp = `Vraag via kastvanklaas.nl${taal === 'nl' ? '' : ` (${taalMail})`}`;
+const T = {
+  nl: { naam: 'Naam', contact: 'Telefoon of e-mail', kast: 'Kastnummer', kastHint: '(als je er een op het oog hebt)', bv: 'bijvoorbeeld 21A5', vraag: 'Wat zoek je?',
+    vraagBv: 'Bijvoorbeeld een vitrinekast van ongeveer 120 cm breed voor in de keuken.', knop: 'Verstuur je vraag', privacy: ['We gebruiken je gegevens alleen voor deze vraag. Zie de ', 'privacyverklaring', '.'],
+    dank: 'Dank je. Klaas heeft je vraag en neemt contact op.', fout: 'Versturen lukte niet. Bel of WhatsApp Klaas even.' },
+  de: { naam: 'Name', contact: 'Telefon oder E-Mail', kast: 'Schranknummer', kastHint: '(falls Sie schon einen im Blick haben)', bv: 'zum Beispiel 21A5', vraag: 'Was suchen Sie?',
+    vraagBv: 'Zum Beispiel einen Vitrinenschrank, etwa 120 cm breit, für die Küche.', knop: 'Frage senden', privacy: ['Wir verwenden Ihre Angaben nur für diese Frage. Siehe ', 'Datenschutzerklärung', '.'],
+    dank: 'Vielen Dank. Klaas hat Ihre Frage erhalten und meldet sich bei Ihnen.', fout: 'Das Senden hat nicht geklappt. Bitte rufen Sie Klaas an oder schreiben Sie ihm per WhatsApp.' },
+  en: { naam: 'Name', contact: 'Phone or email', kast: 'Cabinet number', kastHint: '(if you already have one in mind)', bv: 'for example 21A5', vraag: 'What are you looking for?',
+    vraagBv: 'For example a display cabinet about 120 cm wide for the kitchen.', knop: 'Send your question', privacy: ['We only use your details for this question. See the ', 'privacy statement', '.'],
+    dank: 'Thank you. Klaas has your question and will get in touch.', fout: 'Sending did not work. Please call or WhatsApp Klaas.' },
+}[taal];
 ---
 <form class="vraag grid gap-5" method="post" action="https://api.web3forms.com/submit"
-  data-mail={zaak.email} data-onderwerp="Vraag via kastvanklaas.nl" data-key={heeftWaarde(WEB3FORMS_KEY) ? 'ja' : 'nee'} data-bron={bron}>
+  data-mail={zaak.email} data-onderwerp={onderwerp} data-key={heeftWaarde(WEB3FORMS_KEY) ? 'ja' : 'nee'} data-bron={bron}
+  data-taal={taal === 'nl' ? '' : taalMail} data-dank={T.dank} data-fout={T.fout}>
   {heeftWaarde(WEB3FORMS_KEY) && <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />}
-  <input type="hidden" name="subject" value="Vraag via kastvanklaas.nl" />
+  <input type="hidden" name="subject" value={onderwerp} />
   <input type="hidden" name="from_name" value="kastvanklaas.nl" />
+  {taal !== 'nl' && <input type="hidden" name="taal_bezoeker" value={taalMail} />}
   <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
   <div class="grid gap-5 sm:grid-cols-2">
-    <div><label for={id('naam')} class="mb-1.5 block text-sm font-semibold text-inkt">Naam <span class="text-[#a33]" aria-hidden="true">*</span></label>
+    <div><label for={id('naam')} class="mb-1.5 block text-sm font-semibold text-inkt">{T.naam} <span class="text-[#a33]" aria-hidden="true">*</span></label>
       <input id={id('naam')} required name="naam" autocomplete="name" class="veld" /></div>
-    <div><label for={id('contact')} class="mb-1.5 block text-sm font-semibold text-inkt">Telefoon of e-mail <span class="text-[#a33]" aria-hidden="true">*</span></label>
+    <div><label for={id('contact')} class="mb-1.5 block text-sm font-semibold text-inkt">{T.contact} <span class="text-[#a33]" aria-hidden="true">*</span></label>
       <input id={id('contact')} required name="contact" autocomplete="email" class="veld" /></div>
   </div>
-  <div><label for={id('kast')} class="mb-1.5 block text-sm font-semibold text-inkt">Kastnummer <span class="font-normal text-stil">(als je er een op het oog hebt)</span></label>
-    <input id={id('kast')} name="kastnummer" placeholder="bijvoorbeeld 21A5" class="veld uppercase placeholder:normal-case" /></div>
-  <div><label for={id('bericht')} class="mb-1.5 block text-sm font-semibold text-inkt">Wat zoek je? <span class="text-[#a33]" aria-hidden="true">*</span></label>
-    <textarea id={id('bericht')} required name="bericht" rows="4" placeholder="Bijvoorbeeld een vitrinekast van ongeveer 120 cm breed voor in de keuken." class="veld resize-y"></textarea></div>
+  <div><label for={id('kast')} class="mb-1.5 block text-sm font-semibold text-inkt">{T.kast} <span class="font-normal text-stil">{T.kastHint}</span></label>
+    <input id={id('kast')} name="kastnummer" placeholder={T.bv} class="veld uppercase placeholder:normal-case" /></div>
+  <div><label for={id('bericht')} class="mb-1.5 block text-sm font-semibold text-inkt">{T.vraag} <span class="text-[#a33]" aria-hidden="true">*</span></label>
+    <textarea id={id('bericht')} required name="bericht" rows="4" placeholder={T.vraagBv} class="veld resize-y"></textarea></div>
   <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
-    <button type="submit" class="knop">Verstuur je vraag</button>
-    <p class="text-xs text-stil">We gebruiken je gegevens alleen voor deze vraag. Zie de <a class="underline" href="/privacy/">privacyverklaring</a>.</p>
+    <button type="submit" class="knop">{T.knop}</button>
+    <p class="text-xs text-stil">{T.privacy[0]}<a class="underline" href={lp(taal, '/privacy/')}>{T.privacy[1]}</a>{T.privacy[2]}</p>
   </div>
 </form>
 
@@ -36,7 +52,8 @@ const id = (n: string) => `${bron}-${n}`;
       if (d.get('botcheck')) return;
       (window as any).goatcounter?.count?.({ path: `vraag-${form.dataset.bron}`, title: 'Vraag verstuurd', event: true });
       if (form.dataset.key !== 'ja') {
-        const body = `Naam: ${d.get('naam')}\nContact: ${d.get('contact')}\nKastnummer: ${d.get('kastnummer') || '-'}\n\n${d.get('bericht') ?? ''}`;
+        const taal = form.dataset.taal ? `Taal bezoeker: ${form.dataset.taal}\n` : '';
+        const body = `${taal}Naam: ${d.get('naam')}\nContact: ${d.get('contact')}\nKastnummer: ${d.get('kastnummer') || '-'}\n\n${d.get('bericht') ?? ''}`;
         location.href = `mailto:${form.dataset.mail}?subject=${encodeURIComponent(form.dataset.onderwerp ?? '')}&body=${encodeURIComponent(body)}`;
         return;
       }
@@ -45,10 +62,18 @@ const id = (n: string) => `${bron}-${n}`;
       try {
         const r = await fetch(form.action, { method: 'POST', body: d, headers: { Accept: 'application/json' } });
         if (!r.ok) throw new Error();
-        form.innerHTML = '<p class="text-lg font-semibold text-inkt" role="status">Dank je. Klaas heeft je vraag en neemt contact op.</p>';
+        const p = document.createElement('p');
+        p.className = 'text-lg font-semibold text-inkt';
+        p.setAttribute('role', 'status');
+        p.textContent = form.dataset.dank ?? '';
+        form.replaceChildren(p);
       } catch {
         knop.disabled = false;
-        knop.insertAdjacentHTML('afterend', '<p class="text-sm" role="alert">Versturen lukte niet. Bel of WhatsApp Klaas even.</p>');
+        const p = document.createElement('p');
+        p.className = 'text-sm';
+        p.setAttribute('role', 'alert');
+        p.textContent = form.dataset.fout ?? '';
+        knop.after(p);
       }
     });
   }

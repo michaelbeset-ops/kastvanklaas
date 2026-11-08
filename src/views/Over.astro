@@ -1,0 +1,147 @@
+---
+import { Picture } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import { kruimelSchema } from '../lib/kasten';
+import { waLink } from '../lib/site';
+import { type Taal, UI, lp } from '../lib/i18n';
+import klaas from '../assets/site/klaas.jpg';
+import klaasIndia from '../assets/site/klaas-india.jpg';
+import binnen from '../assets/site/winkel.jpg';
+import indiaWerkplaats from '../assets/site/india-werkplaats.jpg';
+import indiaDeuren from '../assets/site/india-deuren.jpg';
+import indiaBlikjes from '../assets/site/india-blikjes.jpg';
+// Alle tekst letterlijk van kastvanklaas.nl/over-kast-van-klaas/ en de home (bron/site), alleen ingekort. DE/EN: vertaling daarvan.
+interface Props { taal: Taal }
+const { taal } = Astro.props;
+const T = {
+  nl: {
+    titel: 'Over Klaas Hoekstra en zijn India kasten | Kast van Klaas',
+    beschrijving: 'Klaas Hoekstra reist al ruim twintig jaar naar Noord-India om zelf de mooiste oude kasten van primair teakhout te zoeken. Winkel op de Kaasmarkt in Leiden.',
+    kruimel: 'Over Kast van Klaas', h1: ['Authentieke Indiase meubels van ', 'teakhout'],
+    intro: 'In het hartje van Leiden, op de Kaasmarkt, vindt u de winkel Kast van Klaas. Een eigenzinnige winkel met unieke, rechtstreeks uit India geïmporteerde, oude India kasten.',
+    klaasAlt: 'Portret van Klaas Hoekstra, eigenaar van Kast van Klaas',
+    verhaal: [
+      'Eigenaar Klaas Hoekstra en zijn team bieden een buitengewone collectie authentieke meubels in alle soorten en maten, uitgevoerd in prachtige Indiase kleuren.',
+      'Klaas kent Noord-India als geen ander. Het is dan ook al meer dan twintig jaar zijn geliefde bestemming, waar hij enkele keren per jaar naartoe reist om persoonlijk op zoek te gaan naar de mooiste Indiase kasten. Originaliteit staat voorop.',
+      'De kasten zijn veelal minimaal zestig tot meer dan honderd jaar oud en zijn nog gemaakt van zogenoemd primair teakhout, dat tegenwoordig steeds zeldzamer is.',
+    ],
+    stripAlt: ['Indiase meubelmakers in een werkplaats, voor gerestaureerde vitrinekasten', 'Oude Indiase deuren en kasten, opgesteld in de winkel', 'Oude Indiase blikjes met handgeschilderde opdruk'],
+    importKop: ['Direct uit India ', 'geïmporteerd.'],
+    import: ['Onder toezicht van Klaas en zijn medewerkers worden de oude India kasten, indien nodig, bij lokale Indiase meubelmakers tot in detail gerestaureerd voordat ze naar Nederland worden verscheept.', 'De Kasten van Klaas zijn unieke exemplaren, eigenhandig geïmporteerd uit India.'],
+    indiaAlt: 'Klaas Hoekstra voor een verweerde roze muur', binnenAlt: 'Vitrinekasten en een oude tafel in de winkel van Kast van Klaas',
+    maatKop: 'Op zoek naar een oude kast op maat?', maat: 'In overleg kunt u een eigen maatwerkkast laten maken, gemaakt van authentiek Indiaas (sloop)hout.',
+    maatKnop: 'Vraag Klaas naar maatwerk', maatWa: 'Hallo Klaas, ik zoek een kast op maat.',
+  },
+  de: {
+    titel: 'Klaas Hoekstra und seine indischen Schränke | Kast van Klaas',
+    beschrijving: 'Klaas Hoekstra reist seit über zwanzig Jahren nach Nordindien und sucht dort selbst die schönsten alten Teakholzschränke. Laden am Kaasmarkt in Leiden.',
+    kruimel: 'Über Kast van Klaas', h1: ['Authentische indische Möbel aus ', 'Teakholz'],
+    intro: 'Mitten in Leiden, am Kaasmarkt, finden Sie den Laden Kast van Klaas. Ein eigenwilliger Laden mit einzigartigen alten Schränken, direkt aus Indien importiert.',
+    klaasAlt: 'Porträt von Klaas Hoekstra, Inhaber von Kast van Klaas',
+    verhaal: [
+      'Inhaber Klaas Hoekstra und sein Team bieten eine außergewöhnliche Kollektion authentischer Möbel in allen Formen und Größen, in wunderschönen indischen Farben.',
+      'Klaas kennt Nordindien wie kein Zweiter. Seit mehr als zwanzig Jahren ist es sein Lieblingsziel, wohin er mehrmals im Jahr reist, um persönlich nach den schönsten indischen Schränken zu suchen. Originalität steht an erster Stelle.',
+      'Die Schränke sind meist mindestens sechzig bis über hundert Jahre alt und noch aus sogenanntem Teakholz aus Primärwald gefertigt, das heute immer seltener wird.',
+    ],
+    stripAlt: ['Indische Möbeltischler in einer Werkstatt vor restaurierten Vitrinenschränken', 'Alte indische Türen und Schränke, im Laden aufgestellt', 'Alte indische Dosen mit handbemaltem Aufdruck'],
+    importKop: ['Direkt aus Indien ', 'importiert.'],
+    import: ['Unter Aufsicht von Klaas und seinen Mitarbeitern werden die alten Schränke bei Bedarf von örtlichen indischen Möbeltischlern bis ins Detail restauriert, bevor sie in die Niederlande verschifft werden.', 'Die Schränke von Klaas sind Einzelstücke, von ihm selbst aus Indien importiert.'],
+    indiaAlt: 'Klaas Hoekstra vor einer verwitterten rosa Wand', binnenAlt: 'Vitrinenschränke und ein alter Tisch im Laden von Kast van Klaas',
+    maatKop: 'Auf der Suche nach einem alten Schrank nach Maß?', maat: 'Nach Absprache können Sie sich einen eigenen Schrank nach Maß anfertigen lassen, aus authentischem indischem (Abriss-)Holz.',
+    maatKnop: 'Klaas nach Maßanfertigung fragen', maatWa: 'Hallo Klaas, ich suche einen Schrank nach Maß.',
+  },
+  en: {
+    titel: 'About Klaas Hoekstra and his Indian cabinets | Kast van Klaas',
+    beschrijving: 'For over twenty years Klaas Hoekstra has travelled to North India to find the finest old teak cabinets himself. Shop on the Kaasmarkt in Leiden.',
+    kruimel: 'About Kast van Klaas', h1: ['Authentic Indian furniture in ', 'teak'],
+    intro: 'In the heart of Leiden, on the Kaasmarkt, you will find the Kast van Klaas shop. A shop with a character of its own, full of unique old Indian cabinets imported directly from India.',
+    klaasAlt: 'Portrait of Klaas Hoekstra, owner of Kast van Klaas',
+    verhaal: [
+      'Owner Klaas Hoekstra and his team offer an exceptional collection of authentic furniture in all shapes and sizes, finished in beautiful Indian colours.',
+      'Klaas knows North India like no one else. For more than twenty years it has been his favourite destination, and he travels there several times a year to personally search for the most beautiful Indian cabinets. Originality comes first.',
+      'Most of the cabinets are at least sixty to more than a hundred years old and are still made of what is known as old-growth teak, which is becoming increasingly rare.',
+    ],
+    stripAlt: ['Indian furniture makers in a workshop, in front of restored display cabinets', 'Old Indian doors and cabinets, set out in the shop', 'Old Indian tins with hand-painted designs'],
+    importKop: ['Imported straight ', 'from India.'],
+    import: ['Under the supervision of Klaas and his staff, the old Indian cabinets are restored down to the last detail by local Indian furniture makers where needed, before being shipped to the Netherlands.', 'The cabinets of Kast van Klaas are one-off pieces, imported from India by Klaas himself.'],
+    indiaAlt: 'Klaas Hoekstra in front of a weathered pink wall', binnenAlt: 'Display cabinets and an old table in the Kast van Klaas shop',
+    maatKop: 'Looking for an old cabinet made to measure?', maat: 'In consultation, you can have your own made-to-measure cabinet built from authentic Indian (reclaimed) wood.',
+    maatKnop: 'Ask Klaas about made-to-measure', maatWa: 'Hello Klaas, I am looking for a made-to-measure cabinet.',
+  },
+}[taal];
+const u = UI[taal];
+---
+<Basis titel={T.titel} beschrijving={T.beschrijving} pad="/over-kast-van-klaas/" taal={taal}
+  schema={[kruimelSchema([{ naam: u.home, pad: lp(taal, '/') }, { naam: T.kruimel, pad: lp(taal, '/over-kast-van-klaas/') }])]}>
+  <!-- Bovenaan donker, zoals de home: Klaas groot in beeld met de kop. -->
+  <section class="donker bg-nacht pb-14 pt-4 text-mist sm:pb-20 sm:pt-6 lg:pb-24">
+    <div class="wrap">
+      <nav aria-label={u.kruimelpad} class="text-xs text-mist">
+        <ol class="flex flex-wrap gap-x-2">
+          <li><a class="no-underline hover:text-wit" href={lp(taal, '/')}>{u.home}</a><span class="ml-2" aria-hidden="true">/</span></li>
+          <li aria-current="page" class="text-wit">{T.kruimel}</li>
+        </ol>
+      </nav>
+      <div class="mt-8 grid gap-10 md:grid-cols-12 md:items-center md:gap-14 lg:mt-10">
+        <div class="md:col-span-7 lg:col-span-6">
+          <h1 class="text-[2.1rem] text-wit hyphens-auto min-[400px]:text-[2.4rem] sm:text-5xl lg:text-[4.25rem]">{T.h1[0]}<span class="sier text-saffraan">{T.h1[1]}</span></h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-wit/90 sm:text-xl">{T.intro}</p>
+        </div>
+        <figure class="md:col-span-5 lg:col-span-5 lg:col-start-8">
+          <Picture src={klaas} alt={T.klaasAlt} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1100]}
+            sizes="(min-width: 768px) 40vw, 100vw" quality={74} loading="eager" fetchpriority="high" class="aspect-[4/5] w-full rounded-[24px] object-cover object-[50%_30%]" />
+          <figcaption class="mt-2 text-xs text-mist">Klaas Hoekstra</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zijn verhaal, letterlijk van de huidige site, in een prettige leesbreedte. -->
+  <section class="wrap py-14 sm:py-20 lg:py-24">
+    <div class="mx-auto max-w-2xl space-y-5 text-lg leading-relaxed">
+      {T.verhaal.map((p) => <p>{p}</p>)}
+    </div>
+    <!-- Strook uit India: dezelfde eigen foto's als op de home. -->
+    <div class="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:grid-cols-12 sm:gap-4">
+      <div class="col-span-2 sm:col-span-6">
+        <Picture src={indiaWerkplaats} alt={T.stripAlt[0]} formats={['avif']} fallbackFormat="webp" widths={[480, 960]}
+          sizes="(min-width: 640px) 50vw, 100vw" quality={64} loading="lazy" class="aspect-[4/3] h-full w-full rounded-[18px] object-cover" />
+      </div>
+      <div class="sm:col-span-3">
+        <Picture src={indiaDeuren} alt={T.stripAlt[1]} formats={['avif']} fallbackFormat="webp" widths={[400, 800]}
+          sizes="(min-width: 640px) 25vw, 50vw" quality={64} loading="lazy" class="aspect-[3/4] h-full w-full rounded-[18px] object-cover" />
+      </div>
+      <div class="sm:col-span-3">
+        <Picture src={indiaBlikjes} alt={T.stripAlt[2]} formats={['avif']} fallbackFormat="webp" widths={[400, 800]}
+          sizes="(min-width: 640px) 25vw, 50vw" quality={64} loading="lazy" class="aspect-[3/4] h-full w-full rounded-[18px] object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <section class="donker bg-nacht py-14 text-mist sm:py-20 lg:py-28">
+    <div class="wrap grid gap-10 md:grid-cols-12 md:items-center md:gap-14">
+      <div class="md:col-span-5">
+        <h2 class="text-3xl text-wit md:text-[1.8rem] lg:text-[2.6rem]">{T.importKop[0]}<span class="text-saffraan">{T.importKop[1]}</span></h2>
+        <div class="mt-6 space-y-4 text-lg leading-relaxed">
+          {T.import.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+      <figure class="md:col-span-7">
+        <Picture src={klaasIndia} alt={T.indiaAlt} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]}
+          sizes="(min-width: 768px) 55vw, 100vw" quality={72} class="h-auto w-full rounded-[24px]" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap grid gap-10 pt-14 sm:pt-20 md:grid-cols-12 md:gap-14 lg:pt-28">
+    <figure class="md:col-span-6">
+      <Picture src={binnen} alt={T.binnenAlt} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1170]}
+        sizes="(min-width: 768px) 50vw, 100vw" quality={72} class="h-auto w-full rounded-[24px]" />
+    </figure>
+    <div class="md:col-span-5 md:col-start-8 md:self-center">
+      <h2 class="text-3xl">{T.maatKop}</h2>
+      <p class="mt-6 text-lg leading-relaxed">{T.maat}</p>
+      <a href={waLink(T.maatWa)} class="knop mt-8 whitespace-normal text-center" data-goatcounter-click="whatsapp-over">{T.maatKnop}</a>
+    </div>
+  </section>
+</Basis>

@@ -1,0 +1,22 @@
+{
+  "slug": "2313",
+  "bron": "5e1869e00c44",
+  "de": {
+    "naam": "3A5 Unbehandelter Vitrinenschrank",
+    "omschrijving": "<p>Alter kleiner Vitrinenschrank, etwa aus dem Jahr 1910!, auf hohen, charmanten Füßchen.</p><p>Wenn dieser Schrank Geschichten erzählen könnte! Unbehandelt, also noch in jeder Farbe zu streichen, oder einfach so zu lassen, denn so kommt das originale alte Teakholz besonders schön zur Geltung.</p>",
+    "alt": {
+      "3A5 Vitrinekast onbewerkt, voorkant": "3A5 Unbehandelter Vitrinenschrank, Vorderansicht",
+      "3A5 Vitrinekast onbewerkt, open": "3A5 Unbehandelter Vitrinenschrank, geöffnet",
+      "3A5 Vitrinekast onbewerkt, zijkant": "3A5 Unbehandelter Vitrinenschrank, Seitenansicht"
+    }
+  },
+  "en": {
+    "naam": "3A5 Untreated display cabinet",
+    "omschrijving": "<p>Old small display cabinet, from around 1910!, on tall, charming little legs.</p><p>If only this cabinet could tell stories! Untreated, so it can still be painted in any colour, or left as it is, because that really shows off the original old teak.</p>",
+    "alt": {
+      "3A5 Vitrinekast onbewerkt, voorkant": "3A5 Untreated display cabinet, front view",
+      "3A5 Vitrinekast onbewerkt, open": "3A5 Untreated display cabinet, open",
+      "3A5 Vitrinekast onbewerkt, zijkant": "3A5 Untreated display cabinet, side view"
+    }
+  }
+}

@@ -1,20 +1,24 @@
 ---
 // Openingstijden als kaart; vandaag krijgt een label (in de browser, Nederlandse tijd).
 import { tijden } from '../lib/site';
+import { type Taal, UI, tijdvak } from '../lib/i18n';
+interface Props { taal?: Taal }
+const { taal = 'nl' } = Astro.props;
+const u = UI[taal];
 ---
 <div class="kaart p-6 sm:p-7">
-  <h3 class="text-xl">Openingstijden</h3>
+  <h3 class="text-xl">{u.openingstijden}</h3>
   <table class="mt-4 w-full text-[.95rem] tabular-nums">
     <tbody>
       {tijden.map((t, i) => (
         <tr class="border-b border-lijn last:border-0" data-dag={(i + 1) % 7}>
-          <th scope="row" class="py-2.5 text-left font-normal text-inkt">{t.dag} <span class="vandaag ml-1.5 hidden rounded-full bg-nacht px-2 py-0.5 align-[1px] text-[.7rem] font-semibold text-wit">vandaag</span></th>
-          <td class="py-2.5 text-right">{t.open.replace(':', '.')} tot {t.dicht.replace(':', '.')} uur</td>
+          <th scope="row" class="py-2.5 text-left font-normal text-inkt">{u.dagen[i]} <span class="vandaag ml-1.5 hidden rounded-full bg-nacht px-2 py-0.5 align-[1px] text-[.7rem] font-semibold text-wit">{u.vandaag}</span></th>
+          <td class="py-2.5 text-right">{tijdvak(t.open, t.dicht, taal)}</td>
         </tr>
       ))}
     </tbody>
   </table>
-  <p class="mt-3 text-sm text-stil">Of op afspraak.</p>
+  <p class="mt-3 text-sm text-stil">{u.ofOpAfspraak}</p>
 </div>
 <script>
   const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Amsterdam' })).getDay();

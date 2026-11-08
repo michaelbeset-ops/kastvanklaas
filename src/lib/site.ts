@@ -59,3 +59,20 @@ export const reviews = [
   { naam: 'Vipan V.', tekst: 'Top service en kwaliteit. Echt authentiek kasten van tiekhout uit india' },
   { naam: 'Caro V. L.', tekst: 'leuke winkel' },
 ];
+// Dezelfde reviews vertaald (zo getrouw mogelijk, niets toegevoegd); op de pagina staat dat ze uit het Nederlands vertaald zijn.
+export const reviewsVertaald = {
+  de: [
+    'Für unsere neue Küche haben wir bei Kast van Klaas einen sehr schönen Geschirrschrank gefunden, auch mit Glas in den Seitenwänden. Schöne 60 Jahre alt, indische Tischlerarbeit.',
+    'Was für eine große Auswahl an schönen Vitrinenschränken. In verschiedenen Größen.',
+    'Schöne Möbel. Auf jeden Fall einen Besuch wert!',
+    'Top Service und Qualität. Wirklich authentische Schränke aus Teakholz aus Indien',
+    'schöner Laden',
+  ],
+  en: [
+    'For our new kitchen we found a really beautiful china cabinet at Kast van Klaas, with glass in the side panels too. A good 60 years old, Indian cabinetmaking craftsmanship.',
+    'What a large choice of beautiful display cabinets. In different sizes.',
+    'Beautiful furniture. Definitely worth a visit!',
+    'Top service and quality. Truly authentic teak cabinets from India',
+    'nice shop',
+  ],
+};

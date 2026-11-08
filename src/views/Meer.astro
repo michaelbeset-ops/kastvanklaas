@@ -1,0 +1,23 @@
+---
+// Alles wat geen kast is (tafels, accessoires, tuinmeubels), op verzoek van Klaas als eigen groep naast de kasten.
+import Basis from '../layouts/Basis.astro';
+import Collectie from '../components/Collectie.astro';
+import { alleKasten, kruimelSchema } from '../lib/kasten';
+import { type Taal, UI, lp } from '../lib/i18n';
+
+interface Props { taal: Taal }
+const { taal } = Astro.props;
+const kasten = (await alleKasten(taal)).filter((k) => k.inCollectie && k.categorie !== 'india-kasten');
+const T = {
+  nl: { titel: 'Tafels, accessoires en meer uit India | Kast van Klaas Leiden', beschrijving: 'Naast kasten verkoopt Klaas ook tafels, krukjes, lampen, kistjes en tuinmeubels uit India. Te zien in de winkel op de Kaasmarkt 3 in Leiden.',
+    h1: 'Meer bij Kast van Klaas', intro: 'Naast kasten verkoopt Klaas ook tafels, stoelen en woonaccessoires uit India: emaille lampen, teakhouten kistjes, krukjes en meer.' },
+  de: { titel: 'Tische, Accessoires und mehr aus Indien | Kast van Klaas', beschrijving: 'Neben Schränken verkauft Klaas auch Tische, Hocker, Lampen, Kistchen und Gartenmöbel aus Indien. Zu sehen im Laden am Kaasmarkt 3 in Leiden.',
+    h1: 'Mehr bei Kast van Klaas', intro: 'Neben Schränken verkauft Klaas auch Tische, Stühle und Wohnaccessoires aus Indien: Emaillelampen, Kistchen aus Teakholz, Hocker und mehr.' },
+  en: { titel: 'Tables, accessories and more from India | Kast van Klaas', beschrijving: 'As well as cabinets, Klaas also sells tables, stools, lamps, boxes and garden furniture from India. On view in the shop at Kaasmarkt 3 in Leiden.',
+    h1: 'More at Kast van Klaas', intro: 'As well as cabinets, Klaas also sells tables, chairs and home accessories from India: enamel lamps, teak boxes, stools and more.' },
+}[taal];
+const kruimels = [{ naam: UI[taal].home, pad: lp(taal, '/') }, { naam: T.h1, pad: lp(taal, '/meer-bij-kastvanklaas/') }];
+---
+<Basis titel={T.titel} beschrijving={T.beschrijving} pad="/meer-bij-kastvanklaas/" taal={taal} schema={[kruimelSchema(kruimels)]}>
+  <Collectie kasten={kasten} actief="meer" titel={T.h1} kruimels={kruimels} intro={T.intro} taal={taal} />
+</Basis>

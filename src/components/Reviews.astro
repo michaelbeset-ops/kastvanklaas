@@ -1,33 +1,44 @@
 ---
 // Reviews van Google, letterlijk (bron/google/reviews-alle.json). Horizontaal te swipen, met pijlen op desktop.
+// In het Duits en Engels vertaald, met de vermelding dat het origineel Nederlands is.
 import Icoon from './Icoon.astro';
-import { zaak, reviews } from '../lib/site';
+import { zaak, reviews, reviewsVertaald } from '../lib/site';
+import { type Taal } from '../lib/i18n';
+interface Props { taal?: Taal }
+const { taal = 'nl' } = Astro.props;
+const T = {
+  nl: { kicker: 'Reviews', kop: 'Wat klanten zeggen.', uit: ['uit 5 op Google,', 'reviews'], vorige: 'Vorige review', volgende: 'Volgende review', sterren: '5 sterren', bron: 'Google', vertaald: '' },
+  de: { kicker: 'Bewertungen', kop: 'Das sagen Kunden.', uit: ['von 5 auf Google,', 'Bewertungen'], vorige: 'Vorherige Bewertung', volgende: 'Nächste Bewertung', sterren: '5 Sterne', bron: 'Google, aus dem Niederländischen übersetzt', vertaald: 'Aus dem Niederländischen übersetzt.' },
+  en: { kicker: 'Reviews', kop: 'What customers say.', uit: ['out of 5 on Google,', 'reviews'], vorige: 'Previous review', volgende: 'Next review', sterren: '5 stars', bron: 'Google, translated from Dutch', vertaald: 'Translated from Dutch.' },
+}[taal];
+const score = taal === 'en' ? zaak.google.score.replace(',', '.') : zaak.google.score;
+const lijst = reviews.map((r, i) => ({ naam: r.naam, tekst: taal === 'nl' ? r.tekst : reviewsVertaald[taal][i] }));
 ---
 <section class="bg-ijs py-12 sm:py-20 lg:py-28" aria-labelledby="reviews-kop">
   <div class="wrap">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <div>
-        <p class="kicker text-stil">Reviews</p>
-        <h2 id="reviews-kop" class="mt-3 text-4xl">Wat klanten zeggen.</h2>
+        <p class="kicker text-stil">{T.kicker}</p>
+        <h2 id="reviews-kop" class="mt-3 text-4xl">{T.kop}</h2>
       </div>
       <div class="flex items-center gap-4">
         <a href={zaak.google.link} rel="noopener" class="flex items-center gap-2 text-sm text-inkt no-underline hover:underline">
           <span class="flex text-saffraan" aria-hidden="true">{[1, 2, 3, 4, 5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span>
-          <b>{zaak.google.score}</b> uit 5 op Google, {zaak.google.aantal} reviews
+          <b>{score}</b> {T.uit[0]} {zaak.google.aantal} {T.uit[1]}
         </a>
         <div class="hidden gap-2 sm:flex">
-          <button type="button" class="grid h-10 w-10 place-items-center rounded-full bg-wit shadow-zacht ring-1 ring-lijn hover:bg-ijs" data-rij-terug aria-label="Vorige review"><Icoon naam="pijl-links" class="h-4 w-4" /></button>
-          <button type="button" class="grid h-10 w-10 place-items-center rounded-full bg-wit shadow-zacht ring-1 ring-lijn hover:bg-ijs" data-rij-verder aria-label="Volgende review"><Icoon naam="pijl" class="h-4 w-4" /></button>
+          <button type="button" class="grid h-10 w-10 place-items-center rounded-full bg-wit shadow-zacht ring-1 ring-lijn hover:bg-ijs" data-rij-terug aria-label={T.vorige}><Icoon naam="pijl-links" class="h-4 w-4" /></button>
+          <button type="button" class="grid h-10 w-10 place-items-center rounded-full bg-wit shadow-zacht ring-1 ring-lijn hover:bg-ijs" data-rij-verder aria-label={T.volgende}><Icoon naam="pijl" class="h-4 w-4" /></button>
         </div>
       </div>
     </div>
     <ul class="rij mt-10" data-rij>
-      {reviews.map((r) => (
+      {lijst.map((r) => (
         <li class="kaart flex flex-col p-6">
-          <span class="flex text-saffraan" role="img" aria-label="5 sterren">{[1, 2, 3, 4, 5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span>
+          <span class="flex text-saffraan" role="img" aria-label={T.sterren}>{[1, 2, 3, 4, 5].map(() => <Icoon naam="ster" class="h-4 w-4" />)}</span>
           <blockquote class="mt-4 flex-1 text-[.98rem] leading-relaxed text-inkt">{r.tekst}</blockquote>
           <p class="mt-6 text-sm font-semibold text-inkt">{r.naam}</p>
-          <p class="text-xs text-stil">Google</p>
+          <p class="text-xs text-stil">{T.bron}</p>
         </li>
       ))}
     </ul>

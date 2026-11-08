@@ -1,0 +1,8 @@
+---
+// Duitse en Engelse homepage. Zelfde opbouw als de Nederlandse (src/views/Home.astro).
+import Home from '../../views/Home.astro';
+import { ANDERE_TALEN, type Taal } from '../../lib/i18n';
+export const getStaticPaths = () => ANDERE_TALEN.map((taal) => ({ params: { taal } }));
+const taal = Astro.params.taal as Taal;
+---
+<Home taal={taal} />

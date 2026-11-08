@@ -1,0 +1,22 @@
+{
+  "slug": "6a5-linnenkast-kledingkast",
+  "bron": "d697aaf9d87c",
+  "de": {
+    "naam": "6A5 Wäscheschrank, Kleiderschrank",
+    "omschrijving": "<p>Wäscheschrank bzw. Kleiderschrank mit 4 Einlegeböden. Wunderschöne Farbgebung. Einzigartiger Schrank aus Indien im Vintage-Look.</p>",
+    "alt": {
+      "6A5 Linnenkast, Kledingkast, voorkant": "6A5 Wäscheschrank, Kleiderschrank, Vorderansicht",
+      "6A5 Linnenkast, Kledingkast, zijkant": "6A5 Wäscheschrank, Kleiderschrank, Seitenansicht",
+      "6A5 Linnenkast, Kledingkast, open": "6A5 Wäscheschrank, Kleiderschrank, geöffnet"
+    }
+  },
+  "en": {
+    "naam": "6A5 Linen cupboard, wardrobe",
+    "omschrijving": "<p>Linen cupboard or wardrobe with 4 shelves. Beautiful paintwork. A unique cabinet from India with a vintage look.</p>",
+    "alt": {
+      "6A5 Linnenkast, Kledingkast, voorkant": "6A5 Linen cupboard, wardrobe, front view",
+      "6A5 Linnenkast, Kledingkast, zijkant": "6A5 Linen cupboard, wardrobe, side view",
+      "6A5 Linnenkast, Kledingkast, open": "6A5 Linen cupboard, wardrobe, open"
+    }
+  }
+}

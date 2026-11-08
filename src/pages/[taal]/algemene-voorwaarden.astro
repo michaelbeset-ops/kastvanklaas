@@ -1,0 +1,6 @@
+---
+import Voorwaarden from '../../views/Voorwaarden.astro';
+import { ANDERE_TALEN, type Taal } from '../../lib/i18n';
+export const getStaticPaths = () => ANDERE_TALEN.map((taal) => ({ params: { taal } }));
+---
+<Voorwaarden taal={Astro.params.taal as Taal} />

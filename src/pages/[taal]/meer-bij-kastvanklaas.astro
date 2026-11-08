@@ -1,0 +1,6 @@
+---
+import Meer from '../../views/Meer.astro';
+import { ANDERE_TALEN, type Taal } from '../../lib/i18n';
+export const getStaticPaths = () => ANDERE_TALEN.map((taal) => ({ params: { taal } }));
+---
+<Meer taal={Astro.params.taal as Taal} />

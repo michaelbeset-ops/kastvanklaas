@@ -1,0 +1,6 @@
+---
+import Contact from '../../views/Contact.astro';
+import { ANDERE_TALEN, type Taal } from '../../lib/i18n';
+export const getStaticPaths = () => ANDERE_TALEN.map((taal) => ({ params: { taal } }));
+---
+<Contact taal={Astro.params.taal as Taal} />

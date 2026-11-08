@@ -1,0 +1,41 @@
+---
+// Soortpagina's op de oude tag-URL's, alleen voor soorten met genoeg kasten (zie src/lib/soorten.mjs).
+import { getImage } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import Collectie from '../components/Collectie.astro';
+import { alleKasten, kruimelSchema } from '../lib/kasten';
+import { SITE } from '../lib/site';
+import { soortenMetPagina, hoortBij, soortChips } from '../lib/soorten.mjs';
+import { type Taal, UI, SOORT_T, lp } from '../lib/i18n';
+
+interface Props { taal: Taal; tag: string }
+const { taal, tag } = Astro.props;
+const echte = soortenMetPagina();
+const soort = echte.find((s) => s.tag === tag)!;
+const alle = (await alleKasten(taal)).filter((k) => k.inCollectie);
+const kasten = alle.filter((k) => hoortBij(soort, k));
+const n = kasten.filter((k) => k.status === 'te-koop').length;
+const pad = `/webshop/tag/${tag}/`;
+const m = taal === 'nl' ? soort.meervoud : SOORT_T[tag][taal];
+const merk = ' | Kast van Klaas Leiden';
+const T = {
+  nl: { h1: `${m} uit India`, titels: [`${m} uit India, oud teakhout${merk}`],
+    intro: `${m} uit India, zestig tot honderd jaar oud en van primair teakhout. Klaas zoekt elke kast zelf uit, dus er is er telkens maar één van. Bovenaan wat nu te koop is, daaronder wat al verkocht is.`,
+    beschrijving: `${n ? `${n} ${m.toLowerCase()} te koop` : m} uit India: oud, van teakhout en elk met een eigen kastnummer. Te zien bij Kast van Klaas op de Kaasmarkt in Leiden.` },
+  de: { h1: `${m} aus Indien`, titels: [`${m} aus Indien, altes Teakholz${merk}`, `${m} aus Indien${merk}`, `${m} aus Indien | Kast van Klaas`],
+    intro: `${m} aus Indien, sechzig bis hundert Jahre alt und aus Teakholz aus Primärwald. Klaas sucht jeden Schrank selbst aus, deshalb gibt es jeden nur einmal. Oben steht, was jetzt zu verkaufen ist, darunter, was schon verkauft ist.`,
+    beschrijving: `${m} aus Indien${n ? `, ${n} jetzt zu verkaufen` : ''}: alt, aus Teakholz, jeder mit eigener Nummer. Zu sehen bei Kast van Klaas am Kaasmarkt in Leiden.` },
+  en: { h1: `${m} from India`, titels: [`${m} from India, old teak${merk}`, `${m} from India${merk}`, `${m} from India | Kast van Klaas`],
+    intro: `${m} from India, sixty to a hundred years old and made of old-growth teak. Klaas picks every cabinet himself, so there is only ever one of each. At the top what is for sale now, below that what has already been sold.`,
+    beschrijving: `${m} from India${n ? `, ${n} for sale now` : ''}: old, made of teak, each with its own number. On view at Kast van Klaas on the Kaasmarkt in Leiden.` },
+}[taal];
+// Kortste titel die binnen 62 tekens past (Nederlands: altijd de eerste, zoals voorheen).
+const titel = taal === 'nl' ? T.titels[0] : (T.titels.find((t) => t.length <= 62) ?? T.titels.at(-1)!);
+const kruimels = [{ naam: UI[taal].home, pad: lp(taal, '/') }, { naam: UI[taal].collectie, pad: lp(taal, '/webshop/') }, { naam: m, pad: lp(taal, pad) }];
+const chips = soortChips(alle, new Set(echte.map((s) => s.tag)));
+const eerste = kasten.find((k) => k.status === 'te-koop') ?? kasten[0];
+const og = new URL((await getImage({ src: eerste.fotos[0].src, width: 1200, format: 'jpg', quality: 68 })).src, SITE).href;
+---
+<Basis titel={titel} beschrijving={T.beschrijving} pad={pad} taal={taal} ogBeeld={og} schema={[kruimelSchema(kruimels)]}>
+  <Collectie kasten={kasten} actief="india-kasten" titel={T.h1} intro={T.intro} kruimels={kruimels} soorten={chips} huidigPad={pad} taal={taal} />
+</Basis>

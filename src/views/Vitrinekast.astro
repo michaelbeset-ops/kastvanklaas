@@ -1,0 +1,33 @@
+---
+// Oude landingspagina die in Google staat; nu met de echte vitrinekasten eronder. Ook de oude tag-URL's
+// voor vitrinekasten verwijzen hierheen (redirects.mjs).
+import { getImage } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import Collectie from '../components/Collectie.astro';
+import { alleKasten, kruimelSchema } from '../lib/kasten';
+import { SITE } from '../lib/site';
+import { soortChips, soortenMetPagina } from '../lib/soorten.mjs';
+import { type Taal, UI, lp } from '../lib/i18n';
+
+interface Props { taal: Taal }
+const { taal } = Astro.props;
+const alle = (await alleKasten(taal)).filter((k) => k.inCollectie);
+// Op de Nederlandse naam, zodat elke taal dezelfde vitrinekasten toont.
+const kasten = alle.filter((k) => /vitrine/i.test(k.naam) || k.tags.includes('vitrinekast'));
+const n = kasten.filter((k) => k.status === 'te-koop').length;
+const T = {
+  nl: { titel: 'Vitrinekast uit India van oud teakhout | Kast van Klaas Leiden', beschrijving: `${n} oude vitrinekasten uit India te koop, van primair teakhout en elk met een eigen kastnummer. Te zien in de winkel op de Kaasmarkt in Leiden.`,
+    h1: 'Vitrinekast uit India', intro: 'Oude vitrinekasten van primair teakhout, rechtstreeks uit India en zestig tot honderd jaar oud. Hoog of laag, met schuifdeuren of openslaande deurtjes. Elke kast heeft een eigen nummer.' },
+  de: { titel: 'Vitrinenschrank aus Indien aus altem Teakholz | Kast van Klaas', beschrijving: `${n} alte Vitrinenschränke aus Indien zu verkaufen, aus Teakholz aus Primärwald und jeder mit eigener Schranknummer. Zu sehen im Laden am Kaasmarkt in Leiden.`,
+    h1: 'Vitrinenschrank aus Indien', intro: 'Alte Vitrinenschränke aus Teakholz aus Primärwald, direkt aus Indien und sechzig bis hundert Jahre alt. Hoch oder niedrig, mit Schiebetüren oder Flügeltürchen. Jeder Schrank hat eine eigene Nummer.' },
+  en: { titel: 'Indian display cabinet in old teak | Kast van Klaas Leiden', beschrijving: `${n} old Indian display cabinets for sale, made of old-growth teak and each with its own cabinet number. On view in the shop on the Kaasmarkt in Leiden.`,
+    h1: 'Display cabinets from India', intro: 'Old display cabinets in old-growth teak, straight from India and sixty to a hundred years old. Tall or low, with sliding or hinged doors. Every cabinet has its own number.' },
+}[taal];
+const kruimels = [{ naam: UI[taal].home, pad: lp(taal, '/') }, { naam: T.h1, pad: lp(taal, '/vitrinekast-uit-india/') }];
+const chips = soortChips(alle, new Set(soortenMetPagina().map((s) => s.tag)));
+const eerste = kasten.find((k) => k.status === 'te-koop') ?? kasten[0];
+const og = new URL((await getImage({ src: eerste.fotos[0].src, width: 1200, format: 'jpg', quality: 68 })).src, SITE).href;
+---
+<Basis titel={T.titel} beschrijving={T.beschrijving} pad="/vitrinekast-uit-india/" taal={taal} ogBeeld={og} schema={[kruimelSchema(kruimels)]}>
+  <Collectie kasten={kasten} actief="india-kasten" huidigPad="/vitrinekast-uit-india/" titel={T.h1} kruimels={kruimels} soorten={chips} intro={T.intro} taal={taal} />
+</Basis>

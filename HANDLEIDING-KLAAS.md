@@ -31,6 +31,12 @@ Zo blijft hij gevonden worden in Google en komen er nieuwe vragen binnen.
 
 Open de kast, verander de prijs, sla op.
 
+## Duits en Engels
+
+De site staat ook in het Duits (/de/) en Engels (/en/). Jij werkt gewoon in het Nederlands, verder hoef je niets te doen.
+Een nieuwe kast staat meteen ook op de Duitse en Engelse site, met jouw Nederlandse tekst. Michael laat die tekst later vertalen
+(hij ziet met `npm run vertalingen-ontbreken` welke kasten nog wachten); tot dan wordt die pagina niet in Google gezet.
+
 ## Reserveringen
 
 Klikt iemand op "Reserveer deze kast", dan krijg je een mail op klaas@kastvanklaas.nl met het

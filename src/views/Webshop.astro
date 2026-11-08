@@ -1,0 +1,25 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Collectie from '../components/Collectie.astro';
+import { alleKasten, kruimelSchema } from '../lib/kasten';
+import { soortChips, soortenMetPagina } from '../lib/soorten.mjs';
+import { type Taal, UI, lp } from '../lib/i18n';
+
+interface Props { taal: Taal }
+const { taal } = Astro.props;
+const kasten = (await alleKasten(taal)).filter((k) => k.inCollectie);
+const n = kasten.filter((k) => k.status === 'te-koop').length;
+const T = {
+  nl: { titel: 'Collectie India kasten en meubels van teakhout | Kast van Klaas Leiden', beschrijving: `${n} oude India kasten, tafels en meubels van teakhout te koop, elk met een eigen kastnummer. Te zien in de winkel op de Kaasmarkt in Leiden.`,
+    h1: 'De collectie', intro: 'Oude kasten en meubels uit India, door Klaas zelf uitgezocht. Elke kast heeft een eigen nummer: noem dat nummer als je Klaas iets vraagt.' },
+  de: { titel: 'Kollektion indischer Teakholzschränke | Kast van Klaas Leiden', beschrijving: `${n} alte Schränke, Tische und Möbel aus Indien aus Teakholz zu verkaufen, jedes Stück mit eigener Schranknummer. Zu sehen im Laden am Kaasmarkt in Leiden.`,
+    h1: 'Die Kollektion', intro: 'Alte Schränke und Möbel aus Indien, von Klaas selbst ausgesucht. Jeder Schrank hat eine eigene Nummer: Nennen Sie diese Nummer, wenn Sie Klaas etwas fragen.' },
+  en: { titel: 'Collection of Indian teak cabinets | Kast van Klaas Leiden', beschrijving: `${n} old Indian cabinets, tables and teak furniture for sale, each with its own cabinet number. On view in the shop on the Kaasmarkt in Leiden.`,
+    h1: 'The collection', intro: 'Old cabinets and furniture from India, hand-picked by Klaas. Every cabinet has its own number: mention that number when you ask Klaas something.' },
+}[taal];
+const kruimels = [{ naam: UI[taal].home, pad: lp(taal, '/') }, { naam: UI[taal].collectie, pad: lp(taal, '/webshop/') }];
+const chips = soortChips(kasten, new Set(soortenMetPagina().map((s) => s.tag)));
+---
+<Basis titel={T.titel} beschrijving={T.beschrijving} pad="/webshop/" taal={taal} schema={[kruimelSchema(kruimels)]}>
+  <Collectie kasten={kasten} actief={null} titel={T.h1} kruimels={kruimels} soorten={chips} taal={taal} intro={T.intro} />
+</Basis>

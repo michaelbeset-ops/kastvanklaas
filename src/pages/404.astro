@@ -1,16 +1,38 @@
 ---
+// GitHub Pages toont voor elke onbekende URL deze ene 404.html. Daarom staan de drie talen erin en kiest een klein
+// script de taal op basis van het pad (/de/... of /en/...). Zonder JavaScript: Nederlands.
 import Basis from '../layouts/Basis.astro';
 import Icoon from '../components/Icoon.astro';
 import { zaak } from '../lib/site';
+import { type Taal, lp } from '../lib/i18n';
+const T: Record<Taal, { kicker: string; kop: string; tekst: string; knop: string; bel: string; nr: string; titel: string }> = {
+  nl: { kicker: 'Pagina niet gevonden', kop: 'Deze kast staat hier niet meer.', tekst: 'Misschien is de pagina verplaatst. Zoek in de collectie op kastnummer, of vraag het Klaas.', knop: 'Naar de collectie', bel: 'Bel', nr: zaak.telefoon, titel: 'Pagina niet gevonden | Kast van Klaas Leiden' },
+  de: { kicker: 'Seite nicht gefunden', kop: 'Dieser Schrank steht hier nicht mehr.', tekst: 'Vielleicht wurde die Seite verschoben. Suchen Sie in der Kollektion nach der Schranknummer oder fragen Sie Klaas.', knop: 'Zur Kollektion', bel: '', nr: '+31 6 26 37 84 80', titel: 'Seite nicht gefunden | Kast van Klaas Leiden' },
+  en: { kicker: 'Page not found', kop: 'This cabinet is no longer here.', tekst: 'The page may have moved. Search the collection by cabinet number, or ask Klaas.', knop: 'Go to the collection', bel: '', nr: '+31 6 26 37 84 80', titel: 'Page not found | Kast van Klaas Leiden' },
+};
+const talen: Taal[] = ['nl', 'de', 'en'];
 ---
-<Basis titel="Pagina niet gevonden | Kast van Klaas Leiden" beschrijving="Deze pagina bestaat niet (meer). Bekijk de collectie oude India kasten of vraag Klaas naar een kastnummer." pad="/404/" noindex>
+<Basis titel={T.nl.titel} beschrijving="Deze pagina bestaat niet (meer). Bekijk de collectie oude India kasten of vraag Klaas naar een kastnummer." pad="/404/" noindex>
   <section class="wrap py-12 sm:py-20 lg:py-28">
-    <p class="kicker text-stil">Pagina niet gevonden</p>
-    <h1 class="mt-4 max-w-3xl text-5xl">Deze kast staat hier niet meer.</h1>
-    <p class="mt-6 max-w-xl text-lg">Misschien is de pagina verplaatst. Zoek in de collectie op kastnummer, of vraag het Klaas.</p>
-    <div class="mt-8 flex flex-wrap gap-3">
-      <a href="/webshop/" class="knop knop-geel">Naar de collectie<Icoon naam="pijl" /></a>
-      <a href={zaak.telefoonLink} class="knop knop-wit"><Icoon naam="tel" />Bel {zaak.telefoon}</a>
-    </div>
+    {talen.map((t) => (
+      <div data-taal404={t} lang={t} class:list={[t !== 'nl' && 'hidden']}>
+        <p class="kicker text-stil">{T[t].kicker}</p>
+        {t === 'nl' ? <h1 class="mt-4 max-w-3xl text-5xl">{T[t].kop}</h1> : <p class="mt-4 max-w-3xl font-kop text-5xl font-extrabold leading-none text-inkt" role="heading" aria-level="1">{T[t].kop}</p>}
+        <p class="mt-6 max-w-xl text-lg">{T[t].tekst}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={lp(t, '/webshop/')} class="knop knop-geel">{T[t].knop}<Icoon naam="pijl" /></a>
+          <a href={zaak.telefoonLink} class="knop knop-wit"><Icoon naam="tel" />{[T[t].bel, T[t].nr].filter(Boolean).join(' ')}</a>
+        </div>
+      </div>
+    ))}
   </section>
+  <script is:inline define:vars={{ titels: { de: T.de.titel, en: T.en.titel } }}>
+    const m = location.pathname.match(/^\/(de|en)(\/|$)/);
+    if (m) {
+      const t = m[1];
+      document.querySelectorAll('[data-taal404]').forEach((e) => e.classList.toggle('hidden', e.dataset.taal404 !== t));
+      document.documentElement.lang = t;
+      document.title = titels[t];
+    }
+  </script>
 </Basis>

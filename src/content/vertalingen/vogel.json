@@ -1,0 +1,18 @@
+{
+  "slug": "vogel",
+  "bron": "da5600e1c785",
+  "de": {
+    "naam": "Vogel",
+    "omschrijving": "",
+    "alt": {
+      "Vogel, foto 1": "Vogel, Foto 1"
+    }
+  },
+  "en": {
+    "naam": "Bird",
+    "omschrijving": "",
+    "alt": {
+      "Vogel, foto 1": "Bird, photo 1"
+    }
+  }
+}

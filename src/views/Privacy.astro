@@ -1,0 +1,151 @@
+---
+import Basis from '../layouts/Basis.astro';
+import PaginaKop from '../components/PaginaKop.astro';
+import { zaak } from '../lib/site';
+import { type Taal } from '../lib/i18n';
+// Opbouw en vaste gegevens van de oude privacyverklaring (bron/site-extra/privacy.txt), bijgewerkt naar wat deze
+// site echt doet: geen webshop, geen accounts, geen cookies; formulier via Web3Forms, statistiek via GoatCounter.
+// DE/EN: vertaling van de Nederlandse tekst; bij verschil geldt de Nederlandse versie (staat onderaan de pagina).
+interface Props { taal: Taal }
+const { taal } = Astro.props;
+const T = {
+  nl: { titel: 'Privacyverklaring | Kast van Klaas Leiden', beschrijving: 'Hoe Kast van Klaas omgaat met je gegevens: alleen wat je zelf invult om je vraag te beantwoorden. Deze site plaatst geen cookies.', kruimel: 'Privacy', h1: 'Privacyverklaring' },
+  de: { titel: 'Datenschutzerklärung | Kast van Klaas Leiden', beschrijving: 'Wie Kast van Klaas mit Ihren Daten umgeht: nur mit dem, was Sie selbst eingeben, um Ihre Frage zu beantworten. Diese Website setzt keine Cookies.', kruimel: 'Datenschutz', h1: 'Datenschutzerklärung' },
+  en: { titel: 'Privacy statement | Kast van Klaas Leiden', beschrijving: 'How Kast van Klaas handles your data: only what you enter yourself so we can answer your question. This website does not place any cookies.', kruimel: 'Privacy', h1: 'Privacy statement' },
+}[taal];
+---
+<Basis titel={T.titel} beschrijving={T.beschrijving} pad="/privacy/" taal={taal}>
+  <PaginaKop kruimel={T.kruimel} titel={T.h1} taal={taal} />
+  <div class="wrap mt-14">
+    <div class="max-w-3xl space-y-10 [&_h2]:text-2xl [&_p]:mt-3 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:pl-5">
+      {taal === 'nl' && (
+        <>
+          <section>
+            <p>{zaak.naam}, gevestigd aan {zaak.straat}, {zaak.postcode} {zaak.plaats}, is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring.</p>
+            <p>Contact: {zaak.telefoon}, <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>. KvK {zaak.kvk}.</p>
+          </section>
+          <section>
+            <h2>Welke gegevens</h2>
+            <p>Je kunt op deze site een kast reserveren of een vraag stellen. Daarvoor vul je zelf in:</p>
+            <ul><li>je naam</li><li>je telefoonnummer of e-mailadres</li><li>je bericht, en bij een reservering om welke kast het gaat</li></ul>
+            <p>Meer vragen we niet. Er is geen webshop, je maakt geen account aan en je betaalt niet online.</p>
+          </section>
+          <section>
+            <h2>Waarvoor</h2>
+            <p>Alleen om contact met je op te nemen over je vraag of over de kast die je wilt reserveren.</p>
+          </section>
+          <section>
+            <h2>Wie verwerkt de gegevens</h2>
+            <p>Het formulier wordt verstuurd via de dienst Web3Forms, die het bericht doorstuurt naar de mailbox van {zaak.naam}. Web3Forms gebruikt de gegevens alleen om het bericht af te leveren.</p>
+            <p>Klik je op WhatsApp of op een e-mailadres, dan gebruik je je eigen app. Wat je daar verstuurt valt onder de voorwaarden van die app.</p>
+            <p>De website staat bij GitHub Pages. Zoals bij elke website ziet de server technisch je IP-adres om de pagina te kunnen tonen.</p>
+          </section>
+          <section>
+            <h2>Cookies en bezoekersstatistiek</h2>
+            <p>Deze website plaatst geen cookies. Daarom zie je ook geen cookiemelding.</p>
+            <p>We tellen bezoeken met GoatCounter. Dat werkt zonder cookies en zonder persoonsgegevens: we zien bijvoorbeeld hoe vaak een pagina is bekeken of hoe vaak er op "Reserveer deze kast" is geklikt, maar niet wie dat was.</p>
+          </section>
+          <section>
+            <h2>Hoe lang</h2>
+            <p>{zaak.naam} bewaart je gegevens niet langer dan nodig. Wij hanteren voor alle persoonsgegevens een bewaartermijn van 1 jaar.</p>
+          </section>
+          <section>
+            <h2>Je rechten</h2>
+            <p>Je hebt het recht om je gegevens in te zien, te laten corrigeren of te laten verwijderen. Stuur daarvoor een bericht naar <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>. {zaak.naam} reageert zo snel mogelijk, en in ieder geval binnen vier weken.</p>
+            <p>Je kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens, via <a class="link" href="https://autoriteitpersoonsgegevens.nl" rel="noopener">autoriteitpersoonsgegevens.nl</a>.</p>
+          </section>
+          <section>
+            <h2>Beveiliging</h2>
+            <p>De website werkt via een beveiligde verbinding (https). Merk je iets dat niet klopt, mail dan naar <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>.</p>
+          </section>
+        </>
+      )}
+      {taal === 'de' && (
+        <>
+          <section>
+            <p>{zaak.naam}, mit Sitz in {zaak.straat}, {zaak.postcode} {zaak.plaats}, Niederlande, ist für die Verarbeitung personenbezogener Daten verantwortlich, wie in dieser Datenschutzerklärung beschrieben.</p>
+            <p>Kontakt: +31 6 26 37 84 80, <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>. KvK (niederländisches Handelsregister) {zaak.kvk}.</p>
+          </section>
+          <section>
+            <h2>Welche Daten</h2>
+            <p>Auf dieser Website können Sie einen Schrank reservieren oder eine Frage stellen. Dazu geben Sie selbst ein:</p>
+            <ul><li>Ihren Namen</li><li>Ihre Telefonnummer oder E-Mail-Adresse</li><li>Ihre Nachricht und bei einer Reservierung, um welchen Schrank es geht</li></ul>
+            <p>Mehr fragen wir nicht ab. Es gibt keinen Webshop, Sie legen kein Konto an und bezahlen nicht online.</p>
+          </section>
+          <section>
+            <h2>Wofür</h2>
+            <p>Nur, um Sie zu Ihrer Frage oder zu dem Schrank, den Sie reservieren möchten, zu kontaktieren.</p>
+          </section>
+          <section>
+            <h2>Wer verarbeitet die Daten</h2>
+            <p>Das Formular wird über den Dienst Web3Forms versendet, der die Nachricht an das Postfach von {zaak.naam} weiterleitet. Web3Forms verwendet die Daten nur, um die Nachricht zuzustellen.</p>
+            <p>Wenn Sie auf WhatsApp oder eine E-Mail-Adresse klicken, verwenden Sie Ihre eigene App. Was Sie dort senden, unterliegt den Bedingungen dieser App.</p>
+            <p>Die Website wird bei GitHub Pages gehostet. Wie bei jeder Website sieht der Server technisch Ihre IP-Adresse, um die Seite anzeigen zu können.</p>
+          </section>
+          <section>
+            <h2>Cookies und Besucherstatistik</h2>
+            <p>Diese Website setzt keine Cookies. Deshalb sehen Sie auch keinen Cookie-Hinweis.</p>
+            <p>Wir zählen Besuche mit GoatCounter. Das funktioniert ohne Cookies und ohne personenbezogene Daten: Wir sehen zum Beispiel, wie oft eine Seite aufgerufen oder wie oft auf „Diesen Schrank reservieren“ geklickt wurde, aber nicht, wer das war.</p>
+          </section>
+          <section>
+            <h2>Wie lange</h2>
+            <p>{zaak.naam} speichert Ihre Daten nicht länger als nötig. Für alle personenbezogenen Daten gilt eine Aufbewahrungsfrist von 1 Jahr.</p>
+          </section>
+          <section>
+            <h2>Ihre Rechte</h2>
+            <p>Sie haben das Recht, Ihre Daten einzusehen, berichtigen oder löschen zu lassen. Senden Sie dazu eine Nachricht an <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>. {zaak.naam} antwortet so schnell wie möglich, spätestens innerhalb von vier Wochen.</p>
+            <p>Sie können auch eine Beschwerde bei der niederländischen Datenschutzbehörde (Autoriteit Persoonsgegevens) einreichen, über <a class="link" href="https://autoriteitpersoonsgegevens.nl" rel="noopener">autoriteitpersoonsgegevens.nl</a>.</p>
+          </section>
+          <section>
+            <h2>Sicherheit</h2>
+            <p>Die Website läuft über eine gesicherte Verbindung (https). Fällt Ihnen etwas auf, das nicht stimmt, schreiben Sie bitte an <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>.</p>
+          </section>
+          <p class="text-sm text-stil">Dies ist eine Übersetzung der niederländischen Datenschutzerklärung. Im Zweifel gilt die niederländische Fassung.</p>
+        </>
+      )}
+      {taal === 'en' && (
+        <>
+          <section>
+            <p>{zaak.naam}, located at {zaak.straat}, {zaak.postcode} {zaak.plaats}, the Netherlands, is responsible for processing personal data as described in this privacy statement.</p>
+            <p>Contact: +31 6 26 37 84 80, <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>. KvK (Dutch Chamber of Commerce) {zaak.kvk}.</p>
+          </section>
+          <section>
+            <h2>What data</h2>
+            <p>On this website you can reserve a cabinet or ask a question. To do so, you enter the following yourself:</p>
+            <ul><li>your name</li><li>your phone number or email address</li><li>your message and, for a reservation, which cabinet it concerns</li></ul>
+            <p>That is all we ask for. There is no web shop, you do not create an account and you do not pay online.</p>
+          </section>
+          <section>
+            <h2>What for</h2>
+            <p>Only to contact you about your question or about the cabinet you want to reserve.</p>
+          </section>
+          <section>
+            <h2>Who processes the data</h2>
+            <p>The form is sent via the Web3Forms service, which forwards the message to the mailbox of {zaak.naam}. Web3Forms only uses the data to deliver the message.</p>
+            <p>If you click on WhatsApp or an email address, you are using your own app. Whatever you send there is subject to that app's terms.</p>
+            <p>The website is hosted on GitHub Pages. As with any website, the server technically sees your IP address in order to display the page.</p>
+          </section>
+          <section>
+            <h2>Cookies and visitor statistics</h2>
+            <p>This website does not place any cookies. That is why you do not see a cookie notice.</p>
+            <p>We count visits with GoatCounter. It works without cookies and without personal data: we can see, for example, how often a page has been viewed or how often someone clicked "Reserve this cabinet", but not who that was.</p>
+          </section>
+          <section>
+            <h2>How long</h2>
+            <p>{zaak.naam} does not keep your data for longer than necessary. We apply a retention period of 1 year to all personal data.</p>
+          </section>
+          <section>
+            <h2>Your rights</h2>
+            <p>You have the right to view, correct or delete your data. To do so, send a message to <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>. {zaak.naam} will respond as quickly as possible, and in any case within four weeks.</p>
+            <p>You can also lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens) via <a class="link" href="https://autoriteitpersoonsgegevens.nl" rel="noopener">autoriteitpersoonsgegevens.nl</a>.</p>
+          </section>
+          <section>
+            <h2>Security</h2>
+            <p>The website uses a secure connection (https). If you notice anything that is not right, please email <a class="link" href={`mailto:${zaak.email}`}>{zaak.email}</a>.</p>
+          </section>
+          <p class="text-sm text-stil">This is a translation of the Dutch privacy statement. In case of doubt, the Dutch version applies.</p>
+        </>
+      )}
+    </div>
+  </div>
+</Basis>

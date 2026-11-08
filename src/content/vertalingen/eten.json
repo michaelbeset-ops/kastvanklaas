@@ -1,0 +1,18 @@
+{
+  "slug": "eten",
+  "bron": "6c1f598ee473",
+  "de": {
+    "naam": "Essen",
+    "omschrijving": "",
+    "alt": {
+      "Eten, foto 1": "Essen, Foto 1"
+    }
+  },
+  "en": {
+    "naam": "Food",
+    "omschrijving": "",
+    "alt": {
+      "Eten, foto 1": "Food, photo 1"
+    }
+  }
+}

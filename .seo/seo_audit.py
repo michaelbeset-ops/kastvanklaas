@@ -301,6 +301,12 @@ def run(dist: Path, cfg: dict) -> tuple[Audit, dict]:
     biz = cfg.get("business") or {}
     ignore = [norm_path(p) for p in cfg.get("ignorePaths", [])]
     lang_expected = (cfg.get("language") or "nl-NL").split("-")[0].lower()
+    # Meertalige site: "languages" in seo.config.json koppelt een pad-voorvoegsel aan een taal (bv. {"de": "/de/"}).
+    lang_prefixes = sorted(((code.lower(), (base + pre) if base else pre) for code, pre in (cfg.get("languages") or {}).items() if pre and pre != "/"),
+                           key=lambda x: -len(x[1]))
+
+    def lang_for(url: str) -> str:
+        return next((code for code, pre in lang_prefixes if url.startswith(pre)), lang_expected)
 
     # ---- pagina's verzamelen
     pages: dict[str, dict] = {}
@@ -360,7 +366,8 @@ def run(dist: Path, cfg: dict) -> tuple[Audit, dict]:
 
     for url, d in pages.items():
         p: PageParser = d["p"]
-        if d["is404"] or d["skip"]:
+        # 404 en hulppagina's (noindex en in ignorePaths, bv. het CMS op /beheer/) zijn geen SEO-pagina's.
+        if d["is404"] or d["skip"] or (d["noindex"] and is_ignored(url)):
             continue
         txt = p.text
 
@@ -388,13 +395,14 @@ def run(dist: Path, cfg: dict) -> tuple[Audit, dict]:
         # ---------------- techniek
         if not p.lang:
             au.add("Middel", "Techniek", "lang", "<html> mist een lang-attribuut.", url, "Zet <html lang=\"nl\">.")
-        elif not p.lang.lower().startswith(lang_expected):
-            au.add("Middel", "Techniek", "lang", f"lang=\"{p.lang}\" past niet bij taal {lang_expected}.", url)
+        elif not p.lang.lower().startswith(lang_for(url)):
+            au.add("Middel", "Techniek", "lang", f"lang=\"{p.lang}\" past niet bij taal {lang_for(url)}.", url)
         if "viewport" not in p.meta:
             au.add("Hoog", "Techniek", "viewport", "Geen viewport-meta (mobile-first indexering).", url)
         if "nosnippet" in d["robots"] or re.search(r"max-snippet\s*:\s*0", d["robots"]):
             au.add("Hoog", "AI-gereedheid", "nosnippet", "nosnippet/max-snippet:0: pagina kan niet als bron in AI Overviews of snippets verschijnen.", url)
-        if d["noindex"] and not is_ignored(url):
+        # Bewuste noindex met reden (bv. vertaling ontbreekt nog): <meta name="sitefront:noindex" content="...">
+        if d["noindex"] and not is_ignored(url) and not p.meta.get("sitefront:noindex"):
             au.add("Hoog", "Techniek", "noindex", "Pagina staat op noindex maar niet in ignorePaths. Bewust?", url,
                    "Haal noindex weg, of zet het pad in ignorePaths in seo.config.json.")
         if not d["noindex"]:

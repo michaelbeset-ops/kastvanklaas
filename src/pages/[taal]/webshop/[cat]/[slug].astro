@@ -1,0 +1,11 @@
+---
+// Kastpagina in het Duits of Engels. Zonder vertaling: Nederlandse tekst met vertaalde interface, noindex (zie src/views/Kast.astro).
+import KastPagina from '../../../../views/Kast.astro';
+import { alleKasten } from '../../../../lib/kasten';
+import { ANDERE_TALEN, type Taal } from '../../../../lib/i18n';
+export async function getStaticPaths() {
+  const kasten = await alleKasten('nl');
+  return ANDERE_TALEN.flatMap((taal) => kasten.map((k) => ({ params: { taal, cat: k.categorie, slug: k.slug } })));
+}
+---
+<KastPagina taal={Astro.params.taal as Taal} slug={Astro.params.slug as string} />

@@ -1,0 +1,39 @@
+---
+import Basis from '../layouts/Basis.astro';
+import PaginaKop from '../components/PaginaKop.astro';
+import nl from '../data/voorwaarden.json';
+import de from '../data/voorwaarden.de.json';
+import en from '../data/voorwaarden.en.json';
+import { type Taal } from '../lib/i18n';
+// NL: letterlijk de voorwaarden van de huidige site (bron/site-extra/algemene-voorwaarden.txt). Juridische tekst: niet herschreven.
+// DE/EN: vertaling daarvan, ter informatie. Bij verschil geldt de Nederlandse tekst (staat bovenaan de pagina).
+interface Props { taal: Taal }
+const { taal } = Astro.props;
+const artikelen = { nl, de, en }[taal];
+const id = (kop: string) => 'artikel-' + kop.match(/\d+/)![0];
+const T = {
+  nl: { titel: 'Algemene voorwaarden | Kast van Klaas Leiden', beschrijving: 'De algemene voorwaarden van Kast van Klaas, Kaasmarkt 3 in Leiden: aanbod, overeenkomst, herroepingsrecht, prijs, levering, betaling en klachten.', h1: 'Algemene voorwaarden', nav: 'Artikelen', noot: '' },
+  de: { titel: 'Allgemeine Geschäftsbedingungen | Kast van Klaas Leiden', beschrijving: 'Die AGB von Kast van Klaas, Kaasmarkt 3 in Leiden: Angebot, Vertrag, Widerrufsrecht, Preis, Lieferung, Zahlung und Beschwerden.', h1: 'Allgemeine Geschäftsbedingungen', nav: 'Artikel',
+    noot: 'Dies ist eine Übersetzung der niederländischen Allgemeinen Geschäftsbedingungen, zu Ihrer Information. Rechtlich maßgeblich ist die niederländische Fassung.' },
+  en: { titel: 'Terms and conditions | Kast van Klaas Leiden', beschrijving: 'The general terms and conditions of Kast van Klaas, Kaasmarkt 3 in Leiden: offer, agreement, right of withdrawal, price, delivery, payment and complaints.', h1: 'Terms and conditions', nav: 'Articles',
+    noot: 'This is a translation of the Dutch general terms and conditions, for your information. The Dutch version is legally binding.' },
+}[taal];
+---
+<Basis titel={T.titel} beschrijving={T.beschrijving} pad="/algemene-voorwaarden/" taal={taal}>
+  <PaginaKop kruimel={T.h1} titel={T.h1} taal={taal} intro={T.noot || undefined} />
+  <div class="wrap mt-14 grid gap-10 lg:grid-cols-12">
+    <nav aria-label={T.nav} class="text-sm lg:col-span-3">
+      <ol class="space-y-1 lg:sticky lg:top-8">
+        {artikelen.map((a) => <li><a class="no-underline hover:text-teak" href={`#${id(a.kop)}`}>{a.kop}</a></li>)}
+      </ol>
+    </nav>
+    <div class="max-w-3xl space-y-12 hyphens-auto lg:col-span-8 lg:col-start-5">
+      {artikelen.map((a) => (
+        <section id={id(a.kop)} class="scroll-mt-8">
+          <h2 class="text-xl sm:text-2xl">{a.kop}</h2>
+          <div class="mt-4 space-y-3">{a.regels.map((r) => <p>{r}</p>)}</div>
+        </section>
+      ))}
+    </div>
+  </div>
+</Basis>

@@ -1,0 +1,9 @@
+---
+import Categorie from '../../../../views/Categorie.astro';
+import { ECHTE_CATEGORIEEN } from '../../../../lib/redirects.mjs';
+import { ANDERE_TALEN, type Taal } from '../../../../lib/i18n';
+export function getStaticPaths() {
+  return ANDERE_TALEN.flatMap((taal) => ECHTE_CATEGORIEEN.map((cat) => ({ params: { taal, cat } })));
+}
+---
+<Categorie taal={Astro.params.taal as Taal} cat={Astro.params.cat as string} />

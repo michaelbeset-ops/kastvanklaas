@@ -1,12 +1,13 @@
 ---
 // Kop voor inhoudspagina's: kruimelpad en een grote Fraunces-kop, links uitgelijnd, veel lucht.
-interface Props { titel: string; intro?: string; kruimel: string }
-const { titel, intro, kruimel } = Astro.props;
+import { type Taal, UI, lp } from '../lib/i18n';
+interface Props { titel: string; intro?: string; kruimel: string; taal?: Taal }
+const { titel, intro, kruimel, taal = 'nl' } = Astro.props;
 ---
 <div class="wrap pt-6">
-  <nav aria-label="Kruimelpad" class="text-xs text-stil">
+  <nav aria-label={UI[taal].kruimelpad} class="text-xs text-stil">
     <ol class="flex flex-wrap gap-x-2">
-      <li><a class="no-underline hover:text-teak" href="/">Home</a><span class="ml-2" aria-hidden="true">/</span></li>
+      <li><a class="no-underline hover:text-teak" href={lp(taal, '/')}>{UI[taal].home}</a><span class="ml-2" aria-hidden="true">/</span></li>
       <li aria-current="page" class="text-inkt">{kruimel}</li>
     </ol>
   </nav>

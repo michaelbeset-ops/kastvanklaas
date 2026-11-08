@@ -1,6 +1,8 @@
 # Beheeromgeving Kast van Klaas (Sveltia CMS, Decap-compatibele config).
 # Na opslaan zet Sveltia een commit in de repo; GitHub Actions bouwt de site opnieuw (± 3 minuten).
 # Koppeling bij livegang invullen: repo-naam en inlogmethode (zie HANDLEIDING-KLAAS.md en het eindverslag).
+# Duitse en Engelse teksten staan los in src/content/vertalingen/<slug>.json (geen CMS-collectie): Klaas ziet ze niet
+# en kan ze dus ook niet per ongeluk wissen. Ontbrekende vertalingen: npm run vertalingen-ontbreken.
 
 backend:
   name: github

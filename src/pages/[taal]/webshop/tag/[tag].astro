@@ -1,0 +1,9 @@
+---
+import Soort from '../../../../views/Soort.astro';
+import { soortenMetPagina } from '../../../../lib/soorten.mjs';
+import { ANDERE_TALEN, type Taal } from '../../../../lib/i18n';
+export function getStaticPaths() {
+  return ANDERE_TALEN.flatMap((taal) => soortenMetPagina().map((s) => ({ params: { taal, tag: s.tag } })));
+}
+---
+<Soort taal={Astro.params.taal as Taal} tag={Astro.params.tag as string} />

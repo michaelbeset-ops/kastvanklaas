@@ -1,0 +1,6 @@
+---
+import Webshop from '../../../views/Webshop.astro';
+import { ANDERE_TALEN, type Taal } from '../../../lib/i18n';
+export const getStaticPaths = () => ANDERE_TALEN.map((taal) => ({ params: { taal } }));
+---
+<Webshop taal={Astro.params.taal as Taal} />

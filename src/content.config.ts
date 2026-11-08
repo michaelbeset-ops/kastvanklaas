@@ -25,4 +25,22 @@ const kasten = defineCollection({
     }),
 });
 
-export const collections = { kasten };
+// Duitse en Engelse teksten per kast, los van de kast zelf: Klaas en het CMS zien deze map niet, dus zijn
+// Nederlandse werkwijze verandert niet. Bestandsnaam = slug van de kast. "bron" is een vingerafdruk van de
+// Nederlandse naam en tekst op het moment van vertalen; wijkt die af, dan meldt `npm run vertalingen-ontbreken` het.
+const taalTekst = z.object({
+  naam: z.string().default(''),
+  omschrijving: z.string().default(''),
+  alt: z.record(z.string(), z.string()).default({}), // Nederlandse alt-tekst -> vertaling
+});
+const vertalingen = defineCollection({
+  loader: glob({ pattern: '*.json', base: './src/content/vertalingen' }),
+  schema: z.object({
+    slug: z.string(),
+    bron: z.string(),
+    de: taalTekst.optional(),
+    en: taalTekst.optional(),
+  }),
+});
+
+export const collections = { kasten, vertalingen };

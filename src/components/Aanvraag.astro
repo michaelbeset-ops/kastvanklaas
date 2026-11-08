@@ -3,30 +3,43 @@
 import Icoon from './Icoon.astro';
 import VraagFormulier from './VraagFormulier.astro';
 import { zaak } from '../lib/site';
-interface Props { bron: string }
-const { bron } = Astro.props;
+import { type Taal } from '../lib/i18n';
+interface Props { bron: string; taal?: Taal }
+const { bron, taal = 'nl' } = Astro.props;
+const T = {
+  nl: { kicker: 'Vraag het Klaas', kop: 'Vertel Klaas wat je zoekt.', intro: 'Neem gerust contact op met Klaas, als je vragen hebt over jouw droomkast.',
+    punten: ['Elke kast is een uniek exemplaar uit India', 'Kom kijken in de winkel, ook op afspraak', 'Tegen een vergoeding worden de kasten thuis bezorgd'],
+    stappen: ['Je stuurt je vraag, Klaas krijgt hem direct in de mail.', 'Klaas belt of mailt je terug.', 'Je komt kijken op de Kaasmarkt, of spreekt af hoe de kast bij je komt.'],
+    bel: 'Liever direct bellen?', nr: zaak.telefoon },
+  de: { kicker: 'Fragen Sie Klaas', kop: 'Sagen Sie Klaas, was Sie suchen.', intro: 'Wenden Sie sich gern an Klaas, wenn Sie Fragen zu Ihrem Traumschrank haben.',
+    punten: ['Jeder Schrank ist ein Einzelstück aus Indien', 'Besuchen Sie den Laden, auch nach Vereinbarung', 'Gegen eine Gebühr werden die Schränke nach Hause geliefert'],
+    stappen: ['Sie senden Ihre Frage, Klaas bekommt sie direkt per E-Mail.', 'Klaas ruft Sie zurück oder antwortet per E-Mail.', 'Sie kommen an den Kaasmarkt oder vereinbaren, wie der Schrank zu Ihnen kommt.'],
+    bel: 'Lieber direkt anrufen?', nr: '+31 6 26 37 84 80' },
+  en: { kicker: 'Ask Klaas', kop: 'Tell Klaas what you are looking for.', intro: 'Feel free to get in touch with Klaas if you have any questions about your dream cabinet.',
+    punten: ['Every cabinet is a one-off piece from India', 'Come and see them in the shop, also by appointment', 'For a fee, the cabinets can be delivered to your home'],
+    stappen: ['You send your question and Klaas receives it straight away by email.', 'Klaas calls or emails you back.', 'You come and have a look on the Kaasmarkt, or arrange how the cabinet gets to you.'],
+    bel: 'Rather call straight away?', nr: '+31 6 26 37 84 80' },
+}[taal];
 ---
 <section id="vraag" class="wrap py-12 sm:py-20 lg:py-28" aria-labelledby="vraag-kop">
   <div class="grid overflow-hidden rounded-[24px] bg-wit shadow-hoog ring-1 ring-lijn lg:grid-cols-12">
     <div class="donker bg-nacht p-8 text-mist sm:p-10 lg:col-span-5 lg:p-12">
-      <p class="kicker text-saffraan">Vraag het Klaas</p>
-      <h2 id="vraag-kop" class="mt-4 text-4xl text-wit">Vertel Klaas wat je zoekt.</h2>
-      <p class="mt-5 text-lg">Neem gerust contact op met Klaas, als je vragen hebt over jouw droomkast.</p>
+      <p class="kicker text-saffraan">{T.kicker}</p>
+      <h2 id="vraag-kop" class="mt-4 text-4xl text-wit">{T.kop}</h2>
+      <p class="mt-5 text-lg">{T.intro}</p>
       <ul class="mt-6 space-y-2 text-sm">
-        <li class="flex gap-2.5"><Icoon naam="vink" class="mt-0.5 h-4 w-4 flex-none text-saffraan" />Elke kast is een uniek exemplaar uit India</li>
-        <li class="flex gap-2.5"><Icoon naam="vink" class="mt-0.5 h-4 w-4 flex-none text-saffraan" />Kom kijken in de winkel, ook op afspraak</li>
-        <li class="flex gap-2.5"><Icoon naam="vink" class="mt-0.5 h-4 w-4 flex-none text-saffraan" />Tegen een vergoeding worden de kasten thuis bezorgd</li>
+        {T.punten.map((p) => <li class="flex gap-2.5"><Icoon naam="vink" class="mt-0.5 h-4 w-4 flex-none text-saffraan" />{p}</li>)}
       </ul>
       <ol class="mt-8 space-y-4 text-[.95rem]">
-        {['Je stuurt je vraag, Klaas krijgt hem direct in de mail.', 'Klaas belt of mailt je terug.', 'Je komt kijken op de Kaasmarkt, of spreekt af hoe de kast bij je komt.'].map((t, i) => (
+        {T.stappen.map((t, i) => (
           <li class="flex gap-3"><span class="grid h-7 w-7 flex-none place-items-center rounded-full bg-wit/10 text-sm font-semibold text-wit">{i + 1}</span><span>{t}</span></li>
         ))}
       </ol>
-      <p class="mt-10 text-sm">Liever direct bellen?</p>
-      <a href={zaak.telefoonLink} class="mt-1 inline-block font-kop text-3xl font-bold text-wit no-underline [font-stretch:110%] hover:text-saffraan" data-goatcounter-click={`bel-${bron}`}>{zaak.telefoon}</a>
+      <p class="mt-10 text-sm">{T.bel}</p>
+      <a href={zaak.telefoonLink} class="mt-1 inline-block font-kop text-3xl font-bold text-wit no-underline [font-stretch:110%] hover:text-saffraan" data-goatcounter-click={`bel-${bron}`}>{T.nr}</a>
     </div>
     <div class="p-6 sm:p-10 lg:col-span-7 lg:p-12">
-      <VraagFormulier bron={bron} />
+      <VraagFormulier bron={bron} taal={taal} />
     </div>
   </div>
 </section>

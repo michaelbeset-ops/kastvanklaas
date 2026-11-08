@@ -3,22 +3,43 @@ import '../styles/global.css';
 import Kop from '../components/Kop.astro';
 import Voet from '../components/Voet.astro';
 import { SITE, GOATCOUNTER_CODE, heeftWaarde } from '../lib/site';
+import { type Taal, TALEN, TAAL_INFO, UI, lp } from '../lib/i18n';
 
 interface Props {
   titel: string;
   beschrijving: string;
-  pad: string; // canonical pad, altijd met slash aan het eind
+  pad: string; // Nederlands (root-)pad, altijd met slash aan het eind; de taal zet het voorvoegsel ervoor
+  taal?: Taal;
   ogBeeld?: string; // absolute URL
   schema?: object[];
   noindex?: boolean;
   thuis?: boolean; // home: header ligt over de donkere hero
+  // Talen waarin deze pagina indexeerbaar bestaat (voor hreflang). Standaard alle drie.
+  // Een kast zonder vertaling: alleen 'nl', zodat Google niet naar een noindex-pagina wordt gestuurd.
+  talen?: Taal[];
+  vertalingOntbreekt?: boolean; // DE/EN-kastpagina met Nederlandse tekst: noindex met reden
 }
-const { titel, beschrijving, pad, ogBeeld, schema = [], noindex = false, thuis = false } = Astro.props;
-const canonical = new URL(pad, SITE).href;
+const { titel, beschrijving, pad, taal = 'nl', ogBeeld, schema = [], noindex = false, thuis = false, talen = TALEN, vertalingOntbreekt = false } = Astro.props;
+const info = TAAL_INFO[taal];
+const url = (t: Taal) => new URL(lp(t, pad), SITE).href;
+const canonical = url(taal);
 const og = ogBeeld ?? new URL('/og.jpg', SITE).href;
+const geenIndex = noindex || vertalingOntbreekt;
+// hreflang: alleen naar indexeerbare taalversies; x-default is altijd de Nederlandse pagina.
+const alternates = geenIndex && !vertalingOntbreekt ? [] : talen;
+const webPagina = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${canonical}#pagina`,
+  url: canonical,
+  name: titel,
+  description: beschrijving,
+  inLanguage: info.schema,
+  isPartOf: { '@id': `${SITE}/#website` },
+};
 ---
 <!doctype html>
-<html lang="nl">
+<html lang={info.html}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,9 +49,13 @@ const og = ogBeeld ?? new URL('/og.jpg', SITE).href;
     <title>{titel}</title>
     <meta name="description" content={beschrijving} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {alternates.map((t) => <link rel="alternate" hreflang={t} href={url(t)} />)}
+    {alternates.includes('nl') && <link rel="alternate" hreflang="x-default" href={url('nl')} />}
+    {geenIndex && <meta name="robots" content="noindex, follow" />}
+    {vertalingOntbreekt && <meta name="sitefront:noindex" content="vertaling-ontbreekt" />}
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:locale" content={info.og} />
+    {alternates.filter((t) => t !== taal).map((t) => <meta property="og:locale:alternate" content={TAAL_INFO[t].og} />)}
     <meta property="og:site_name" content="Kast van Klaas" />
     <meta property="og:title" content={titel} />
     <meta property="og:description" content={beschrijving} />
@@ -40,16 +65,17 @@ const og = ogBeeld ?? new URL('/og.jpg', SITE).href;
     <meta name="theme-color" content="#1f1812" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {!geenIndex && <script type="application/ld+json" set:html={JSON.stringify(webPagina)} />}
     {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
     <slot name="head" />
   </head>
   <body class="min-h-screen bg-nacht">
-    <a href="#inhoud" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-wit focus:px-4 focus:py-2">Naar de inhoud</a>
-    <Kop thuis={thuis} />
+    <a href="#inhoud" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-wit focus:px-4 focus:py-2">{UI[taal].naarInhoud}</a>
+    <Kop thuis={thuis} taal={taal} pad={pad} />
     <main id="inhoud" class="bg-wit pb-14 sm:pb-20 lg:pb-24">
       <slot />
     </main>
-    <Voet />
+    <Voet taal={taal} />
     {heeftWaarde(GOATCOUNTER_CODE) && (
       <script is:inline async data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`} src="//gc.zgo.at/count.js"></script>
     )}

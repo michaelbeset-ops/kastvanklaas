@@ -1,13 +1,21 @@
 ---
 import Icoon from './Icoon.astro';
 import { zaak } from '../lib/site';
+import { type Taal, lp } from '../lib/i18n';
+interface Props { taal?: Taal }
+const { taal = 'nl' } = Astro.props;
+const T = {
+  nl: { voor: 'Op zoek naar een oude kast uit ', land: 'India', na: '?', knop: 'Bekijk de kasten', bel: 'Bel', nr: zaak.telefoon },
+  de: { voor: 'Auf der Suche nach einem alten Schrank aus ', land: 'Indien', na: '?', knop: 'Schränke ansehen', bel: '', nr: '+31 6 26 37 84 80' },
+  en: { voor: 'Looking for an old cabinet from ', land: 'India', na: '?', knop: 'View the cabinets', bel: '', nr: '+31 6 26 37 84 80' },
+}[taal];
 ---
 <section class="wrap">
   <div class="flex flex-col gap-8 border-t border-lijn pt-10 sm:pt-12 lg:flex-row lg:items-center lg:justify-between">
-    <h2 class="max-w-2xl text-4xl">Op zoek naar een oude kast uit <span class="bg-[linear-gradient(transparent_62%,var(--color-saffraan)_62%)]">India</span>?</h2>
+    <h2 class="max-w-2xl text-4xl">{T.voor}<span class="bg-[linear-gradient(transparent_62%,var(--color-saffraan)_62%)]">{T.land}</span>{T.na}</h2>
     <div class="flex flex-wrap gap-3">
-      <a href="/webshop/cat/india-kasten/" class="knop">Bekijk de kasten</a>
-      <a href={zaak.telefoonLink} class="knop knop-wit" data-goatcounter-click="bel-cta"><Icoon naam="tel" />Bel {zaak.telefoon}</a>
+      <a href={lp(taal, '/webshop/cat/india-kasten/')} class="knop">{T.knop}</a>
+      <a href={zaak.telefoonLink} class="knop knop-wit" data-goatcounter-click="bel-cta"><Icoon naam="tel" />{[T.bel, T.nr].filter(Boolean).join(' ')}</a>
     </div>
   </div>
 </section>

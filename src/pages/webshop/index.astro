@@ -1,20 +1,4 @@
 ---
-import Basis from '../../layouts/Basis.astro';
-import Collectie from '../../components/Collectie.astro';
-import { alleKasten, kruimelSchema } from '../../lib/kasten';
-import { soortChips, soortenMetPagina } from '../../lib/soorten.mjs';
-
-const kasten = (await alleKasten()).filter((k) => k.inCollectie);
-const n = kasten.filter((k) => k.status === 'te-koop').length;
-const kruimels = [{ naam: 'Home', pad: '/' }, { naam: 'Collectie', pad: '/webshop/' }];
-const chips = soortChips(kasten, new Set(soortenMetPagina().map((s) => s.tag)));
+import Webshop from '../../views/Webshop.astro';
 ---
-<Basis
-  titel="Collectie India kasten en meubels van teakhout | Kast van Klaas Leiden"
-  beschrijving={`${n} oude India kasten, tafels en meubels van teakhout te koop, elk met een eigen kastnummer. Te zien in de winkel op de Kaasmarkt in Leiden.`}
-  pad="/webshop/"
-  schema={[kruimelSchema(kruimels)]}
->
-  <Collectie kasten={kasten} actief={null} titel="De collectie" kruimels={kruimels} soorten={chips}
-    intro="Oude kasten en meubels uit India, door Klaas zelf uitgezocht. Elke kast heeft een eigen nummer: noem dat nummer als je Klaas iets vraagt." />
-</Basis>
+<Webshop taal="nl" />

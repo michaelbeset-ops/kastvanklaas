@@ -1,25 +1,4 @@
 ---
-import Basis from '../layouts/Basis.astro';
-import PaginaKop from '../components/PaginaKop.astro';
-import artikelen from '../data/voorwaarden.json';
-// Letterlijk de voorwaarden van de huidige site (bron/site-extra/algemene-voorwaarden.txt). Juridische tekst: niet herschreven.
-const id = (kop: string) => 'artikel-' + kop.match(/\d+/)![0];
+import Voorwaarden from '../views/Voorwaarden.astro';
 ---
-<Basis titel="Algemene voorwaarden | Kast van Klaas Leiden" beschrijving="De algemene voorwaarden van Kast van Klaas, Kaasmarkt 3 in Leiden: aanbod, overeenkomst, herroepingsrecht, prijs, levering, betaling en klachten." pad="/algemene-voorwaarden/">
-  <PaginaKop kruimel="Algemene voorwaarden" titel="Algemene voorwaarden" />
-  <div class="wrap mt-14 grid gap-10 lg:grid-cols-12">
-    <nav aria-label="Artikelen" class="text-sm lg:col-span-3">
-      <ol class="space-y-1 lg:sticky lg:top-8">
-        {artikelen.map((a) => <li><a class="no-underline hover:text-teak" href={`#${id(a.kop)}`}>{a.kop}</a></li>)}
-      </ol>
-    </nav>
-    <div class="max-w-3xl space-y-12 lg:col-span-8 lg:col-start-5">
-      {artikelen.map((a) => (
-        <section id={id(a.kop)} class="scroll-mt-8">
-          <h2 class="text-xl sm:text-2xl">{a.kop}</h2>
-          <div class="mt-4 space-y-3">{a.regels.map((r) => <p>{r}</p>)}</div>
-        </section>
-      ))}
-    </div>
-  </div>
-</Basis>
+<Voorwaarden taal="nl" />

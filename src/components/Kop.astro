@@ -1,22 +1,29 @@
 ---
 // Kop naar het voorbeeld van zbnridderkerk.nl: donkere topbalk met de drie vinkjes, daaronder een witte
 // zwevende menubalk die bij scrollen mee blijft. Op de home ligt die balk over de hero-foto.
+// Taalwisselaar: op desktop rechts in de topbalk, op mobiel bovenaan het uitklapmenu. Hij linkt naar dezelfde
+// pagina in de andere taal (zelfde pad met /de/ of /en/ ervoor), nooit naar de homepage.
 import Icoon from './Icoon.astro';
 import Merk from './Merk.astro';
+import TaalKeuze from './TaalKeuze.astro';
 import { zaak, waLink } from '../lib/site';
+import { type Taal, UI, lp } from '../lib/i18n';
 
-interface Props { thuis?: boolean }
-const { thuis = false } = Astro.props;
-const pad = Astro.url.pathname;
+interface Props { thuis?: boolean; taal?: Taal; pad?: string }
+const { thuis = false, taal = 'nl', pad = '/' } = Astro.props;
+const u = UI[taal];
 const nav = [
-  { href: '/webshop/cat/india-kasten/', t: 'Kasten', actief: pad.startsWith('/webshop/cat/india-kasten') || pad.startsWith('/webshop/india-kasten') || pad.startsWith('/vitrinekast') },
-  { href: '/meer-bij-kastvanklaas/', t: 'Meer bij Klaas', actief: pad.startsWith('/meer-bij') || (pad.startsWith('/webshop/') && !pad.includes('india-kasten')) },
-  { href: '/over-kast-van-klaas/', t: 'Over Klaas', actief: pad.startsWith('/over') },
-  { href: '/contact/', t: 'Contact', actief: pad.startsWith('/contact') },
-];
+  { href: '/webshop/cat/india-kasten/', t: u.nav.kasten, actief: pad.startsWith('/webshop/cat/india-kasten') || pad.startsWith('/webshop/india-kasten') || pad.startsWith('/vitrinekast') },
+  { href: '/meer-bij-kastvanklaas/', t: u.nav.meer, actief: pad.startsWith('/meer-bij') || (pad.startsWith('/webshop/') && !pad.includes('india-kasten')) },
+  { href: '/over-kast-van-klaas/', t: u.nav.over, actief: pad.startsWith('/over') },
+  { href: '/contact/', t: u.nav.contact, actief: pad.startsWith('/contact') },
+].map((n) => ({ ...n, href: lp(taal, n.href) }));
 // Twee letterlijk van kastvanklaas.nl (home en over-pagina), "Wij bezorgen" op verzoek van Klaas (04-11-2026).
-const usp = ['Rechtstreeks uit India', 'Oude kasten van primair teakhout', 'Wij bezorgen'];
-const hoi = waLink('Hallo Klaas, ik heb een vraag over een kast.');
+const usp = u.usp;
+const hoi = waLink(u.waHoi);
+// Buitenlandse bezoekers: nummer met landcode.
+const nr = taal === 'nl' ? zaak.telefoon : '+31 6 26 37 84 80';
+const nrTop = taal === 'nl' ? '06 26 37 84 80' : '+31 6 26 37 84 80';
 ---
 <div class="donker hidden bg-nacht lg:block">
   <div class="wrap flex h-10 items-center justify-between gap-6 text-[.875rem] text-wit/85">
@@ -24,8 +31,9 @@ const hoi = waLink('Hallo Klaas, ik heb een vraag over een kast.');
       {usp.map((e) => <li class="flex items-center gap-2"><Icoon naam="vink" class="h-4 w-4 text-saffraan" />{e}</li>)}
     </ul>
     <div class="flex items-center gap-6">
-      <a href={`mailto:${zaak.email}`} class="no-underline hover:text-wit">{zaak.email}</a>
-      <a href={zaak.telefoonLink} class="flex items-center gap-2 tabular-nums no-underline hover:text-wit" data-goatcounter-click="bel-topbalk"><Icoon naam="tel" class="h-4 w-4 text-saffraan" />06 26 37 84 80</a>
+      <a href={`mailto:${zaak.email}`} class="no-underline hover:text-wit max-xl:hidden">{zaak.email}</a>
+      <a href={zaak.telefoonLink} class="flex items-center gap-2 tabular-nums no-underline hover:text-wit" data-goatcounter-click="bel-topbalk"><Icoon naam="tel" class="h-4 w-4 text-saffraan" />{nrTop}</a>
+      <TaalKeuze taal={taal} pad={pad} donker />
     </div>
   </div>
 </div>
@@ -33,25 +41,29 @@ const hoi = waLink('Hallo Klaas, ik heb een vraag over een kast.');
 <header class:list={['sticky top-3 z-50 px-3 sm:px-5', thuis ? 'h-0' : 'my-3']}>
   <div class:list={[thuis && 'translate-y-3']}>
   <div class="mx-auto flex max-w-[78rem] items-center justify-between gap-4 rounded-[20px] bg-wit/95 py-2.5 pl-4 pr-2.5 shadow-hoog backdrop-blur-md sm:pl-5 lg:rounded-full">
-    <Merk licht compact />
-    <nav aria-label="Hoofdmenu" class="hidden lg:block">
+    <Merk licht compact taal={taal} />
+    <nav aria-label={u.hoofdmenu} class="hidden lg:block">
       <ul class="flex gap-1 text-[.95rem] font-medium text-inkt">
-        {nav.map((n) => <li><a href={n.href} aria-current={n.actief ? 'page' : undefined} class:list={['rounded-full px-3.5 py-2 no-underline transition-colors hover:bg-ijs', n.actief && 'bg-ijs font-semibold']}>{n.t}</a></li>)}
+        {nav.map((n) => <li><a href={n.href} aria-current={n.actief ? 'page' : undefined} class:list={['whitespace-nowrap rounded-full px-3.5 py-2 no-underline transition-colors hover:bg-ijs', n.actief && 'bg-ijs font-semibold']}>{n.t}</a></li>)}
       </ul>
     </nav>
     <div class="flex items-center gap-2">
-      <a href={zaak.telefoonLink} class="knop knop-wit hidden min-h-10 px-4 py-2 text-[.95rem] xl:inline-flex" data-goatcounter-click="bel-kop"><Icoon naam="tel" />{zaak.telefoon}</a>
-      <a href={hoi} class="knop knop-geel hidden min-h-10 px-4 py-2 text-[.95rem] md:inline-flex" data-goatcounter-click="whatsapp-kop"><Icoon naam="wa" />App Klaas</a>
+      <a href={zaak.telefoonLink} class="knop knop-wit hidden min-h-10 px-4 py-2 text-[.95rem] xl:inline-flex" data-goatcounter-click="bel-kop"><Icoon naam="tel" />{nr}</a>
+      <a href={hoi} class="knop knop-geel hidden min-h-10 whitespace-nowrap px-4 py-2 text-[.95rem] md:inline-flex" data-goatcounter-click="whatsapp-kop"><Icoon naam="wa" />{u.appKlaas}</a>
       <button type="button" class="grid h-10 w-10 place-items-center rounded-full text-inkt hover:bg-ijs lg:hidden" aria-expanded="false" aria-controls="menu-nav" data-menu-knop>
-        <span class="sr-only">Menu</span>
+        <span class="sr-only">{u.menu}</span>
         <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg>
       </button>
     </div>
   </div>
-  <nav id="menu-nav" aria-label="Menu" class="mx-auto mt-2 hidden max-w-[78rem] rounded-[20px] bg-wit p-3 shadow-hoog lg:hidden" data-menu>
-    <ul>
+  <nav id="menu-nav" aria-label={u.menu} class="mx-auto mt-2 hidden max-w-[78rem] rounded-[20px] bg-wit p-3 shadow-hoog lg:hidden" data-menu>
+    <div class="flex items-center justify-between gap-3 border-b border-lijn px-4 pb-3 pt-1">
+      <span class="text-sm text-stil">{u.taalKiezen}</span>
+      <TaalKeuze taal={taal} pad={pad} />
+    </div>
+    <ul class="pt-1">
       {nav.map((n) => <li><a href={n.href} class="block rounded-xl px-4 py-3 font-kop text-xl font-bold text-inkt no-underline [font-stretch:110%] hover:bg-ijs">{n.t}</a></li>)}
-      <li class="px-4 pb-2 pt-3"><a href={zaak.telefoonLink} class="font-medium tabular-nums text-stil no-underline">{zaak.telefoon}</a></li>
+      <li class="px-4 pb-2 pt-3"><a href={zaak.telefoonLink} class="font-medium tabular-nums text-stil no-underline">{nr}</a></li>
     </ul>
   </nav>
   </div>

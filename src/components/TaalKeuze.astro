@@ -1,0 +1,17 @@
+---
+// Drie gewone links (geen JavaScript): naar dezelfde pagina in NL, DE of EN. De huidige taal is gemarkeerd.
+import { type Taal, TALEN, TAAL_INFO, UI, lp } from '../lib/i18n';
+interface Props { taal: Taal; pad: string; donker?: boolean }
+const { taal, pad, donker = false } = Astro.props;
+---
+<ul class:list={['flex items-center gap-0.5 rounded-full p-0.5 text-[.8125rem] font-semibold tracking-wide', donker ? 'ring-1 ring-wit/20' : 'ring-1 ring-lijn']} aria-label={UI[taal].taalKiezen}>
+  {TALEN.map((t) => (
+    <li>
+      <a href={lp(t, pad)} hreflang={t} lang={TAAL_INFO[t].html} aria-current={t === taal ? 'true' : undefined} title={TAAL_INFO[t].naam}
+        class:list={['grid h-7 min-w-9 place-items-center rounded-full px-2 no-underline transition-colors',
+          donker ? (t === taal ? 'bg-saffraan text-inkt' : 'text-wit/85 hover:bg-wit/10 hover:text-wit') : (t === taal ? 'bg-nacht text-wit' : 'text-inkt hover:bg-ijs')]}>
+        <span aria-hidden="true">{TAAL_INFO[t].kort}</span><span class="sr-only">{TAAL_INFO[t].naam}</span>
+      </a>
+    </li>
+  ))}
+</ul>

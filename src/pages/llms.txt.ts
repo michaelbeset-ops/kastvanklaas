@@ -21,4 +21,10 @@ export const GET: APIRoute = () => new Response([
   `- [Over Klaas](${SITE}/over-kast-van-klaas/)`,
   `- [Contact en route](${SITE}/contact/)`,
   '',
+  '## Taalversies',
+  'De hele site, inclusief elke kastpagina, bestaat in drie talen met dezelfde paden: Nederlands op de root, Duits onder /de/ en Engels onder /en/.',
+  `- [Nederlands](${SITE}/)`,
+  `- [Deutsch](${SITE}/de/): Schränke aus Indien, [Kollektion](${SITE}/de/webshop/), [Kontakt](${SITE}/de/contact/)`,
+  `- [English](${SITE}/en/): Indian cabinets, [collection](${SITE}/en/webshop/), [contact](${SITE}/en/contact/)`,
+  '',
 ].join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

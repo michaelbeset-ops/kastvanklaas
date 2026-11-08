@@ -1,0 +1,67 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Basis from '../layouts/Basis.astro';
+import PaginaKop from '../components/PaginaKop.astro';
+import Aanvraag from '../components/Aanvraag.astro';
+import Tijden from '../components/Tijden.astro';
+import Icoon from '../components/Icoon.astro';
+import { kruimelSchema, winkelSchema } from '../lib/kasten';
+import { zaak, SITE, waLink } from '../lib/site';
+import { type Taal, UI, lp } from '../lib/i18n';
+import pui from '../assets/site/pui.jpg';
+import hero from '../assets/site/hero.jpg';
+
+interface Props { taal: Taal }
+const { taal } = Astro.props;
+const winkelBeeld = new URL((await getImage({ src: hero, width: 1170, format: 'jpg' })).src, SITE).href;
+// Alleen een link naar Google Maps, geen ingesloten kaart: dan plaatst de site geen cookies van derden.
+const route = 'https://www.google.com/maps/dir/?api=1&destination=Kaasmarkt+3%2C+2312+HZ+Leiden';
+const T = {
+  nl: { titel: 'Contact en openingstijden | Kast van Klaas, Kaasmarkt 3 Leiden',
+    beschrijving: 'Kast van Klaas, Kaasmarkt 3 in Leiden. Open maandag tot en met zondag, of op afspraak. Parkeren voor de deur. Bel 06-26378480 of mail klaas@kastvanklaas.nl.',
+    kruimel: 'Contact', h1: 'Contact Klaas', puiAlt: 'De ingang van de winkel van Kast van Klaas, met groene tuinstoelen voor de deur', kicker: 'De winkel',
+    ligging: `Achter de Hooigracht, hoogte Oude Rijn. ${zaak.parkeren}`, route: 'Plan route', kaart: 'Bel, app of mail Klaas', nr: zaak.telefoon, wa: 'Hallo Klaas, ', mail: 'Mail' },
+  de: { titel: 'Kontakt und Öffnungszeiten | Kast van Klaas Leiden',
+    beschrijving: 'Kast van Klaas, Kaasmarkt 3 in Leiden. Geöffnet Montag bis Sonntag oder nach Vereinbarung. Parken vor der Tür. Tel. +31 6 26378480, klaas@kastvanklaas.nl.',
+    kruimel: 'Kontakt', h1: 'Kontakt zu Klaas', puiAlt: 'Der Eingang des Ladens von Kast van Klaas mit grünen Gartenstühlen vor der Tür', kicker: 'Der Laden',
+    ligging: 'Hinter der Hooigracht, auf Höhe des Oude Rijn. Bequem parken auf dem Kaasmarkt, direkt vor der Ladentür.', route: 'Route planen', kaart: 'Anrufen, WhatsApp oder E-Mail an Klaas', nr: '+31 6 26 37 84 80', wa: 'Hallo Klaas, ', mail: 'E-Mail' },
+  en: { titel: 'Contact and opening hours | Kast van Klaas Leiden',
+    beschrijving: 'Kast van Klaas, Kaasmarkt 3 in Leiden. Open Monday to Sunday, or by appointment. Parking right outside. Call +31 6 26378480 or email klaas@kastvanklaas.nl.',
+    kruimel: 'Contact', h1: 'Contact Klaas', puiAlt: 'The entrance to the Kast van Klaas shop, with green garden chairs outside the door', kicker: 'The shop',
+    ligging: 'Behind the Hooigracht, level with the Oude Rijn. Easy parking on the Kaasmarkt, right outside the shop door.', route: 'Plan your route', kaart: 'Call, WhatsApp or email Klaas', nr: '+31 6 26 37 84 80', wa: 'Hello Klaas, ', mail: 'Email' },
+}[taal];
+---
+<Basis titel={T.titel} beschrijving={T.beschrijving} pad="/contact/" taal={taal}
+  schema={[winkelSchema(winkelBeeld, [], taal), kruimelSchema([{ naam: UI[taal].home, pad: lp(taal, '/') }, { naam: T.kruimel, pad: lp(taal, '/contact/') }])]}>
+  <PaginaKop kruimel={T.kruimel} titel={T.h1} taal={taal} />
+
+  <!-- Links de winkel groot met adres en route, rechts direct contact en de openingstijden. -->
+  <section class="wrap mt-12 grid gap-8 lg:grid-cols-12 lg:gap-10">
+    <div class="relative overflow-hidden rounded-[24px] shadow-zacht lg:col-span-7">
+      <Picture src={pui} alt={T.puiAlt} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]}
+        sizes="(min-width: 1024px) 58vw, 100vw" quality={72} loading="eager" class="aspect-[4/5] h-full w-full object-cover sm:aspect-[4/3] lg:aspect-auto" />
+      <div class="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,#1f181200,#1f1812e6_55%)] p-6 pt-24 sm:p-9 sm:pt-32">
+        <p class="kicker text-saffraan">{T.kicker}</p>
+        <p class="mt-3 font-kop text-[1.75rem] font-extrabold leading-tight text-wit [font-stretch:110%] sm:text-[2.1rem]">{zaak.straat}<br />{zaak.postcode} {zaak.plaats}</p>
+        <p class="mt-3 max-w-md text-wit/85">{T.ligging}</p>
+        <a href={route} rel="noopener" class="knop knop-geel mt-6" data-goatcounter-click="route-contact">{T.route}<Icoon naam="pijl" /></a>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6 lg:col-span-5">
+      <div class="kaart p-6 sm:p-7">
+        <h2 class="text-xl">{T.kaart}</h2>
+        <a href={zaak.telefoonLink} class="mt-4 block font-kop text-[2.1rem] font-extrabold leading-none text-inkt no-underline tabular-nums [font-stretch:110%] hover:text-teak-donker max-[379px]:text-[1.7rem] sm:text-[2.5rem]" data-goatcounter-click="bel-contact">{T.nr}</a>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={waLink(T.wa)} class="knop knop-geel" data-goatcounter-click="whatsapp-contact"><Icoon naam="wa" />WhatsApp</a>
+          <a href={`mailto:${zaak.email}`} class="knop knop-wit">{T.mail}</a>
+        </div>
+        <p class="mt-4 text-sm text-stil">{zaak.email}</p>
+      </div>
+      <Tijden taal={taal} />
+      <p class="px-1 text-xs text-stil">Kast van Klaas · KvK {zaak.kvk}</p>
+    </div>
+  </section>
+
+  <Aanvraag bron="contact" taal={taal} />
+</Basis>

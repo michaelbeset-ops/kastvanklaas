@@ -5,6 +5,11 @@
   "githubPagesUrl": "",
   "mode": "klant",
   "language": "nl-NL",
+  "languages": {
+    "nl": "/",
+    "de": "/de/",
+    "en": "/en/"
+  },
   "branche": "meubelwinkel",
   "strategy": [
     "lokaal",

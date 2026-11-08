@@ -13,7 +13,8 @@
     "preview": "astro preview --port 4860",
     "check-urls": "node tools/check-urls.mjs",
     "astro": "astro",
-    "check-seo": "node tools/check-seo.mjs"
+    "check-seo": "node tools/check-seo.mjs",
+    "vertalingen-ontbreken": "node tools/vertalingen-ontbreken.mjs"
   },
   "allowScripts": {
     "esbuild": true,
