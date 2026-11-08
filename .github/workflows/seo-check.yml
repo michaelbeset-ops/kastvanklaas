@@ -1,0 +1,50 @@
+# .github/workflows/seo-check.yml  (sitefront-seo 1.1)
+# Bij elke push naar main en elke pull request: bouwen, statische SEO-audit, Lighthouse.
+# Blokkeert de deploy niet (die loopt in een eigen workflow), maar een rode check betekent:
+# er is iets kritieks kapot (kapotte link, geen canonical, noindex, ...).
+# De audit gaat alleen over de publieke site, dus de samenvatting mag in deze publieke repo staan.
+name: SEO-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: SEO-audit (faalt alleen op Kritiek)
+        id: audit
+        run: python3 .seo/seo_audit.py --out .seo/out/audit.md --json .seo/out/audit.json --fail-on kritiek
+      - name: Samenvatting in de Actions-run
+        if: always()
+        run: cat .seo/out/audit.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+      - name: Lighthouse (mobiel, 3 runs)
+        if: always() && steps.audit.outcome != 'skipped'
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./.seo/lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: false
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: seo-audit
+          path: .seo/out/
+          if-no-files-found: ignore

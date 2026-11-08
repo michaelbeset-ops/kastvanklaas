@@ -1,0 +1,50 @@
+# .github/workflows/seo-indexnow.yml  (sitefront-seo 1.1)
+# Na elke geslaagde deploy: gewijzigde pagina's melden bij Bing (en daarmee Copilot en
+# deels ChatGPT search), Yandex, Seznam, Naver en Yep via IndexNow.
+# Pas de naam onder `workflows:` aan naar de exacte `name:` van je deploy-workflow.
+# De state (welke pagina's al gemeld zijn) staat in de Actions-cache; die vervalt na 7 dagen
+# zonder gebruik, waarna alle pagina's opnieuw gemeld worden. Dat is onschuldig.
+name: SEO IndexNow
+
+on:
+  workflow_run:
+    workflows: ["Site bouwen en publiceren"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Vorige staat ophalen
+        uses: actions/cache/restore@v5
+        with:
+          path: .indexnow-state.json
+          key: indexnow-${{ github.run_id }}
+          restore-keys: indexnow-
+      - name: Gewijzigde URL's insturen
+        run: |
+          if [ -z "$INDEXNOW_KEY" ]; then echo "Repository-variabele INDEXNOW_KEY ontbreekt, overslaan."; exit 0; fi
+          python3 .seo/indexnow.py --key "$INDEXNOW_KEY" --wait-live
+      - name: Nieuwe staat bewaren
+        if: success() && hashFiles('.indexnow-state.json') != ''
+        uses: actions/cache/save@v5
+        with:
+          path: .indexnow-state.json
+          key: indexnow-${{ github.run_id }}
