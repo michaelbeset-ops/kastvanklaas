@@ -19,6 +19,7 @@ import indiaWerkplaats from '../assets/site/india-werkplaats.jpg';
 import indiaDeuren from '../assets/site/india-deuren.jpg';
 import indiaBlikjes from '../assets/site/india-blikjes.jpg';
 import dahlias from '../assets/site/dahlias.jpg';
+import styling from '../assets/site/styling.jpg';
 
 interface Props { taal: Taal }
 const { taal } = Astro.props;
@@ -36,6 +37,7 @@ const T = {
       { titel: 'India kasten', tekst: 'Klaas zoekt, selecteert, transporteert en bezorgt.', alt: 'Oude Indiase kasten in de winkel van Kast van Klaas' },
       { titel: 'Meer bij Kast van Klaas', tekst: 'Tafels, accessoires en meer uit India.', alt: 'Blauwe Indiase tafel met servies en bloemen' },
     ],
+    mo: { tekst: 'Styling- en interieuradvies bij KASTVANKLAAS door GETINSPIREDBYMO', alt: 'Twee houten stoelen en een gedekte tafel op een binnenplaats onder een boom' },
     deKasten: 'De kasten van Klaas',
     stappen: [
       { t: 'Bekijken', z: 'De collectie online of in het echt in de winkel bekijken? Dat kan, op de Kaasmarkt 3 in Leiden.' },
@@ -77,6 +79,7 @@ const T = {
       { titel: 'Schränke aus Indien', tekst: 'Klaas sucht, wählt aus, transportiert und liefert.', alt: 'Alte indische Schränke im Laden von Kast van Klaas' },
       { titel: 'Mehr bei Kast van Klaas', tekst: 'Tische, Accessoires und mehr aus Indien.', alt: 'Blauer indischer Tisch mit Geschirr und Blumen' },
     ],
+    mo: { tekst: 'Styling- und Einrichtungsberatung bei KASTVANKLAAS von GETINSPIREDBYMO', alt: 'Zwei Holzstühle und ein gedeckter Tisch in einem Innenhof unter einem Baum' },
     deKasten: 'Die Schränke von Klaas',
     stappen: [
       { t: 'Ansehen', z: 'Die Kollektion online oder in echt im Laden ansehen? Das geht, am Kaasmarkt 3 in Leiden.' },
@@ -118,6 +121,7 @@ const T = {
       { titel: 'Indian cabinets', tekst: 'Klaas searches, selects, ships and delivers.', alt: 'Old Indian cabinets in the Kast van Klaas shop' },
       { titel: 'More at Kast van Klaas', tekst: 'Tables, accessories and more from India.', alt: 'Blue Indian table with china and flowers' },
     ],
+    mo: { tekst: 'Styling and interior advice at KASTVANKLAAS by GETINSPIREDBYMO', alt: 'Two wooden chairs and a laid table in a courtyard under a tree' },
     deKasten: 'The cabinets of Klaas',
     stappen: [
       { t: 'Have a look', z: 'Browse the collection online or see it for real in the shop? You can, at Kaasmarkt 3 in Leiden.' },
@@ -212,6 +216,17 @@ const website = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `
         </div>
       ))}
     </div>
+    <!-- Op verzoek van Klaas: styling- en interieuradvies door GetInspiredByMo, met link naar haar site. -->
+    <a href="https://www.getinspiredbymo.com" target="_blank" rel="noopener" class="group mt-6 grid gap-4 no-underline lg:grid-cols-2 lg:gap-6" data-goatcounter-click="getinspiredbymo">
+      <div class="overflow-hidden rounded-[24px] shadow-zacht lg:col-start-2 lg:row-start-1">
+        <Picture src={styling} alt={T.mo.alt} formats={['avif']} fallbackFormat="webp" widths={[480, 720, 900]} sizes="(min-width: 1024px) 600px, 100vw" quality={50}
+          class="aspect-[4/3] w-full object-cover object-[50%_62%] transition-transform duration-700 group-hover:scale-[1.03] lg:aspect-[16/9]" />
+      </div>
+      <p class="flex items-center gap-3 text-lg font-semibold text-inkt lg:col-start-1 lg:row-start-1 lg:items-end lg:justify-end lg:pb-2 lg:text-right lg:text-2xl">
+        <span class="underline decoration-1 underline-offset-4">{T.mo.tekst}</span>
+        <Icoon naam="pijl" class="h-5 w-5 flex-none transition-transform group-hover:translate-x-1" />
+      </p>
+    </a>
   </section>
 
   <!-- Nu te koop: de kasten zelf, met nummer en prijs. -->
